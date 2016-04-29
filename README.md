@@ -17,14 +17,19 @@ To minimize download size, we could look at one of the following possible bases:
 ## Packages
 
 The following packages should be installed within the Vagrant environment:
+
+### Outside virtual environment
 - [Python 3](https://www.python.org/download/releases/3.0/)
-- [PostgreSQL](http://www.postgresql.org/)
-- [Psycopg](http://initd.org/psycopg/docs/install.html)
 - [Virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) and [Virtualenv](https://virtualenv.pypa.io/en/latest/)
+- [PostgreSQL](http://www.postgresql.org/)
 - [Heroku toolbelt](https://toolbelt.heroku.com/)
 - [Git](https://git-scm.com/)
 
+### Inside virtual environment
+
 Inside a typical Python 3 based virtual environment, these Python packages are to be installed with `pip`:
+
+- [Psycopg](http://initd.org/psycopg/docs/install.html)
 - [Django (latest, stable)](https://www.djangoproject.com/)
 - [Django-REST](http://www.django-rest-framework.org/)
 
