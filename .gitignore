@@ -1,62 +1,69 @@
+### Python ###
 # Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+**/__pycache__
+**/*.py[cod]
+**/*$py.class
 
 # C extensions
-*.so
+**/*.so
 
 # Distribution / packaging
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
+**/.python/
+**/env/
+**/build/
+**/develop-eggs/
+**/dist/
+**/downloads/
+**/eggs/
+**/.eggs/
+**/lib/
+**/lib64/
+**/parts/
+**/sdist/
+**/var/
+**/.egg-info/
+**/.installed.cfg/
 
 # PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+# Usually these files are written by a python script from a template
+# before PyInstaller builds the exe, so as to
+# inject date/other infos into it.
+**/.manifest/
+**/.spec/
 
 # Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+**/pip-log.txt
+**/pip-delete-this-directory.txt
 
 # Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*,cover
-.hypothesis/
+**/htmlcov/
+**/.tox/
+**/.coverage/
+**/.coverage.*
+**/.cache/
+**/nosetests.xml
+**/coverage.xml
+**/.cover/
+**/.hypothesis/
 
-# Translations
-*.mo
-*.pot
+# KDE directory preferences
+**/.directory
 
-# Django stuff:
-*.log
+### Django ###
+**/*.log
+**/log/
+**/.log/
+**/*.pot
+**/local_settings.py
+**/db.sqlite3
+**/media/
 
-# Sphinx documentation
-docs/_build/
+### Vagrant Directory###
+.vagrant/
+**/.vagrant/
 
-# PyBuilder
-target/
-
-#Ipython Notebook
-.ipynb_checkpoints
+### Custom Directories###
+**/.DS_Store/
+**/.idea/
+**/.otto/
+**/myvenv/
