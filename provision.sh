@@ -5,7 +5,9 @@ echo "Running vagrant provisioning"
 echo "---------------------------------------------"
 
 sudo apt-get update
-sudo apt-get install -y git
+# Not sure yet if pip is pre-installed on minimal/trusty64
+# sudo apt-get install -y python-pip
+# sudo pip install virtualenvwrapper
 
 echo "---------------------------------------------"
 echo " Finished."
