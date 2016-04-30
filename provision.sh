@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "---------------------------------------------"
-echo "Running vagrant bootstrap to install requirements"
+echo "Running vagrant provisioning"
 echo "---------------------------------------------"
 
 sudo apt-get update

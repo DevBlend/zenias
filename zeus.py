@@ -11,7 +11,7 @@ import subprocess
 import sys
 
 from plumbum import local
-from plumbum.cmd import mkdir, cp, git, cd
+from plumbum.cmd import mkdir, cp, git
 
 script_path_inspect = inspect.getfile(inspect.currentframe())
 # The absolute path to the source code directory.
@@ -33,8 +33,10 @@ cp(source_path + "/Vagrantfile", project_path)
 cp(source_path + "/provision.sh", project_path)
 # Install README.md
 cp(source_path + "/readme.txt", project_path + "/README.md")
-# git_chain = cd["project_path"] | git["git init"]
-# git_chain()
+# Change current working directory to project directory.
+local.cwd = project_path
+# Initialise git local repository.
+git("init")
 
 # def main():
 #     """ Peform copy commands in shell."""
