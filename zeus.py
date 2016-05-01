@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-""" Automates creating the development environment for Python, Django,
-    and Vagrant on a local machine.
+""" Automatic creation of a development environment.
+
+Python-Django-Vagrant Stack.
 """
 
 import inspect
@@ -11,7 +12,7 @@ import subprocess
 import sys
 
 from plumbum import local
-from plumbum.cmd import mkdir, cp, git
+from plumbum.cmd import mkdir, cp, git, vagrant
 
 script_path_inspect = inspect.getfile(inspect.currentframe())
 # The absolute path to the source code directory.
@@ -37,32 +38,3 @@ cp(source_path + "/readme.txt", project_path + "/README.md")
 local.cwd = project_path
 # Initialise git local repository.
 git("init")
-
-# def main():
-#     """ Peform copy commands in shell."""
-#
-#     script_path_inspect = inspect.getfile(inspect.currentframe())
-#     script_path = os.path.dirname(os.path.abspath(script_path_inspect))
-#     print 'What is the absolute path to your development directory?'
-#     dev_dir_path = raw_input("> ")
-#
-#     # Install Vagrantfile
-#     cmd_vagrant = 'cp %s/Vagrantfile %s' % (script_path, dev_dir_path)
-#     subprocess.call(cmd_vagrant, shell=True)
-#     # Install provision.sh
-#     cmd_provision = 'cp %s/provision.sh %s' % (script_path, dev_dir_path)
-#     subprocess.call(cmd_provision, shell=True)
-#     # Install requirements.txt
-#     cmd_requirements = 'cp %s/requirements.txt %s' % (script_path,
-#                                                       dev_dir_path)
-#     subprocess.call(cmd_requirements, shell=True)
-#     # Install .gitignore
-#     cmd_gitignore = 'cp %s/.gitignore %s' % (script_path, dev_dir_path)
-#     subprocess.call(cmd_gitignore, shell=True)
-#     # Install README.md
-#     cmd_readme = 'cp %s/README.md %s' % (script_path, dev_dir_path)
-#     subprocess.call(cmd_readme, shell=True)
-#
-# # Begin main() function if this script is called directly.
-# if __name__ == '__main__':
-#     main()
