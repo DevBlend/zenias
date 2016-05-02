@@ -38,6 +38,26 @@ The user should be able to download and run a `vagrant up` in their bash-complia
 
 The idea is to minimize _installation fatigue_ as much as possible for end-user; and have them focus on working on their project.
 
+## Tests
+Tests are there to ensure integrity of the vagrant guest OS and packages installed within it.
+
+It would require the `py.test` module to run it, which can be installed as
+
+```bash
+$ pip install pytest
+```
+
+Once installed, go to the test directory, and run the tests. No need to run these tests inside an **active virtual environment**
+They are written in a way that they are both Python 2.x and Python 3.x compliant.
+
+It is assumed that these tests would be run after the `vagrant up` has finished and the vagrant environment.
+
+Tests are to be invoked inside the vagrant environment, from within the `tests` directory as
+
+```bash
+$ py.test -v test_runner.py
+```
+
 ## Software Specification
 Latest software specification can be found in the [Google Doc](https://docs.google.com/document/d/1VkHJRZs0XdL2ne1Z55eAWL8pLrhdhpb7i60dpph0jmY/)
 
