@@ -8,10 +8,9 @@ Python-Django-Vagrant Stack.
 
 import inspect
 import os
-import subprocess
 import sys
 
-from plumbum import local
+from plumbum import local, FG, colors
 from plumbum.cmd import mkdir, cp, git, vagrant
 
 script_path_inspect = inspect.getfile(inspect.currentframe())
@@ -24,17 +23,35 @@ current_path = local.cwd
 project_dir = sys.argv[1]
 # Define absolute path to project directory.
 project_path = current_path + "/" + project_dir
-# Make a directory with the name project_dir.
+
+with colors.orchid:
+    print "========== Setting up your project directory =========="
 mkdir(project_dir)
-# Install .gitignore file.
+
+with colors.orchid:
+    print "========== Installing .gitignore =========="
 cp(source_path + "/.gitignore", project_path)
-# Install Vagrantfile.
+
+with colors.orchid:
+    print "========== Installing Vagrant environment =========="
 cp(source_path + "/Vagrantfile", project_path)
 # Install provisioning script.
 cp(source_path + "/provision.sh", project_path)
-# Install README.md
+
+with colors.orchid:
+    print "========== Setting up bare README.md =========="
 cp(source_path + "/readme.txt", project_path + "/README.md")
 # Change current working directory to project directory.
 local.cwd = project_path
-# Initialise git local repository.
+
+with colors.orchid:
+    print "========== Initialising local git repository =========="
 git("init")
+
+with colors.orchid:
+    print "========== Launching vagrant up =========="
+vagrant["up"] & FG
+
+with colors.orchid:
+    print "========== Initialising vagrant ssh session =========="
+vagrant["ssh"] & FG
