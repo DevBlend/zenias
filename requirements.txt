@@ -1,1 +1,4 @@
-# Put here your Python requirements for pip to install.
+# Requirements to be installed within the standard virtualenv upon startup.
+
+django
+django-widget-tweaks

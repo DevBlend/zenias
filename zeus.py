@@ -37,6 +37,8 @@ with colors.orchid:
 cp(source_path + "/Vagrantfile", project_path)
 # Install provisioning script.
 cp(source_path + "/provision.sh", project_path)
+# Installing requirements.txt
+cp(source_path + "/requirements.txt", project_path)
 
 with colors.orchid:
     print "========== Setting up bare README.md =========="
