@@ -7,8 +7,8 @@ Vagrant.configure("2") do |config|
 
     # Create forwarding ports for client-guest machine access via localhost.
     config.vm.network :forwarded_port, guest: 80, host: 8080
-    config.vm.network :forwarded_port, guest: 8000, host: 8000
-    
+    config.vm.network :forwarded_port, guest: 5000, host: 5000
+
     # Add the tty fix as mentioned in issue 1673 on vagrant repo
     # To avoid 'stdin is not a tty' messages
     # vagrant provisioning in shell runs bash -l

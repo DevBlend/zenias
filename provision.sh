@@ -6,8 +6,8 @@ DB="fcc_provision" # the name of postgreSQL DB we need to provision, maybe $2
 ENV_NAME="fcc-py3" # the vitualenv we would like to create, with Python 3.4
 
 # This file is executed by root user - sudo not needed
-# But do not create any directory 
-# which vagrant user might need access to later in su mode 
+# But do not create any directory
+# which vagrant user might need access to later in su mode
 # use su - vagrant -c "" syntax
 
 echo "---------------------------------------------"
