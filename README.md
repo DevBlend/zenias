@@ -31,12 +31,23 @@ Python 3.4 will be invoked as python. Inside a typical Python 3.4 based virtual 
 There are more packages to be introduced later.
 
 ## How to Use this App
+### First Time Usage
 
 1. git clone https://github.com/byteknacker/fcc-python-vagrant.git
 2. Run vagrant up in your bash-compliant terminal (Git Bash on Windows, regular terminal on Linux or Mac).
 3. Run vagrant ssh to start the session inside the development VM.
-4. Initiate virtualenv inside `/vagrant` directory, which is the synced directory of your local development folder.
-5. Start coding your app.
+4. Start coding your app.
+
+### Future Projects
+
+1. Go to your directory in which you wish to place your new project. Decide
+for a project name: <projectname>.
+2. Run the following command to setup the entire development environment:
+`python /absolute/path/to/zeus.py <projectname>` where zeus.py is invoke from
+within the local git repo of this repository. This presumes that you have
+python2.7 + installed on your local machine.
+3. After running the previous command you will be taken directly into
+the vagrant ssh session and you can start coding straight away.
 
 ## Tests for this App
 
