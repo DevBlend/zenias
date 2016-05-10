@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-""" Automatic creation of a development environment.
+""" Automatic creation of a local development environment.
 
-Python-Django-Vagrant Stack.
+Installation of a local Python-Django-Vagrant Stack based dev env.
 """
 
 import inspect
@@ -31,6 +31,11 @@ mkdir(project_dir)
 with colors.orchid:
     print "========== Installing .gitignore =========="
 cp(source_path + "/.gitignore", project_path)
+
+with colors.orchid:
+    print "========== Installing Procfile and Runtime for Heroku =========="
+cp(source_path + "/Procfile", project_path)
+cp(source_path + "/runtime.txt", project_path)
 
 with colors.orchid:
     print "========== Installing Vagrant environment =========="

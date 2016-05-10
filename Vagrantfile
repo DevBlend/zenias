@@ -3,11 +3,11 @@
 
 Vagrant.configure("2") do |config|
     # Start with base vagrant box. This one is only 271 MB in size.
-    config.vm.box = "minimal/trusty64"
+    config.vm.box = "careerharbour/fcc-box"
 
     # Create forwarding ports for client-guest machine access via localhost.
     config.vm.network :forwarded_port, guest: 80, host: 8080
-    config.vm.network :forwarded_port, guest: 5000, host: 5000
+    config.vm.network :forwarded_port, guest: 6000, host: 6000
 
     # Add the tty fix as mentioned in issue 1673 on vagrant repo
     # To avoid 'stdin is not a tty' messages

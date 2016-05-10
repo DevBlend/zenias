@@ -30,7 +30,7 @@ pip install virtualenvwrapper virtualenv
 echo "--------------- Preparing .bashrc for first usage ------------------"
 # set up virtualenvwrapper
 echo WORKON_HOME="/home/vagrant/.virtualenvs" >> /home/vagrant/.bashrc
-# activate it
+# activate virtualenvwrapper
 echo "source /usr/local/bin/virtualenvwrapper.sh" >> /home/vagrant/.bashrc
 echo "WORKON_HOME=\"/home/vagrant/.virtualenvs\"" >> /home/vagrant/.bashrc
 
@@ -39,8 +39,6 @@ echo "---------------- Creating virtual environment with Python 3 ---------"
 # Otherwise, the user would not be able to run pip install without sudo
 su - vagrant -c "/usr/local/bin/virtualenv /home/vagrant/.virtualenvs/${ENV_NAME} --python=/usr/bin/python3 && \
     /home/vagrant/.virtualenvs/${ENV_NAME}/bin/pip install -r /vagrant/requirements.txt"
-
-#cd /vagrant && virtualenv --python=python3.4 myvenv && source myvenv/bin/activate && pip install -r /vagrant/requirements.txt && django-admin startproject myproject
 
 # take the user to shared directory
 echo "cd /vagrant" >> /home/vagrant/.bashrc
