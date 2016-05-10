@@ -38,6 +38,14 @@ There are more packages to be introduced later.
 3. Run vagrant ssh to start the session inside the development VM.
 4. Start coding your app.
 
+### Test Your Changes
+
+You need to test the vagrant install properly. Things that could help you:
+- Test manually, by installing on your own machine(s).
+- Use `date && vagrant up > logfile.log && date` to log start time and end time properly.
+- Inspect `logfile.log` to ensure no installation error occurred.
+- Shut down the box, then restart with `vagrant up` and `vagrant ssh` into it. Ensure all standard things run properly.
+
 ### Future Projects
 
 1. Go to your directory in which you wish to place your new project. Decide
