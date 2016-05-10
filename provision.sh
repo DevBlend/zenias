@@ -31,7 +31,7 @@ pip install virtualenvwrapper virtualenv
 echo "--------------- Installing postgresql ------------------------------"
 apt-get install -y python-dev libpq-dev postgresql postgresql-contrib
 su - postgres -c "createuser -s vagrant"
-su - vagrant -c "createdb $DB"
+su - vagrant -c "createdb ${DB}"
 
 echo "--------------- Preparing .bashrc for first usage ------------------"
 # set up virtualenvwrapper
