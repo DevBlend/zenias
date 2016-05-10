@@ -27,6 +27,12 @@ wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 echo "--------------- Installing both virtualenv and virtualenvwrapper ---"
 pip install virtualenvwrapper virtualenv
 
+# install postgresql and setup user
+echo "--------------- Installing postgresql ------------------------------"
+apt-get install -y python-dev libpq-dev postgresql postgresql-contrib
+su - postgres -c "createuser -s vagrant"
+su - vagrant -c "createdb $DB"
+
 echo "--------------- Preparing .bashrc for first usage ------------------"
 # set up virtualenvwrapper
 echo WORKON_HOME="/home/vagrant/.virtualenvs" >> /home/vagrant/.bashrc
