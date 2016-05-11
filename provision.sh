@@ -62,8 +62,7 @@ echo "---------------- Creating virtual environment with Python 3 ---------"
 su - vagrant -c "/usr/local/bin/virtualenv /home/vagrant/.virtualenvs/${ENV_NAME} --python=/usr/bin/python3 && \
     /home/vagrant/.virtualenvs/${ENV_NAME}/bin/pip install -r /vagrant/requirements.txt"
 
-# take the user to shared directory
-echo "cd /vagrant" >> /home/vagrant/.bashrc
+su - vagrant -c "cp /vagrant/.bashrc /home/vagrant/.bashrc" 
 
 # Activate the virtualenv on first login
 echo "workon ${ENV_NAME}" >> /home/vagrant/.bashrc
