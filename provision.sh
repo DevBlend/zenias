@@ -14,14 +14,30 @@ echo "---------------------------------------------"
 echo "Running vagrant provisioning"
 echo "---------------------------------------------"
 
-echo "------------- Updating packages and their dependencies -----------"
-apt-get update -y # no need for sudo, and -y is needed to bypass the yes-no
-echo "-------------- Installing build-essential and pip ----------------"
-apt-get install -y build-essential python-pip
-
 # install heroku toolbelt
 echo "-------------- Installing heroku toolbelt -------------------------"
-wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+#wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+# These shell script snippets are directly taken from heroku installation script
+# We want to avoid the apt-get update
+# add heroku repository to apt
+echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
+# install heroku's release key for package verification
+wget -O- https://toolbelt.heroku.com/apt/release.key | apt-key add -
+
+echo "------------- Updating packages and their dependencies -----------"
+apt-get update -y # no need for sudo, and -y is needed to bypass the yes-no
+
+# install the toolbelt
+apt-get install heroku-toolbelt --no-install-recommends -y
+
+echo "-------------- Installing build-essential and pip ----------------"
+# install gcc and g++ and other build basics to ensure most software works
+# install man too
+apt-get install build-essential python-pip man -y --no-install-recommends
+
+# needed for heroku toolbelt
+# notice that this is not a rigorous Ruby install, where we typically use rvm
+apt-get install ruby --no-install-recommends -y
 
 # install virtualenv and virtualenvwrapper
 echo "--------------- Installing both virtualenv and virtualenvwrapper ---"
@@ -29,7 +45,7 @@ pip install virtualenvwrapper virtualenv
 
 # install postgresql and setup user
 echo "--------------- Installing postgresql ------------------------------"
-apt-get install -y python-dev python3-dev libpq-dev postgresql postgresql-contrib
+apt-get install python-dev python3-dev libpq-dev postgresql postgresql-contrib --no-install-recommends -y
 su - postgres -c "createuser -s vagrant"
 su - vagrant -c "createdb ${DB}"
 
@@ -37,8 +53,8 @@ echo "--------------- Preparing .bashrc for first usage ------------------"
 # set up virtualenvwrapper
 echo WORKON_HOME="/home/vagrant/.virtualenvs" >> /home/vagrant/.bashrc
 # activate virtualenvwrapper
-echo "source /usr/local/bin/virtualenvwrapper.sh" >> /home/vagrant/.bashrc
 echo "WORKON_HOME=\"/home/vagrant/.virtualenvs\"" >> /home/vagrant/.bashrc
+echo "source /usr/local/bin/virtualenvwrapper.sh > /dev/null 2>&1" >> /home/vagrant/.bashrc
 
 echo "---------------- Creating virtual environment with Python 3 ---------"
 # Remember to run in vagrantt user mode
