@@ -74,7 +74,7 @@ It is assumed that these tests would be run after the `vagrant up` has finished 
 Invoke the tests inside the vagrant environment, from within the `tests` directory as:
 
 ```bash
-$ py.test -v test_runner.py
+$ py.test -v
 ```
 
 ## Software Specification
