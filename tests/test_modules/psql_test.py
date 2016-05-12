@@ -1,5 +1,4 @@
 from subprocess import call, check_output
-import psycopg2
 
 class TestPsql:
     """ Test that PostgreSQL is properly installed, up and running """
