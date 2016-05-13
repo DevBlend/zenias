@@ -1,4 +1,4 @@
-# FreeCodeCamp Python Vagrant Box [WIP]
+# FreeCodeCamp Python Vagrant Box
 
 This repository hosts the Vagrant file and associated automation tools that create a portable Vagrant development environment for Python-Django full-stack development for [FreeCodeCamp](https://freecodecamp.com) projects.
 
@@ -33,9 +33,18 @@ There are more packages to be introduced later.
 ## How to Use this App
 ### First Time Usage
 
-1. git clone https://github.com/byteknacker/fcc-python-vagrant.git
-2. Run vagrant up in your bash-compliant terminal (Git Bash on Windows, regular terminal on Linux or Mac).
-3. Run vagrant ssh to start the session inside the development VM.
+#### Requirements:
+
+- [Virtualbox](https://www.virtualbox.org/wiki/Downloads) latest (currently version 5.0.20)
+- [Virtualbox extension pack](http://download.virtualbox.org/virtualbox/5.0.20/Oracle_VM_VirtualBox_Extension_Pack-5.0.20-106931.vbox-extpack), compatible with latest Virtualbox
+- [Vagrant](https://www.vagrantup.com/downloads.html), (currently version 1.8.1)
+- [Git Bash](https://git-scm.com/downloads), if you are on Windows
+
+If you are on Windows, restart your machine after Vagrant installation. If you have all these, you are ready to follow the steps outlined below:
+
+1. Run `git clone https://github.com/byteknacker/fcc-python-vagrant.git`
+2. Run `vagrant up` in your bash-compliant terminal (Git Bash on Windows, regular terminal on Linux or Mac).
+3. Run `vagrant ssh` to start the session inside the development VM.
 4. Start coding your app.
 
 ### Test Your Changes
@@ -80,6 +89,14 @@ $ py.test -v
 ## Software Specification
 
 The latest software specification can be found on [Google Docs](https://docs.google.com/document/d/1VkHJRZs0XdL2ne1Z55eAWL8pLrhdhpb7i60dpph0jmY/)
+
+## For Contributors And Maintainers : Testing Strategy
+
+The biggest contribution to our project is to pull in the changes from main `master` branch or some pull request and test them locally on your machine. Here are a few testing strategy:
+
+- Instead of running `vagrant up`, execute `date && vagrant up > logfile.txt && date %s`. This creates a `logfile.txt` file to inspect the installation log. And gives you time it took to provision your box.
+- After `vagrant ssh`, run `pip install pytest && py.test -v`. It runs the test suite to verify that your environment was properly provisioned. If you ha to use `sudo` with that `pip install` command, you should file an issue on our repo.
+- Do not be alarmed by any red-colored text during provisioning. Unless it clearly says _error_ no need to panic!
 
 
 ## Trello for SCRUM Board
