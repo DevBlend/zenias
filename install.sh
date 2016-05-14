@@ -88,5 +88,5 @@ else
 fi
 
 echo "Creating virtual machine"
-#vagrant up
+vagrant up
 echo "Installation done. To start VM, simply run vagrant ssh"
