@@ -53,13 +53,11 @@ if [ -d "$DIRECTORY" ]; then
 	cd $DIRECTORY
 else
 	echo "Repository present. updating ..."
-	cd $DIRECTORY
 	git pull
 fi
 
+SCRIPT
+
 echo "Creating virtual machine"
 vagrant up
-
 echo "Installation done. To start VM, simply run vagrant ssh"
-
-SCRIPT
