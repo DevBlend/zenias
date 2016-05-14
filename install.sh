@@ -13,15 +13,22 @@ sudo sh <<SCRIPT
 
 echo "Installing VirtualBox ..."
 
-wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
-wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+if hash virtualbox 2>/dev/null; then
+	echo "Virtualbox already installed, skipping ..."
+else
+	wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
+	wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
 
-apt-get update -y
-apt-get install -y virtualbox
+	apt-get update -y
+	apt-get install -y virtualbox
+fi
 
 echo "Installing dkms ..."
-
-apt-get install -y dkms
+if hash dkms 2>/dev/null; then
+	echo "Dkms already installed, skipping ..."
+else
+	apt-get install -y dkms
+fi
 
 echo "Installing VirtualBox extensions ..."
 
