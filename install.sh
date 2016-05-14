@@ -1,6 +1,8 @@
 #!/bin/bash
 
 DIRECTORY="fcc-python-vagrant"
+ARCH="$(uname -m)"
+OS="$(cat /etc/os-release | grep ID_LIKE)"
 
 echo "This script requires superuser access to install apt packages."
 echo "You will be prompted for your password by sudo."
@@ -32,32 +34,59 @@ fi
 
 echo "Installing VirtualBox extensions ..."
 
-wget -O /tmp/Linux_amd64.run http://download.virtualbox.org/virtualbox/5.0.20/VirtualBox-5.0.20-106931-Linux_amd64.run
+#wget -O /tmp/Linux_amd64.run http://download.virtualbox.org/virtualbox/5.0.20/VirtualBox-5.0.20-106931-Linux_amd64.run
 
-chmod +x /tmp/Linux_amd64.run
-./tmp/Linux_amd64.run
+#chmod +x /tmp/Linux_amd64.run
+#/tmp/Linux_amd64.run
 
 echo "Installing vagrant ..."
+
+InstallVagrant() {
+	if [ "$OSTYPE" = "darwin" ]; then
+		wget -O /tmp/vagrant.dmg https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1.dmg
+		hdiutil attach /tmp/vagrant.dmg
+		cd /Volumes/vagrant
+		installer -pkg vagrant.pkg -target "/"
+		hdiutil detach /Volumes/vagrant/
+	else
+		case $OS in
+			"ID_LIKE=debian")
+				case $ARCH in
+					"x86_64") wget -O /tmp/vagrant.deb https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.deb ;;
+					"i386") wget -O /tmp/vagrant.deb https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_i686.deb ;;
+				esac
+				dpkg -i /tmp/vagrant.deb
+			;;
+			"ID_LIKE=rhel fedora")
+				case $ARCH in
+					"x86_64") wget -O /tmp/vagrant.rpm https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.rpm ;;
+					"i386") wget -O /tmp/vagrant.rpm https://releases.hashicorp.com/vagrant/1.8.1/vagrant_1.8.1_x86_64.rpm ;;
+				esac
+				rpm -Uvh /tmp/vagrant.rpm
+			;;
+		esac
+	fi
+}
 
 if hash vagrant 2>/dev/null; then
 	echo "Vagrant already installed, skipping ..."
 else
-	apt-get install vagrant
+	InstallVagrant
 fi
+
+SCRIPT
 
 echo "Done Installing. Now cloning repo ..."
 
 if [ -d "$DIRECTORY" ]; then
 	echo "Cloning Git repository"
-	git clone https://github.com/byteknacker/fcc-python-vagrant.git ~\fcc-python-vagrant
+	git clone https://github.com/byteknacker/fcc-python-vagrant.git ~\$DIRECTORY
 	cd $DIRECTORY
 else
 	echo "Repository present. updating ..."
 	git pull
 fi
 
-SCRIPT
-
 echo "Creating virtual machine"
-vagrant up
+#vagrant up
 echo "Installation done. To start VM, simply run vagrant ssh"
