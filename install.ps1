@@ -39,6 +39,7 @@ If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 		Write-Host "Repository Exists. Updating repo."
 		cd ~\fcc-python-vagrant
 		git pull
+		vagrant up
 	} else {
 		Write-Host "Cloning the Git repository"
 		git clone https://github.com/byteknacker/fcc-python-vagrant.git ~\fcc-python-vagrant
