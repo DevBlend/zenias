@@ -33,7 +33,9 @@ apt-get install heroku-toolbelt --no-install-recommends -y
 echo "-------------- Installing build-essential and pip ----------------"
 # install gcc and g++ and other build basics to ensure most software works
 # install man too
-apt-get install build-essential python-pip man -y --no-install-recommends
+# dos2unix is needed because we could have CR-LF line terminator on Windows
+# And that would prevent ~/.bashrc to work properly because \r would be unrecognized
+apt-get install build-essential dos2unix python-pip man -y --no-install-recommends
 
 # needed for heroku toolbelt
 # notice that this is not a rigorous Ruby install, where we typically use rvm
@@ -62,7 +64,10 @@ echo "---------------- Creating virtual environment with Python 3 ---------"
 su - vagrant -c "/usr/local/bin/virtualenv /home/vagrant/.virtualenvs/${ENV_NAME} --python=/usr/bin/python3 && \
     /home/vagrant/.virtualenvs/${ENV_NAME}/bin/pip install -r /vagrant/requirements.txt"
 
-su - vagrant -c "cp /vagrant/.bashrc /home/vagrant/.bashrc" 
+su - vagrant -c "cp /vagrant/.bashrc /home/vagrant/.bashrc"
+# If you are on Windows host, with Git checkout windows line terminator style CRLF
+# this comes in handy
+su - vagrant -c "dos2unix  /home/vagrant/.bashrc > /dev/null 2>&1"
 
 # Activate the virtualenv on first login
 echo "workon ${ENV_NAME}" >> /home/vagrant/.bashrc
