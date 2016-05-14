@@ -39,17 +39,26 @@ chmod +x /tmp/Linux_amd64.run
 
 echo "Installing vagrant ..."
 
-apt-get install vagrant
+if hash vagrant 2>/dev/null; then
+	echo "Vagrant already installed, skipping ..."
+else
+	apt-get install vagrant
+fi
 
 echo "Done Installing. Now cloning repo ..."
 
 if [ -d "$DIRECTORY" ]; then
 	echo "Cloning Git repository"
 	git clone https://github.com/byteknacker/fcc-python-vagrant.git ~\fcc-python-vagrant
-	cd fcc-python-vagrant
-	echo "Creating virtual machine"
-	vagrant up
+	cd $DIRECTORY
+else
+	echo "Repository present. updating ..."
+	cd $DIRECTORY
+	git pull
 fi
+
+echo "Creating virtual machine"
+vagrant up
 
 echo "Installation done. To start VM, simply run vagrant ssh"
 
