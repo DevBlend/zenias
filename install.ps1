@@ -7,7 +7,7 @@ If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 
 	Write-Host "Downloading VirtualBox, VirtualBox Extensions, and Vagrant"
 
-	If (Test-Path "C:\HashiCorp\Vagrant\bin") {
+	If (Test-Path "C:\Program Files\Oracle\VirtualBox\") {
 		Write-Host "VirtualBox already installed. Skipping. "
 	} else {
 		Write-Host "Installing VirtualBox, return to this window once it installs..."
