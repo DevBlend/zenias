@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -80,8 +82,38 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# Initiate virtualenv
 WORKON_HOME="/home/vagrant/.virtualenvs"
 source /usr/local/bin/virtualenvwrapper.sh > /dev/null 2>&1
 cd /vagrant
 
-# the workon command to be added during provisioning 
+# Ask for git configuration data from user based on input
+chmod 755 /home/vagrant/gitconfig
+export PATH=$PATH:/home/vagrant/
+echo 'export PATH=$PATH:/home/vagrant/' >> ~/.profile
+iterator1=0
+iterator2=0
+while [[ $iterator1 = 0 && $iterator2 -lt 5 && ! -f ~/.gitconfig ]]
+do
+    read -p 'Do you wish to setup Github credentials for easy access? (y/n) >>> ' github
+
+    if [ $github = 'y' ]
+    then
+        /home/vagrant/gitconfig
+        iterator1=1
+    elif [ $github = 'n' ]
+    then
+        echo 'You can setup Github credentials later by using the command gitconfig'
+        iterator1=1
+    else
+        echo 'Your answer is not recognised, please enter either y or n'
+        ((iterator2++))
+    fi
+done
+
+if [ $iterator2 = 5 ]
+then
+    echo 'You can setup Github credentials later by using the command gitconfig'
+fi
+
+# the workon command to be added during provisioning
