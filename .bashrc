@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -84,4 +86,4 @@ WORKON_HOME="/home/vagrant/.virtualenvs"
 source /usr/local/bin/virtualenvwrapper.sh > /dev/null 2>&1
 cd /vagrant
 
-# the workon command to be added during provisioning 
+# the workon command to be added during provisioning
