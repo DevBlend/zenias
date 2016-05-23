@@ -1,36 +1,37 @@
 #!/usr/bin/env bash
 
-gitConfig () {
+export zeusargv1=$1
+export zeusargv2=$2
+
+gitconfig () {
     read -p "What is your real name? >>> " username
     read -p "What is your Github email address? >>> " email
     read -p "what is your Github username? >>> " githubusername
     git config --global user.email "$email"
     git config --global user.name "$username"
     git config --global push.default simple
-    export githubname=$githubusername
+    echo "githubusername: $githubusername" >> /home/vagrant/.configs/github_config
 }
 
-gitCreate () {
+gitcreate () {
     read -p "How should the Github remote repo be called? >>> " remoterepo
-    case $2 in
+    githubname=$(cat ~/.configs/github_config | egrep "githubusername" | tail -1 | awk '{print $2}')
+    case $zeusargv2 in
         private)
             curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""',"private":"true"}'
             ;;
         public)
             curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""'}'
             ;;
-        *)
-            echo "Invalid argument parsed"
-            ;;
     esac
 }
 
-case $1 in
-    gitConfig)
-        gitConfig
+case $zeusargv1 in
+    gitconfig)
+        gitconfig
         ;;
-    gitCreate)
-        gitCreate
+    gitcreate)
+        gitcreate
         ;;
     *)
         echo "Invalid argument parsed"

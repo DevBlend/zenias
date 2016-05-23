@@ -93,8 +93,8 @@ export PATH=$PATH:/home/vagrant/.configs
 echo 'export PATH=$PATH:/home/vagrant/.configs' >> ~/.profile
 git config credential.helper store
 
-githubCredentials () {
-    latercommand='You can setup Github later by running zeus gitConfig'
+githubcredentials () {
+    latercommand='You can setup Github later by running zeus gitconfig'
     iterator1=0
     iterator2=0
     while [[ $iterator1 = 0 && $iterator2 -lt 5 && ! -f ~/.gitconfig ]]
@@ -103,7 +103,7 @@ githubCredentials () {
 
         case $response in
             [yY][eE][sS]|[yY])
-                /home/vagrant/.configs/zeus gitConfig
+                /home/vagrant/.configs/zeus gitconfig
                 iterator1=1
                 ;;
             [nN][oO]|[nN])
@@ -123,6 +123,6 @@ githubCredentials () {
     fi
 }
 
-githubCredentials
+githubcredentials
 
 # the workon command to be added during provisioning
