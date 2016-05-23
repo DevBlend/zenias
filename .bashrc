@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -80,8 +82,47 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# Initiate virtualenv
 WORKON_HOME="/home/vagrant/.virtualenvs"
 source /usr/local/bin/virtualenvwrapper.sh > /dev/null 2>&1
 cd /vagrant
 
-# the workon command to be added during provisioning 
+# Ask for git configuration data from user based on input
+chmod 755 /home/vagrant/.configs/zeus
+export PATH=$PATH:/home/vagrant/.configs
+echo 'export PATH=$PATH:/home/vagrant/.configs' >> ~/.profile
+git config credential.helper store
+
+githubcredentials () {
+    latercommand='You can setup Github later by running zeus gitconfig'
+    iterator1=0
+    iterator2=0
+    while [[ $iterator1 = 0 && $iterator2 -lt 5 && ! -f ~/.gitconfig ]]
+    do
+        read -p 'Do you want to setup Github? [y/N] >>> ' response
+
+        case $response in
+            [yY][eE][sS]|[yY])
+                /home/vagrant/.configs/zeus gitconfig
+                iterator1=1
+                ;;
+            [nN][oO]|[nN])
+                echo $latercommand
+                iterator1=1
+                ;;
+            *)
+                echo 'Your answer is not recognised, please enter either [y/N]'
+                ((iterator2++))
+                ;;
+        esac
+    done
+
+    if [ $iterator2 = 5 ]
+    then
+        echo $latercommand
+    fi
+}
+
+githubcredentials
+
+# the workon command to be added during provisioning
