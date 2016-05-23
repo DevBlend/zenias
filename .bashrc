@@ -115,19 +115,6 @@ githubCredentials () {
                 ((iterator2++))
                 ;;
         esac
-
-        # if [ $github = 'y' ]
-        # then
-        #     /home/vagrant/.configs/zeus
-        #     iterator1=1
-        # elif [ $github = 'n' ]
-        # then
-        #     echo $latercommand
-        #     iterator1=1
-        # else
-        #     echo 'Your answer is not recognised, please enter either y or n'
-        #     ((iterator2++))
-        # fi
     done
 
     if [ $iterator2 = 5 ]
