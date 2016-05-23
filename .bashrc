@@ -88,32 +88,54 @@ source /usr/local/bin/virtualenvwrapper.sh > /dev/null 2>&1
 cd /vagrant
 
 # Ask for git configuration data from user based on input
-chmod 755 /home/vagrant/gitconfig
-export PATH=$PATH:/home/vagrant/
-echo 'export PATH=$PATH:/home/vagrant/' >> ~/.profile
-iterator1=0
-iterator2=0
-while [[ $iterator1 = 0 && $iterator2 -lt 5 && ! -f ~/.gitconfig ]]
-do
-    read -p 'Do you wish to setup Github credentials for easy access? (y/n) >>> ' github
+chmod 755 /home/vagrant/.configs/zeus
+export PATH=$PATH:/home/vagrant/.configs
+echo 'export PATH=$PATH:/home/vagrant/.configs' >> ~/.profile
+git config credential.helper store
 
-    if [ $github = 'y' ]
+githubCredentials () {
+    latercommand='You can setup Github later by running zeus gitConfig'
+    iterator1=0
+    iterator2=0
+    while [[ $iterator1 = 0 && $iterator2 -lt 5 && ! -f ~/.gitconfig ]]
+    do
+        read -p 'Do you want to setup Github? [y/N] >>> ' response
+
+        case $response in
+            [yY][eE][sS]|[yY])
+                /home/vagrant/.configs/zeus gitConfig
+                iterator1=1
+                ;;
+            [nN][oO]|[nN])
+                echo $latercommand
+                iterator1=1
+                ;;
+            *)
+                echo 'Your answer is not recognised, please enter either [y/N]'
+                ((iterator2++))
+                ;;
+        esac
+
+        # if [ $github = 'y' ]
+        # then
+        #     /home/vagrant/.configs/zeus
+        #     iterator1=1
+        # elif [ $github = 'n' ]
+        # then
+        #     echo $latercommand
+        #     iterator1=1
+        # else
+        #     echo 'Your answer is not recognised, please enter either y or n'
+        #     ((iterator2++))
+        # fi
+    done
+
+    if [ $iterator2 = 5 ]
     then
-        /home/vagrant/gitconfig
-        iterator1=1
-    elif [ $github = 'n' ]
-    then
-        echo 'You can setup Github credentials later by using the command gitconfig'
-        iterator1=1
-    else
-        echo 'Your answer is not recognised, please enter either y or n'
-        ((iterator2++))
+        echo $latercommand
     fi
-done
+}
 
-if [ $iterator2 = 5 ]
-then
-    echo 'You can setup Github credentials later by using the command gitconfig'
-fi
+githubCredentials
 
 # the workon command to be added during provisioning
