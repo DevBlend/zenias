@@ -38,7 +38,7 @@ echo "---------------------------------------------"
 # And that would prevent ~/.bashrc to work properly because \r would be unrecognized
 # Ruby needed for heroku toolbelt
 # notice that this is not a rigorous Ruby install, where we typically use rvm
-apt-get install -y --no-install-recommends heroku-toolbelt build-essential dos2unix python-pip man ruby python-dev python3-dev libpq-dev postgresql postgresql-contrib curl
+apt-get install -y --no-install-recommends heroku-toolbelt build-essential dos2unix python-pip man ruby python3-dev libpq-dev postgresql postgresql-contrib curl
 # install the cli
 su - vagrant -c "heroku --version > /dev/null 2>&1"
 
