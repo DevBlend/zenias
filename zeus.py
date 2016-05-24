@@ -44,6 +44,8 @@ cp(source_path + "/Vagrantfile", project_path)
 cp(source_path + "/provision.sh", project_path)
 # Installing requirements.txt
 cp(source_path + "/requirements.txt", project_path)
+cp(source_path + "/.bashrc", project_path)
+cp(source_path + "/zeus.sh", project_path)
 
 with colors.orchid:
     print "========== Setting up bare README.md =========="
