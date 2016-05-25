@@ -91,9 +91,13 @@ cd /vagrant
 chmod 755 /home/vagrant/.configs/zeus
 export PATH=$PATH:/home/vagrant/.configs
 echo 'export PATH=$PATH:/home/vagrant/.configs' >> ~/.profile
+# Makes it easier to use Github, you only have to give once your username
+# and password and it will be stored locally on your vagrant VM.
+# This is not a secure way and please don't package and share your vagrant VM.
 git config credential.helper store
 
 githubcredentials () {
+    # Set up Github and git configurations
     latercommand='You can setup Github later by running zeus gitconfig'
     iterator1=0
     iterator2=0
