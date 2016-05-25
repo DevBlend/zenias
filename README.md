@@ -12,6 +12,12 @@ Zeus relies on [Vagrant](https://www.vagrantup.com/). It is a tool that automate
 
 There are three levels that zeus will change: your local machine, Vagrant VM, and virtualenv within the Vagrant VM. Various features are installed on different levels.
 
+[asciinema Tutorial](https://asciinema.org/a/1u9zm99yzpz6v1b95wv6mrppn)
+
+or
+
+[Video Tutorial by John Wu](https://youtu.be/RbQ1qtOVSJc)
+
 ### 1. User's Local Machine Level
 
 #### Files
@@ -75,6 +81,8 @@ If you are on Windows, restart your local machine after the installation of thes
 5. Start coding.
 
 Note that you end up inside the Vagrant VM after these four steps. The VM is isolated from your local machine. Your current working directory has the absolute path of `/vagrant`, which is termed the "synced directory". It is in real-time sync with the `your/path/to/fcc-python-vagrant` local git repo. That is how your local machine communicates with the Vagrant VM.
+
+If you run into trouble, hit `zeus help` inside the Vagrant ssh session.
 
 ### Zeus CLI
 
