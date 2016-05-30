@@ -73,7 +73,7 @@ su - vagrant -c "/usr/local/bin/virtualenv /home/vagrant/.virtualenvs/${ENV_NAME
 
 su - vagrant -c "cp /vagrant/.bashrc /home/vagrant/"
 su - vagrant -c "mkdir /home/vagrant/.configs"
-su - vagrant -c "cp /vagrant/zeus.sh /home/vagrant/.configs/zeus"
+su - vagrant -c "cp /vagrant/zeus /home/vagrant/.configs/zeus"
 # If you are on Windows host, with Git checkout windows line terminator style CRLF
 # this comes in handy
 su - vagrant -c "dos2unix  /home/vagrant/.bashrc > /dev/null 2>&1"

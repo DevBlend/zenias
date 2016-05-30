@@ -3,6 +3,7 @@
 # Making the arguments of the zeus command available to the whole script
 export zeusargv1=$1
 export zeusargv2=$2
+export zeusargv3=$3
 
 gitconfig () {
     # Ask user for input to set up GitHub and git configs.
@@ -34,6 +35,30 @@ gitcreate () {
     esac
 }
 
+create () {
+    # Create a new project directory named after the third argument.
+    # Options available for -python
+    case $zeusargv2 in
+        -python)
+        # Installs all dependencies needed for the Python stack
+            mkdir $zeusargv3
+            BASEDIR=$(dirname "$0")
+            cp $BASEDIR/python/.gitignore $PWD/$zeusargv3
+            cp $BASEDIR/python/Procfile $PWD/$zeusargv3
+            cp $BASEDIR/python/runtime.txt $PWD/$zeusargv3
+            cp $BASEDIR/python/Vagrantfile $PWD/$zeusargv3
+            cp $BASEDIR/python/provision.sh $PWD/$zeusargv3
+            cp $BASEDIR/python/requirements.txt $PWD/$zeusargv3
+            cp $BASEDIR/python/.bashrc $PWD/$zeusargv3
+            cp $BASEDIR/zeus $PWD/$zeusargv3
+            cd $PWD/$zeusargv3
+            git init
+            vagrant up
+            vagrant ssh
+            ;;
+    esac
+}
+
 # Choice of which function to use based on user input of zeus' arguments
 case $zeusargv1 in
     gitconfig)
@@ -41,6 +66,9 @@ case $zeusargv1 in
         ;;
     gitcreate)
         gitcreate
+        ;;
+    create)
+        create
         ;;
     help)
         echo "Zeus - the tool to make web development faster"
