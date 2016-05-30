@@ -56,6 +56,23 @@ create () {
             vagrant up
             vagrant ssh
             ;;
+        -bootstrap)
+        # Install all dependencies needed for Bootstrap stack
+            mkdir $zeusargv3
+            BASEDIR=$(dirname "$0")
+            cp $BASEDIR/bootstrap/.gitignore $PWD/$zeusargv3
+            cp $BASEDIR/bootstrap/composer.json $PWD/$zeusargv3
+            cp $BASEDIR/bootstrap/home.html $PWD/$zeusargv3
+            cp $BASEDIR/bootstrap/index.php $PWD/$zeusargv3
+            cp $BASEDIR/bootstrap/.bashrc $PWD/$zeusargv3
+            cp $BASEDIR/bootstrap/Vagrantfile $PWD/$zeusargv3
+            cp $BASEDIR/bootstrap/provision.sh $PWD/$zeusargv3
+            cp $BASEDIR/zeus $PWD/$zeusargv3
+            cd $PWD/$zeusargv3
+            git init
+            vagrant up
+            vagrant ssh
+            ;;
     esac
 }
 
