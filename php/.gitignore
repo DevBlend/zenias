@@ -1,0 +1,9 @@
+/vendor/*
+/tmp/*
+/logs/*
+
+composer.phar
+
+.vagrant
+.settings
+.project
