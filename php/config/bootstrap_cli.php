@@ -20,9 +20,10 @@ use Cake\Core\Plugin;
  * Additional bootstrapping and configuration for CLI environments should
  * be put here.
  */
- if (isset($_ENV['DYNO'])) {
-     Configure::load('app_heroku', 'default');
- }
+// Loads Heroku config file
+if (isset($_ENV['DYNO'])) {
+   Configure::load('app_heroku', 'default');
+}
 
 // Set the fullBaseUrl to allow URLs to be generated in shell tasks.
 // This is useful when sending email from shells.

@@ -24,7 +24,7 @@
 # Installation settings for a PHP box with CakePHP installed
 PROJECT="my_project" # we would want a name passed to it via te first argument, $1
 DB="my_app" # the name of postgreSQL DB we need to provision, maybe $2
-SERVER="fcc-vagrant-php"
+SERVER="fcc-vagrant-php" # Should be the same name as the box, when implementing #29
 
 # This file is executed by root user - sudo not needed
 # But do not create any directory
@@ -74,9 +74,19 @@ echo "---- Setting up postgresql with ${DB} DB ----"
 echo "---------------------------------------------"
 # Creating superuser (-s) vagrant
 su - postgres -c "createuser -s vagrant"
+
+# Creating 2 different dbs:
+# NOTE : for now, all the names are hardcoded in the beginning of this file
+# In the future, the changes should be applied to config/app.php too
+# 
+# The development database
 su - vagrant -c "createdb ${DB}"
+# The testing database, used when phpunit tests are ran.
+su - vagrant -c "createdb ${DB}_test"
+
 # Setting default password for vagrant so Cake can connect
 su - vagrant -c "psql -U vagrant -d ${DB} -c \"ALTER USER \\\"vagrant\\\" WITH PASSWORD 'vagrant';\""
+su - vagrant -c "psql -U vagrant -d ${DB}_test -c \"ALTER USER \\\"vagrant\\\" WITH PASSWORD 'vagrant';\""
 
 # Copying apache config
 echo "---------------------------------------------"
