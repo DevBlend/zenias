@@ -221,5 +221,3 @@ Type::build('date')
     ->useImmutable();
 Type::build('datetime')
     ->useImmutable();
-
-Plugin::load('Beers', ['bootstrap' => false, 'routes' => true]);

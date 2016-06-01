@@ -129,18 +129,6 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 		<div class="columns large-3">
 			<div class="row">
 				<div class="columns large-12">
-					<h3>Beer noting app demo</h3>
-					<p>
-						In order to test the CRUD system and check if all is allright, we created <?= $this->Html->Link('a small sample plugin', ['plugin' => 'Beers', 'controller' => 'Beers', 'action' => 'index']) ?> to manage beers and notations.
-						<br/>
-						If you want to disable this plugin, simply remove the <code>lqkjsdl</code> line at the end of the <code>config/bootstrap.php</code> file.
-						Then, you can safely remove the plugin from the <code>plugins</code> folder.
-						If you don't need it, you may also remove the <code>Migration</code>plugin. As it's a CakePHP core plugin, you just have to disable it in <code>config/bootstrap.php</code>
-					</p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="columns large-12">
 					<h3>Editing this Page</h3>
 					<ul>
 						<li>To change the content of this page, edit: src/Template/Pages/home.ctp.</li>

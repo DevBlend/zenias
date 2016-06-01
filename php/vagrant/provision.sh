@@ -116,11 +116,13 @@ else
   php composer.phar self-update
   yes | sudo -u vagrant php composer.phar update
 fi
-echo "---------------------------------------------"
-echo "-------- Migrating Beer Plugin DB -----------"
-echo "---------------------------------------------"
+
+# Removed as not part of the box. (I'll leave it here  if we change our minds)
+#echo "---------------------------------------------"
+#echo "-------- Migrating Beer Plugin DB -----------------"
+#echo "---------------------------------------------"
 # Migrating sample DB
-sudo -u vagrant ./bin/cake migrations migrate -p Beers
+#sudo -u vagrant ./bin/cake migrations migrate -p Beers
 
 # All done
 echo "---------------------------------------------"
