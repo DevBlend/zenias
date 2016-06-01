@@ -1,3 +1,0 @@
-log "stuff"
-
-resource "doit"
