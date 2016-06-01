@@ -1,0 +1,6 @@
+### Vagrant Directory ###
+.vagrant/
+
+### Temp Dirctory ###
+tmp/
+

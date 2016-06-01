@@ -1,0 +1,46 @@
+### Disable line length constraint
+Metrics/LineLength:
+  Max: 120
+# Because we're not in the 80s anymore.
+# Based on data from http://sideeffect.kr/popularconvention#ruby
+#
+### Comma after each line in a list
+Style/TrailingCommaInLiteral:
+  EnforcedStyleForMultiline: comma
+# It is very common to add key/value pairs to hashes in Chef attributes. Making
+# sure each line has a comma diminishes the chance of someone making an error
+# when adding a new pair. It also makes the code look more consistent. There is
+# also a good explanation on why this is enabled by default in Puppet
+# (see: http://www.puppetcookbook.com/posts/trailing-commas.html).
+#
+# Instead of writing:
+#   default['cookbook']['attribute'] = {
+#     a: 'a',
+#     b: 'b'
+#   }
+# you should write:
+#   default['cookbook']['attribute'] = {
+#     a: 'a',
+#     b: 'b',
+#   }
+#
+### Align hashes as a table
+Style/AlignHash:
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
+# When dealing with long key names, it is easier to read hashes aligned as
+# tables. This is true both for colon and rocket style hashes.
+#
+# Instead of writing:
+#   default['cookbook']['attribute'] = {
+#     a: 'a',
+#     bb: 'b',
+#     ccc: 'c',
+#   }
+# you should write:
+#   default['cookbook']['attribute'] = {
+#     a:   'a',
+#     bb:  'b',
+#     ccc: 'c',
+#   }
+#

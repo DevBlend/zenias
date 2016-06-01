@@ -1,0 +1,6 @@
+[submodule "cookbooks/nodejs"]
+	path = cookbooks/nodejs
+	url = git@github.com:redguide/nodejs.git
+[submodule "cookbooks/ruby_rbenv"]
+	path = cookbooks/ruby_rbenv
+	url = git@github.com:chef-rbenv/ruby_rbenv.git

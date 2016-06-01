@@ -1,0 +1,7 @@
+language: ruby
+gemfile:
+   - Gemfile
+rvm:
+  - 2.1.6
+bundler_args: --path .vendor
+script: bundle exec rake

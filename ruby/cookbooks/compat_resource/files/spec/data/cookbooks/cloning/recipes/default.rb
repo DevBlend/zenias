@@ -1,0 +1,3 @@
+log "stuff"
+
+resource "doit"
