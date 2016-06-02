@@ -62,6 +62,16 @@ For your comfort, the **same environment variable has been setup** for the `my_a
 A simple step by step method to push your website to heroku:
 
 ```bash
+# You must be in the /vagrant/www dir:
+cd /vagrant/www
+
+# Init a git repo if not already done:
+git init
+
+# Commit your changes:
+git add .
+git commit -m 'Initial commit'
+
 # Create a heroku app:
 heroku create
 
@@ -74,3 +84,9 @@ heroku addons:create heroku-postgresql:hobby-dev
 # Test the heroku box :
 heroku open
 ```
+
+## Side notes:
+
+There is an empty `composer.json` file in the www directory by default. This file tells Heroku that your application is a PHP application.
+
+The `Procfile` is a file for Heroky to know what type of webserver is needed (in our case, Apache).
