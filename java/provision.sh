@@ -98,9 +98,9 @@ echo "---------------------------------------------"
 #su - vagrant -c "mv /vagrant/.bashrc /home/vagrant/"
 # If you are on Windows host, with Git checkout windows line terminator style CRLF
 # this comes in handy
-su - vagrant -c "echo 'export M2_HOME=/usr/share/maven3' >> ~/.bashrc"
-su - vagrant -c "echo 'export M2=$M2_HOME/bin' >> ~/.bashrc"
-su - vagrant -c "echo 'export PATH=$M2:$PATH' >> ~/.bashrc"
+su - vagrant -c "echo 'export M2_HOME=/usr/share/maven3' >> /home/vagrant/.bashrc"
+su - vagrant -c "echo 'export M2=/usr/share/maven3/bin' >> /home/vagrant/.bashrc"
+su - vagrant -c "echo 'export PATH=/usr/share/maven3/bin:$PATH' >> /home/vagrant/.bashrc"
 su - vagrant -c "dos2unix  /home/vagrant/.bashrc > /dev/null 2>&1"
 
 echo "---------------------------------------------"
