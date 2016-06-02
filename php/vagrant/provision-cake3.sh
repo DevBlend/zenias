@@ -16,10 +16,10 @@
 # updated his work to CakePHP 3.2.
 #-----------------------------------------------------------------------
 
-cd /var/www
 
-# Removing existing index:
-rm index.php
+# Removing existing files:
+rm -rf /var/www/*
+cd /var/www
 
 # Clone the git repo
 git clone ${GIT_CAKE3} .
