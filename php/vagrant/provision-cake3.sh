@@ -16,18 +16,20 @@
 # updated his work to CakePHP 3.2.
 #-----------------------------------------------------------------------
 
-
-# Removing existing files:
-rm -rf /var/www/*
-cd /var/www
-
-# Clone the git repo
-git clone ${GIT_CAKE3} .
-
 # Downloading composer in site dir, so it's available
 echo "---------------------------------------------"
 echo "- Setting up Composer and Cake dependencies -"
 echo "---------------------------------------------"
+
+# Removing existing files:
+rm -rf /vagrant/www
+cd /vagrant/
+
+# Clone the git repo
+sudo -u vagrant git clone ${GIT_CAKE3} /vagrant/www
+
+
+cd /vagrant/www
 # Installing composer
 if [ ! -e composer.phar ]; then
   curl -sS https://getcomposer.org/installer | sudo php
