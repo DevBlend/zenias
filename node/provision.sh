@@ -23,6 +23,10 @@ echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku
 # install heroku's release key for package verification
 wget -O- https://toolbelt.heroku.com/apt/release.key 2>&1 | apt-key add -
 
+## Add Keys for MongoDB
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+echo "deb http://repo.mongodb.org/apt/ubuntu "$(lsb_release -sc)"/mongodb-org/3.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+
 echo "---------------------------------------------"
 echo "------- Updating package dependencies -------"
 echo "---------------------------------------------"
@@ -51,6 +55,28 @@ echo 'sourcing done'
 nvm install 4.4.3
 
 NVM
+
+echo "---------------------------------------------"
+echo "------ Installing MongoDB database ----------"
+echo "---------------------------------------------"
+
+apt-get install -y mongodb-org
+
+echo "---------------------------------------------"
+echo "------ Installing Essential Packages --------"
+echo "---------------------------------------------"
+
+su - vagrant <<ESSENTIALS
+
+source ~/.nvm/nvm.sh
+echo "Installing bower"
+npm i -g bower
+echo "Installing gulp"
+npm i -g gulp
+echo "Installing Yeoman"
+npm i -g yo
+
+ESSENTIALS
 
 echo "---------------------------------------------"
 echo "--- Installing Workshopper modules ----------"
