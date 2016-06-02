@@ -27,10 +27,16 @@ gitcreate () {
     # Loop to create the remote repo
     case $zeusargv2 in
         private)
-            curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""',"private":"true"}'
+            curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""',"private":"true"}' > ~/.configs/.githubremote
+            newgithubremote=$(cat ~/.configs/.githubremote | egrep "html_url" | tail -1 | awk '{print $2}' | sed -r 's/[",]//g')
+            git remote add origin $newgithubremote
+            git push --set-upstream origin master
             ;;
         public)
-            curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""'}'
+            curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""'}' > ~/.configs/.githubremote
+            newgithubremote=$(cat ~/.configs/.githubremote | egrep "html_url" | tail -1 | awk '{print $2}' | sed -r 's/[",]//g')
+            git remote add origin $newgithubremote
+            git push --set-upstream origin master
             ;;
     esac
 }
