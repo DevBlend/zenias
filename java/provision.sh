@@ -13,61 +13,61 @@ echo "---------------------------------------------"
 echo "Running vagrant provisioning"
 echo "---------------------------------------------"
 
-# # install heroku toolbelt
-# echo "-------------- Installing heroku toolbelt -------------------------"
-# wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
-# # These shell script snippets are directly taken from heroku installation script
-# # We want to avoid the apt-get update
-# # add heroku repository to apt
-# echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
-# # install heroku's release key for package verification
-# wget -O- https://toolbelt.heroku.com/apt/release.key 2>&1 | apt-key add -
+# install heroku toolbelt
+echo "-------------- Installing heroku toolbelt -------------------------"
+wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+# These shell script snippets are directly taken from heroku installation script
+# We want to avoid the apt-get update
+# add heroku repository to apt
+echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
+# install heroku's release key for package verification
+wget -O- https://toolbelt.heroku.com/apt/release.key 2>&1 | apt-key add -
 
-# # add Java 8 ppa, Maven PPA, Gradle PPA
-# apt-get install -y --no-install-recommends software-properties-common
-# add-apt-repository ppa:webupd8team/java
-# add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
-# add-apt-repository ppa:cwchien/gradle
+# add Java 8 ppa, Maven PPA, Gradle PPA
+apt-get install -y --no-install-recommends software-properties-common
+add-apt-repository ppa:webupd8team/java
+add-apt-repository "deb http://ppa.launchpad.net/natecarlson/maven3/ubuntu precise main"
+add-apt-repository ppa:cwchien/gradle
 
-# echo "---------------------------------------------"
-# echo "------- Updating package dependencies -------"
-# echo "---------------------------------------------"
-# apt-get update -y # no need for sudo, and -y is needed to bypass the yes-no
+echo "---------------------------------------------"
+echo "------- Updating package dependencies -------"
+echo "---------------------------------------------"
+apt-get update -y # no need for sudo, and -y is needed to bypass the yes-no
 
-# echo "---------------------------------------------"
-# echo "-------- Installing packages ----------------"
-# echo "---------------------------------------------"
-# # install gcc and g++ and other build basics to ensure most software works
-# # install man too
-# # dos2unix is needed because we could have CR-LF line terminator on Windows
-# # And that would prevent ~/.bashrc to work properly because \r would be unrecognized
-# # Ruby needed for heroku toolbelt
-# # notice that this is not a rigorous Ruby install, where we typically use rvm
-# apt-get install -y --no-install-recommends heroku-toolbelt build-essential dos2unix man ruby libpq-dev postgresql postgresql-contrib curl
-# # install the cli
-# su - vagrant -c "heroku --version > /dev/null 2>&1"
+echo "---------------------------------------------"
+echo "-------- Installing packages ----------------"
+echo "---------------------------------------------"
+# install gcc and g++ and other build basics to ensure most software works
+# install man too
+# dos2unix is needed because we could have CR-LF line terminator on Windows
+# And that would prevent ~/.bashrc to work properly because \r would be unrecognized
+# Ruby needed for heroku toolbelt
+# notice that this is not a rigorous Ruby install, where we typically use rvm
+apt-get install -y --no-install-recommends heroku-toolbelt build-essential dos2unix man ruby libpq-dev postgresql postgresql-contrib curl
+# install the cli
+su - vagrant -c "heroku --version > /dev/null 2>&1"
 
-# # install Java - 8 and setup configs
-# apt-get install -y --no-install-recommends oracle-java8-installer > /dev/null
-# echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+# install Java - 8 and setup configs
+apt-get install -y --no-install-recommends oracle-java8-installer > /dev/null
+echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 
-# # set JAVA environment variables
-# apt-get install -y --no-install-recommends oracle-java8-set-default
+# set JAVA environment variables
+apt-get install -y --no-install-recommends oracle-java8-set-default
 
-# # install Maven
-# apt-get install -y --force-yes --no-install-recommends maven3
+# install Maven
+apt-get install -y --force-yes --no-install-recommends maven3
 
-# # install Gradle
-# apt-get install -y --no-install-recommends gradle
+# install Gradle
+apt-get install -y --no-install-recommends gradle
 
-# # install Tomcat
-# # Setup Tomcat user
-# groupadd tomcat
-# useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
-# # Download Tomcat
-# wget http://mirror.fibergrid.in/apache/tomcat/tomcat-8/v8.0.35/bin/apache-tomcat-8.0.35.tar.gz
-# mkdir /opt/tomcat
-# tar xvf apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
+# install Tomcat
+# Setup Tomcat user
+groupadd tomcat
+useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
+# Download Tomcat
+wget http://mirror.fibergrid.in/apache/tomcat/tomcat-8/v8.0.35/bin/apache-tomcat-8.0.35.tar.gz
+mkdir /opt/tomcat
+tar xvf apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
 # Configure Tomcat
 su - vagrant <<TOMCAT
 
@@ -83,16 +83,16 @@ TOMCAT
 
 
 
-# # install postgresql and setup user
-# echo "---------------------------------------------"
-# echo "------- Setting up postgresql ---------------"
-# echo "---------------------------------------------"
-# su - postgres -c "createuser -s vagrant"
-# su - vagrant -c "createdb ${DB}"
+# install postgresql and setup user
+echo "---------------------------------------------"
+echo "------- Setting up postgresql ---------------"
+echo "---------------------------------------------"
+su - postgres -c "createuser -s vagrant"
+su - vagrant -c "createdb ${DB}"
 
-# echo "---------------------------------------------"
-# echo "------ Preparing .bashrc for first usage ----"
-# echo "---------------------------------------------"
+echo "---------------------------------------------"
+echo "------ Preparing .bashrc for first usage ----"
+echo "---------------------------------------------"
 
 # Copy bashrc
 #su - vagrant -c "mv /vagrant/.bashrc /home/vagrant/"
