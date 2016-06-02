@@ -17,7 +17,8 @@
 				text-align: center;
 				padding:50px;
 			}
-			.sectionHeader p{
+			.card-panel{
+				padding:5px 15px;
 			}
 			code {
 				background-color:#CFC;
@@ -132,12 +133,12 @@ php5-mcrypt
 php5-apcu 
 php5-gd
 phpunit 
-							</pre>
+</pre>
 							<p>PostgreSQL is the database server: </p>
 							<pre>
 postgresql
 postgresql-contrib 
-							</pre>
+</pre>
 							<p>Of course, <code>git</code> and the <code>heroku-toolelt</code> are present too.</p>
 							<a class="btn waves-effect waves-light modal-trigger" href="#phpinfo">Display complete phpinfo</a>
 						</div>
@@ -154,7 +155,29 @@ host: localhost
 db name : my_app (or my_app_test)
 user: vagrant
 password: vagrant
-							</pre>
+</pre>
+
+							<h3>Local connection test</h3>
+							<?php
+							// Use the DATABASE_URL environment variable
+							$db = parse_url(getenv('DATABASE_URL'));
+
+							// Then, access the properties like this:
+							$host = $db['host'];
+							$username = $db['user'];
+							$password = $db['pass'];
+							$database = ltrim($db["path"], '/');
+							$connection = pg_connect("host=$host port=5432 dbname=$database user=$username password=$password");
+							$class = 'green white-text';
+							$message = 'PHP is able to connect to the database';
+							if ($connection === false) {
+								$class = 'red white-text';
+								$message = 'PHP was unable to connect to the database';
+							}
+							pg_close($connection);
+							?>
+							<div class='card-panel <?php echo $class ?>'><?php echo $message ?></div>
+
 							<h3>Heroku</h3>
 							<p>
 								To use a postgreSQL database on Heroku, you will need the Heroku-Postgres addon. You can enable it using the toolbelt with this command:<br/>
@@ -172,7 +195,7 @@ $host =     $db['host'];
 $username = $db['user'];
 $password = $db['pass'];
 $database = ltrim($db["path"],'/');
-							</pre>
+</pre>
 							<p>For your comfort, the same environment variable has been setup for the database <code>my_app</code>. That way, you don't have to bother on the differences of configuration between this virtual machine and heroku.
 						</div>
 					</div>
