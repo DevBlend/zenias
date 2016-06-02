@@ -1,1 +1,0 @@
-SetEnv DATABASE_URL postgres://vagrant:vagrant@localhost/my_app
