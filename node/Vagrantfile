@@ -24,10 +24,6 @@ Vagrant.configure("2") do |config|
     config.ssh.username = "vagrant"
     config.ssh.password = "vagrant"
 
-    config.vm.provider "virtualbox" do |vb|
-      vb.gui = true
-    end
-
     # naming the VM
     config.vm.provider "virtualbox" do |v|
       v.name = "nodeschool-vagrant"
