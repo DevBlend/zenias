@@ -6,6 +6,7 @@
 - [What is Zeus](#what-is-zeus)
 - [Current Version](#current-version)
 - [How to Use](#how-to-use)
+   - [Basic Requirement](basic-requirement)
    - [Clojure](#clojure)
    - [Java](#java)
    - [Node](#node)
@@ -24,7 +25,7 @@
 
 _Zeus_ is a CLI tool that creates a platform-independent [Vagrant](https://www.vagrantup.com) development environment.
 
-Presently, we support these stacks:
+Presently, we support creating Ubuntu 14.04 LTS environment with these stacks:
 - Clojure-Compojure-Leiningan
 - Node-Express
 - Java 1.8-Tomcat-Maven-Gradle
@@ -39,6 +40,14 @@ In all of the above, PostgreSQL 9.3 is present and configured for use as Databas
 Present version of this project stands at 1.0.0. We use Semvar based versioning.
 
 ## How to Use
+
+### Basic Requirement
+
+You need to install **latest** (version 5.0.20) [Virtualbox](https://www.virtualbox.org/wiki/Downloads), its compatible Virtualbox [Extension pack](https://www.virtualbox.org/wiki/Downloads) for USB 2.0 support; and **latest** (1.8.1) [Vagrant](https://www.vagrantup.com/downloads.html) itself.
+
+If you are on Windows, you need [Git Bash](https://git-scm.com/downloads). ON other platforms, like Linux or MacOSX; you would require having [git](https://git-scm.com/downloads) installed in your machine.
+
+Once you have installed these, you can choose to boot up one of the following environments. In future, we plan on installing the basic requirements as part of `zeus` as well.
 
 ### Clojure
 
@@ -61,6 +70,8 @@ The motivation for this Open Source project is to let users focus more on coding
 We expect our vagrant environments running smoothly on most platforms; including Windows, Mac, and Linux. We also aim to reduce the size of the box as much as possible.
 
 ## Features and Packages
+
+There are three levels that zeus will change: your local machine, Vagrant VM, and virtualenv within the Vagrant VM. Various features are installed on different levels.
 
 ### Individual Boxes
 
@@ -118,18 +129,25 @@ We expect our vagrant environments running smoothly on most platforms; including
 
 > Those could be something as harmless as download progress, or gpg key fetching, or even _building database of man pages_. In cases like those, we don't want the output and we pipe them to `/dev/null`. However, we do need to know if something went wrong - so we also do `2>&1`, to indicate `STDERR` outputs in `STDOUT`.
 
-> And as said earlier, we have test cases to inspect if the provisioning went fine.
+> And as mentioned earlier, we have test cases to inspect if the provisioning went fine.
+
+### Why no Continuous Integration, like Travis?
+
+> To be frank, setting up CI is not so straightforward with this. Our requirement is this: _A contributor changes some file(s) and submits a PR. The CI service should pull in the changes and run vagrant provisioning. After the boxes have been provisioned, the test suites are invoked from inside the provisioned from within the boxes to ensure everything is fine._
+
+> As you can see, it requires that a virtual environment be set up inside the environment that CI service is providing you. However, most CI services use some form of virtualization themselves. Like the Docker images Travis use, uses OpenVZ containers.
+
+> Virtual systems within an already-virtual system is kind of tricky, and in most cases not allowed. We did some research, and we are yet to find a solution. However, if you have a workaround, do get in touch with [us](https://gitter.im/FreeCodeCamp/vagrant)!
 
 
 ## License
 
+Continue to our [license](LICENSE).
 
-
-Zeus relies on [Vagrant](https://www.vagrantup.com/). It is a tool that automates the setup of development environments and provisioning of that environment.
 
 ## Features
 
-There are three levels that zeus will change: your local machine, Vagrant VM, and virtualenv within the Vagrant VM. Various features are installed on different levels.
+
 
 [asciinema Tutorial](https://asciinema.org/a/1u9zm99yzpz6v1b95wv6mrppn)
 
