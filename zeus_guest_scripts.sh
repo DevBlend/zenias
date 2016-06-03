@@ -9,20 +9,19 @@
 #bash_version   :4.3.42(1)-release
 #============================================================================
 # Logo
+export Z_VERSION="0.1"
 z_logo() {
   cat << EOF
-
-
+\n
+\n
 \e[31m         (    (
 \e[31m   (    ))\  ))\  (    \e[39mZeus: Vagrant boxes with Heroku integration
 \e[31m   )\  /(\e[33m(_)\e[31m/(\e[33m(_) )\\
 \e[31m  (\e[33m(_)(_)\e[31m) \e[33m(_)\e[31m)( (\e[33m(_)    \e[32mA FreeCodeCamp project (http://freecodecamp.com)
 \e[32m  |_ // -_)| || |(_-<
 \e[32m  /__|\___| \_,_|/__/  \e[39mv ${Z_VERSION}
-  Guest script
-
-
-
+\n
+\n
 EOF
 }
 

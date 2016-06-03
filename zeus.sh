@@ -8,16 +8,8 @@
 #notes          :
 #bash_version   :4.3.42(1)-release
 #============================================================================
-source ./zeus_host_functions.sh
-
 export Z_VERSION="0.1"
-# Will ask for github credentials
-export Z_GITHUB_CRED=true
-export Z_GITHUB_NEWREPO=true
-# Will ask for Heroku credentials
-export Z_HEROKU_CRED=true
-export Z_HEROKU_NEWMACHINE=true
-export Z_STATE='host'
+source ./zeus_host_functions.sh
 
 # Getting the params:
 while getopts ":l:d:o:ghncz" opt; do
@@ -61,11 +53,11 @@ else
   mkdir "${Z_DESTINATION}"
 fi
 
-echo '-----------------------------------------------------------------------'
+echo '---------------------------------------------------------------------------'
 echo ''
 echo "Preparing a vagrant box for ${Z_LANGUAGE} language..."
 echo ''
-echo '-----------------------------------------------------------------------'
+echo '---------------------------------------------------------------------------'
 echo ' - Copying box files'
 # Copy all the files
 cp -r ./${Z_LANGUAGE}/* ${Z_DESTINATION}/
@@ -83,9 +75,9 @@ chmod +x ${Z_DESTINATION}/vagrant/*
 cd "${Z_DESTINATION}"
 
 echo ''
-echo '-----------------------------------------------------------------------'
+echo '---------------------------------------------------------------------------'
 echo "Launching Vagrant"
-echo '-----------------------------------------------------------------------'
+echo '---------------------------------------------------------------------------'
 vagrant up
 
 #vagrant ssh

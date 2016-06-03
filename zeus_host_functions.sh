@@ -11,17 +11,16 @@
 # Logo
 z_logo() {
   cat << EOF
-
-
+\n
+\n
 \e[31m         (    (
 \e[31m   (    ))\  ))\  (    \e[39mZeus: Vagrant boxes with Heroku integration
 \e[31m   )\  /(\e[33m(_)\e[31m/(\e[33m(_) )\\
 \e[31m  (\e[33m(_)(_)\e[31m) \e[33m(_)\e[31m)( (\e[33m(_)    \e[32mA FreeCodeCamp project (http://freecodecamp.com)
 \e[32m  |_ // -_)| || |(_-<
 \e[32m  /__|\___| \_,_|/__/  \e[39mv ${Z_VERSION}
-  ${Z_STATE} script
-
-
+\n
+\n
 EOF
 }
 
@@ -49,12 +48,4 @@ $(z_help)
 
 EOF
 exit 1
-}
-
-z_export() {
-  cat << EOF
-export Z_LANGUAGE="${Z_LANGUAGE}"
-export Z_DESTINATION="${Z_DESTINATION}"
-export Z_OPTION="${Z_OPTION}"
-EOF
 }
