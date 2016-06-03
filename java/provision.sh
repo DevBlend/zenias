@@ -21,7 +21,7 @@ wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 # add heroku repository to apt
 echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
 # install heroku's release key for package verification
-wget -O- https://toolbelt.heroku.com/apt/release.key 2>&1 | apt-key add -
+wget -O- https://toolbelt.heroku.com/apt/release.key 2>&1 | apt-key add - > /dev/null
 
 # add Java 8 ppa, Maven PPA, Gradle PPA
 apt-get install -y --no-install-recommends software-properties-common
