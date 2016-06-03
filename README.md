@@ -86,7 +86,7 @@ In vagrant configuration, the port 3000 is mapped with guest port 9200. Thus, if
 
 We have also included a sample [Todo app](https://github.com/tastejs/todomvc/tree/master/examples/socketstream/) with Socket Stream, built by the awesome guys at [TodoMVC](https://github.com/tastejs/todomvc). To run it, do the following :
 
-```
+```bash
 cd /vagrant # navigate to shared vagrant folder
 cd socketstream
 npm install
