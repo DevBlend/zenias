@@ -54,23 +54,76 @@ Present version of this project stands at 1.0.0. We use Semvar based versioning.
 
 ## Motivation
 
+Zeus is made for students of [FreeCodeCamp](https://freecodecamp.com), who are starting their journey in learning back-end development.
+
+The motivation for this Open Source project is to let users focus more on coding web apps, and less on configuration and set-up.
+
+We expect our vagrant environments running smoothly on most platforms; including Windows, Mac, and Linux. We also aim to reduce the size of the box as much as possible.
+
 ## Features and Packages
 
 ### Individual Boxes
 
+- Each individual box has its own shell-based provisioner. For instance, `java` provisioner is `zeus/java/provision.sh`.
+- Each box has a DB, a web framework, a package manager and some nifty tools like `curl`, `git`, `dos2unix` etc.
+
+
 ### Common Features
+- All boxes come with pre-installed heroku toolbelt and heroku CLI for easy deployment of apps on heroku.
+- All boxes have port forwarding. So, you don't need to know the IP address of a vagrant box - you can simply access the running app inside vagrant via `http://localhost:<port_number>` in your browser.
+- All boxes share a workspace with host machine. It allows an end-user to work on their own local IDE.
 
 ## Contributing Guidelines
+- Do talk to [us](https://gitter.im/FreeCodeCamp/vagrant) before you raise a pull request.
+- If you are looking for something to work on, please check our [issues](https://github.com/alayek/zeus/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22).
+- Vagrant testing takes time, and we intend to support major platforms. If you raise a PR, it might take a day or two for us to test on most platforms. So have patience.
+- You can contribute by adding documentation on [FreecodeaCamp Wiki](https://github.com/FreeCodeCamp/FreeCodeCamp/wiki) about this project.
+- You can contribute by testing various boxes on new platforms, or existing PRs on common platforms.
 
 ## Frequently Asked Questions
 
+### Why Not Docker?
+
+>Docker is not **natively** supported on Windows and Mac. While on Linux, it makes sense to use Docker, on Windows and Mac; one needs lot of extra packages to make Docker work.
+
+>Docker is in no way superior to Vagrant if we are targeting development environment for end user, on their personal laptop or family desktop. We chose to start with Vagrant and the project grew from there. If we get a compelling reason to move to Docker, we would.
+
+### Why are [c9](https://c9.io/) or [Nitrous](https://www.nitrous.io/) not used?
+
+> Cloud 9 and Nitrous are great services, for coding in-browser. They give you a full-fledged terminal with superuser access, among other things. But we are trying to help people get jobs by building a solid back-end or full-stack profile.
+
+> A user needs to be comfortable working on their own machine, outside a browser. A vagrant environment is a great place to start. Once we have a user comfortably working using a vagrant, we can take them through the journey of taking apart their environments, and setting up their own environment.
+
+> We plan on creating some detailed tutorials on these, and an environment in a local machine is a step towards that.
+
+> In a lot of countries, getting good reliable internet is an issue. Power cuts are rampant. If you are from one of those places, you are probably more comfortable working on your local environment offline.
+
+> We acknowledge the benefits of cloud-hosted, browser-interfaced envs like c9 or nitrous. And our tool is complementary to these. In the end, it's the end-user who gets to decide which one they want to use.
+
+### Why shell-script provisioning?
+
+> State-of-the-art provisioners like Chef, Puppet, Ansible, and Salt are there. They work amazingly well, with 100% reliability; and most big and small companies use them internally in their DevOps.
+
+> But, while they are great for provisioning 16 GB CentOS workstations in a team, part of a large MNC, your local Windows 10 with 4 GB RAM would most likely not be able to handle them. You machine would slow down, or would need to download hundreds of files along with the huge plugins. In some cases, even more things to download.
+
+> We started with shell-script as it is lightweight, and it just works. Our setup is not that complex. In our usecase, where we are provisioning personal machines, we found shell script to provision envs the fastest. We have not yet had a reason to move to any of these provisioners; however, if such a need were to arise, we won't think twice before moving to these!
+
+> Shell script can be odd and esoteric at times, but we have figured out solutions to most of the common problems over the course of this project.
+
+> As for reliability, we have test suites, to be executed after a box has been provisioned.
+
+### Why all the `>/dev/null` style output suppressing? Are you hiding something?
+
+> The only thing we are hiding from end-users, is misleading _red-text_ information. We have noticed that, during provisioning, shell script provisioning prints a lot of stuff in red-text, indicating error.
+
+> Those could be something as harmless as download progress, or gpg key fetching, or even _building database of man pages_. In cases like those, we don't want the output and we pipe them to `/dev/null`. However, we do need to know if something went wrong - so we also do `2>&1`, to indicate `STDERR` outputs in `STDOUT`.
+
+> And as said earlier, we have test cases to inspect if the provisioning went fine.
+
+
 ## License
 
-Zeus creates a platform-independent Vagrant development environment. Currently, Python-Django stack is supported but many more plugins, such as Ruby stack, are under development.
 
-Zeus was initially made for students of [FreeCodeCamp](https://freecodecamp.com).
-
-The motivation for this Open Source project is let users focus only on coding web apps.
 
 Zeus relies on [Vagrant](https://www.vagrantup.com/). It is a tool that automates the setup of development environments and provisioning of that environment.
 
@@ -195,27 +248,8 @@ $ py.test -v
 
 You should see all tests PASSED and no errors printed.
 
-# Contributing Guidelines
 
-## For people who wish to write new code
 
-1. Fork this GitHub repo
-2. Read the latest software specification [here](https://docs.google.com/document/d/1VkHJRZs0XdL2ne1Z55eAWL8pLrhdhpb7i60dpph0jmY/)
-3. Join our Slack Team. Sign up via this [form](https://johnwu.typeform.com/to/ifhehu)
-4. Submit Pull Request
-
-## For people who wish to review existing code
-
-1. Pull in the changes from main `master` branch or any pull requests and test them locally on your machine.
-2. Follow the steps under the section "Test Your Setup". Use multiple testing methods.
-
-Do not be alarmed by any red-colored text during provisioning. Unless it clearly says _error_ no need to panic!
-
-# Acknowledgement
-
-Many thanks to all those who have helped to develop this Open Source project. We hope that it is useful for you and welcome your feedback. Please feel free to contact anyone of the contributors.
-
-A special acknowledgement to FreeCodeCamp for inviting coders to participate in this project.
 
 # Security
 
