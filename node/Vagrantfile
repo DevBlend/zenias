@@ -17,22 +17,6 @@ Vagrant.configure("2") do |config|
         s.inline = "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile"
     end
 
-    # avoiding ssh key insert
-    config.ssh.insert_key = false
-
-    # ssh and gui mode
-    config.ssh.username = "vagrant"
-    config.ssh.password = "vagrant"
-
-    config.vm.provider "virtualbox" do |vb|
-      vb.gui = true
-    end
-
-    # naming the VM
-    config.vm.provider "virtualbox" do |v|
-      v.name = "nodeschool-vagrant"
-    end
-
     # Provision the virtual machine.
     config.vm.provision :shell, :path => "provision.sh"
 end
