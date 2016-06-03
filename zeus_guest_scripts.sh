@@ -35,9 +35,9 @@ gitconfig () {
   echo "Please, enter your github credentials."
   echo ""
   # Ask user for input to set up GitHub and git configs.
-  read -p " - What is your real name?" username
-  read -p " - What is your Github email address?" email
-  read -p " - What is your Github username?" githubusername
+  read -p " - What is your real name? " username
+  read -p " - What is your Github email address? " email
+  read -p " - What is your Github username? " githubusername
   git config --global user.email "$email"
   git config --global user.name "$username"
   # Set push to simple
