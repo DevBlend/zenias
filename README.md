@@ -74,11 +74,11 @@ If you are on Windows, restart your local machine after the installation of thes
 
 ### Standard Usage
 
-1. `git clone https://github.com/byteknacker/fcc-python-vagrant.git`
+1. `git clone --recursive https://github.com/alayek/zeus.git`
 2. Navigate to the directory of this cloned repo.
-`cd your/path/to/fcc-python-vagrant`
+`cd your/path/to/zeus/ruby`
 3. `vagrant up` in your bash-compliant terminal (Git Bash on Windows, regular terminal on Linux or Mac).
-3. Inside the directory `your/path/to/fcc-python-vagrant` run `vagrant ssh` to start the session inside the development VM.
+3. Inside the directory `your/path/to/zeus/ruby` run `vagrant ssh` to start the session inside the development VM.
 4. Complete Github and git config setup. You only need to login to Github once during your first push and never again. You don't need to authenticate yourself when you perform git commit.
 5. Start coding.
 
@@ -95,15 +95,6 @@ Create or overwrite existing git configuration for the user in terms of username
 - `zeus gitcreate private` or `zeus gitcreate public`
 Create a private or public repository on Github via the GitHub API. You need to first have setup your git configurations with `zeus gitconfig` to use this properly. You only need to specify the name you wish to give to the remote repository.
 
-### Alternative Usage: zeus.py
-
-The reason why you might wish to use `zeus.py` is that it copies pre-set files and directories, configures the directory in which the Vagrant VM is located. You can also create multiple VMs simultaneously. Furthermore, it leaves your local git repo `your/path/to/fcc-python-vagrant`.
-
-These are the steps to use `zeus.py`:
-
-1. `cd ~/Desktop`
-2. `python your/path/to/fcc-python-vagrant/zeus.py <newproject>`
-3. That is it. You are directly in a Vagrant ssh session. Start coding now.
 
 Nota Bene:
 

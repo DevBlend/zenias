@@ -85,7 +85,7 @@ su - postgres -c "createuser -s vagrant"
 # Creating 2 different dbs:
 # NOTE : for now, all the names are hardcoded in the beginning of this file
 # In the future, the changes should be applied to config/app.php too
-#
+
 # The development database
 su - vagrant -c "createdb ${DB}"
 # The testing database, used when phpunit tests are ran.

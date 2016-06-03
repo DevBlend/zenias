@@ -1,0 +1,14 @@
+# encoding: utf-8
+
+source 'https://supermarket.chef.io'
+
+
+cookbook 'apt'
+cookbook 'build-essential'
+cookbook 'ruby_build'
+cookbook 'nodejs', {:github=>"mdxp/nodejs-cookbook"}
+cookbook "ruby_rbenv", {:github=>"chef-rbenv/ruby_rbenv"}
+cookbook "sqlite", {}
+cookbook "postgresql", {}
+cookbook "git", {}
+cookbook 'heroku-toolbelt', '~> 0.1.0'
