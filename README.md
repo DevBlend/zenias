@@ -22,7 +22,21 @@
 
 ## What is Zeus
 
+_Zeus_ is a CLI tool that creates a platform-independent [Vagrant](https://www.vagrantup.com) development environment.
+
+Presently, we support these stacks:
+- Clojure-Compojure-Leiningan
+- Node-Express
+- Java 1.8-Tomcat-Maven-Gradle
+- PHP-CakePHP
+- Python-Django
+- Ruby-Rails
+
+In all of the above, PostgreSQL 9.3 is present and configured for use as Database, except for the Node and Express stack; where MongoDB has been provided.
+
 ## Current Version
+
+Present version of this project stands at 1.0.0. We use Semvar based versioning.
 
 ## How to Use
 
