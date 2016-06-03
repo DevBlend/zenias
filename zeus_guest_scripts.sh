@@ -62,7 +62,7 @@ gitcreate () {
       exit
     fi
   else
-    mkdir "${Z_DESTINATION}"
+    mkdir "${V_WORKING_DIR}"
   fi
 
   cd "${V_WORKING_DIR}"
@@ -74,18 +74,26 @@ gitcreate () {
   read -p "Is this repo private or public ? [private/public]" repotype
   # Get the stored GitHub username inside github_config
   githubname=$(cat ~/.configs/github_config | egrep "githubusername" | tail -1 | awk '{print $2}')
+  cd ${V_WORKING_DIR}
+  git init
   # Loop to create the remote repo
   case $repotype in
       private)
-          answer=$(curl -s -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""',"private":"true"}')
-          ;;
+        curl -s -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""',"private":"true"}' > ~/.configs/.githubremote
+        newgithubremote=$(cat ~/.configs/.githubremote | egrep "html_url" | tail -1 | awk '{print $2}' | sed -r 's/[",]//g')
+        git remote add origin $newgithubremote
+        git push --set-upstream origin master
+        ;;
       public)
-          answer=$(curl -s -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""'}')
-          ;;
+        curl -s -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""'}' > ~/.configs/.githubremote
+        newgithubremote=$(cat ~/.configs/.githubremote | egrep "html_url" | tail -1 | awk '{print $2}' | sed -r 's/[",]//g')
+        git remote add origin $newgithubremote
+        git push --set-upstream origin master
+        ;;
   esac
-  repo=$(echo "${answer}"|jq '.clone_url')
-  echo "The repo ${repo} will be cloned in ${V_WORKING_DIR}."
-  git clone "${repo}" "${V_WORKING_DIR}"
+  #repo=$(echo "${answer}"|jq '.clone_url')
+  #echo "The repo ${repo} will be cloned in ${V_WORKING_DIR}."
+  #git clone "${repo}" "${V_WORKING_DIR}"
 }
 
 #
