@@ -65,7 +65,7 @@ echo "---------------------------------------------"
 #  - ruby : needed for heroku toolbelt
 #  - curl : needed to download things
 #  - Apache2 is installed here so we can update its config before the modules install.
-apt-get install -y --no-install-recommends heroku-toolbelt ruby dos2unix man curl apache2
+apt-get install -y --no-install-recommends heroku-toolbelt ruby dos2unix man curl apache2 jq
 # Set Apache ServerName.
 echo "ServerName ${SERVER}" >> /etc/apache2/apache2.conf;
 
