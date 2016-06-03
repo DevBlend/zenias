@@ -63,5 +63,5 @@ Vagrant.configure('2') do |config|
   end
 
   # Provision script
-  config.vm.provision :shell, path: './vagrant/provision.sh', args: '-z'
+  config.vm.provision :shell, path: './vagrant/provision.sh'
 end

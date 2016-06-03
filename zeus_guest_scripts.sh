@@ -33,8 +33,6 @@ gitconfig () {
   if [ "${Z_GITHUB_CRED}" == true ]; then
     echo -----------------------------------------------------------------------
     echo "Please, enter your github credentials."
-    echo "If you don't want to configure a github account, use "
-    echo "the -g option when you launch this script."
     echo ""
     # Ask user for input to set up GitHub and git configs.
     read -p " - What is your real name?" username
@@ -61,8 +59,6 @@ gitcreate () {
     # Create a private or public repo on Github
     echo -----------------------------------------------------------------------
     echo "A new github repo will be created."
-    echo "If you don't want to create a new repo, use the -n"
-    echo "option when you launch this script."
     echo ""
     read -p "How should the Github remote repo be called? " remoterepo
     # Get the stored GitHub username inside github_config
@@ -91,8 +87,6 @@ herokuconfig () {
   if [ "${Z_HEROKU_CRED}" == true ]; then
     echo -----------------------------------------------------------------------
     echo "Please, enter your Heroku credentials."
-    echo "If you don't want to configure a Heroku account, use "
-    echo "the -h option when you launch this script."
     echo ""
     heroku login
 
@@ -108,8 +102,6 @@ herokucreate () {
   if [ "${Z_HEROKU_CRED}" == true ] && [ "${Z_HEROKU_NEWMACHINE}" == true ]; then
     echo -----------------------------------------------------------------------
     echo "A new Heroku machine will be created."
-    echo "If you don't want to create a new machine, use the -c"
-    echo "option when you launch this script."
     echo ""
     cd "${V_WORKING_DIR}"
     heroku create
@@ -117,3 +109,51 @@ herokucreate () {
     echo "... Skipping creation of a new machine on Heroku."
   fi
 }
+
+
+# Github
+while true; do
+    read -p "Do you want to login to Github? [y/n]" yn
+    case $yn in
+        [Yy]* )
+        gitconfig
+        while true; do
+            read -p "Do you want to create a new Github repository? [y/n]" yn
+            case $yn in
+                [Yy]* )
+                gitcreate
+                break;;
+                [Nn]* ) break;;
+                * ) echo "Please answer y or n.";;
+            esac
+        done
+        break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer y or n.";;
+    esac
+done
+
+# Heroku
+while true; do
+    read -p "Do you want to login to Heroku? [y/n]" yn
+    case $yn in
+        [Yy]* )
+        herokuconfig
+        while true; do
+            read -p "Do you want to create a new machine on Heroku? [y/n]" yn
+            case $yn in
+                [Yy]* )
+                herokucreate
+                break;;
+                [Nn]* ) break;;
+                * ) echo "Please answer y or n.";;
+            esac
+        done
+        break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer y or n.";;
+    esac
+done
+
+echo ""
+echo "All done."

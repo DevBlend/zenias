@@ -20,6 +20,7 @@
 # All credit goes to Shinichi Segawa (tektoh) for his implementation, I only
 # updated his work to CakePHP 3.2.
 #-------------------------------------------------------------------------------
+source _provision_vars.sh
 # Installation settings for a PHP box with CakePHP installed
 PROJECT="my_project" # we would want a name passed to it via te first argument, $1
 DB="my_app" # the name of postgreSQL DB we need to provision, maybe $2
