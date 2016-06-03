@@ -84,6 +84,18 @@ In Node box we have provided the following packages :
 
 In vagrant configuration, the port 6000 is mapped with guest port 9331. Thus, if you start an express app on port 6000, you can access it via the address [http://localhost:9331](http://localhost:9331)
 
+We have also included a sample [Todo app](https://github.com/tastejs/todomvc/tree/master/examples/socketstream/) with Socket Stream, built by the awesome guys at [TodoMVC](https://github.com/tastejs/todomvc). To run it, do the following :
+
+```
+cd /vagrant # navigate to shared vagrant folder
+cd socketstream
+npm install
+bower install
+npm start
+```
+
+Now open [http://localhost:9200](http://localhost:9200) in your browser and voila! The todo app is working!
+
 ### PHP
 
 ### Python
