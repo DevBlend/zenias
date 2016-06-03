@@ -52,23 +52,40 @@ gitconfig () {
 # WARNING, THIS IS MEANT TO BE RUN IN THE GUEST.
 # @TODO FIX IT
 gitcreate () {
+  # Destination exists
+  if [ -d "${V_WORKING_DIR}" ]; then
+    # Destination is not empty
+    if  [ "$(ls -A ${V_WORKING_DIR})" ]; then
+      echo ""
+      echo -e "\e[31mERROR: Future git directory '${V_WORKING_DIR}' is not empty.\e[39m"
+      echo ""
+      exit
+    fi
+  else
+    mkdir "${Z_DESTINATION}"
+  fi
+
   cd "${V_WORKING_DIR}"
   # Create a private or public repo on Github
   echo -----------------------------------------------------------------------
-  echo "A new github repo will be created."
+  echo "A new github repo will be created in ${V_WORKING_DIR}."
   echo ""
   read -p "How should the Github remote repo be called? " remoterepo
+  read -p "Is this repo private or public ? [private/public]" repotype
   # Get the stored GitHub username inside github_config
   githubname=$(cat ~/.configs/github_config | egrep "githubusername" | tail -1 | awk '{print $2}')
   # Loop to create the remote repo
-  case $zeusargv2 in
+  case $repotype in
       private)
-          curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""',"private":"true"}'
+          answer=$(curl -s -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""',"private":"true"}')
           ;;
       public)
-          curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""'}'
+          answer=$(curl -s -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""'}')
           ;;
   esac
+  repo=$(echo "${answer}"|jq '.clone_url')
+  echo "The repo ${repo} will be cloned in ${V_WORKING_DIR}."
+  git clone "${repo}" "${V_WORKING_DIR}"
 }
 
 #
@@ -95,55 +112,97 @@ herokucreate () {
 echo -e "$(z_logo)"
 
 # Github
-while true; do
-    read -p "Do you want to login to Github? [y/n]" yn
+
+doCredentials=true
+canCreateRepo=false
+canDoAMachine=false
+# Login already done
+if [ -f /home/vagrant/.configs/github_config ]; then
+  read -p "Overwrite your existing credentials ? [y/n]" yn
+  while true; do
     case $yn in
         [Yy]* )
-        gitconfig
-        # while true; do
-        #     read -p "Do you want to create a new Github repository? [y/n]" yn
-        #     case $yn in
-        #         [Yy]* )
-        #           gitcreate
-        #         break;;
-        #         [Nn]* )
-        #           echo "... Initializing a new git repo."
-        #           cd "${V_WORKING_DIR}"
-        #           git init;
-        #         break;;
-        #         * ) echo "Please answer y or n.";;
-        #     esac
-        # done
-        # For now, as github integration is not finished.
-        echo "... Initializing a new git repo."
-        cd "${V_WORKING_DIR}"
-        break;;
-        [Nn]* ) break;;
+          echo "Ok, then..."
+          break;;
+        [Nn]* )
+          echo "Ok, next step..."
+          doCredentials=false
+          canCreateRepo=true
+          break;;
         * ) echo "Please answer y or n.";;
     esac
-done
+  done
+  echo ""
+fi
+
+# Propose login
+if [ "${doCredentials}" == true ]; then
+  read -p "Do you want to login to Github? [y/n]" yn
+  case $yn in
+    [Yy]* )
+      gitconfig
+      canCreateRepo=true
+      break;;
+    [Nn]* )
+      canCreateRepo=false
+      break;;
+    * ) echo "Please answer y or n.";;
+  esac
+  echo ""
+fi
+
+# Repo creation
+if [ "${canCreateRepo}" == true ]; then
+  while true; do
+    read -p "Do you want to create a new Github repository? [y/n]" yn
+    case $yn in
+      [Yy]* )
+        gitcreate
+        break;;
+      [Nn]* )
+        echo "... Initializing an empty git repo."
+        cd "${V_WORKING_DIR}"
+        git init;
+        break;;
+      * ) echo "Please answer y or n.";;
+    esac
+  done
+  echo ""
+fi
+
 
 # Heroku
+canDoAMachine=false
 while true; do
-    read -p "Do you want to login to Heroku? [y/n]" yn
-    case $yn in
-        [Yy]* )
-        herokuconfig
-        while true; do
-            read -p "Do you want to create a new machine on Heroku? [y/n]" yn
-            case $yn in
-                [Yy]* )
-                herokucreate
-                break;;
-                [Nn]* ) break;;
-                * ) echo "Please answer y or n.";;
-            esac
-        done
-        break;;
-        [Nn]* ) break;;
+  read -p "Do you want to login to Heroku? [y/n/a(lready)]" yn
+  case $yn in
+    [Yy]* )
+      herokuconfig
+      canDoAMachine=true
+      break;;
+    [aA]* )
+      echo "Ok then... Next step"
+      canDoAMachine=true
+      break;;
+    [Nn]* ) break;;
         * ) echo "Please answer y or n.";;
-    esac
+  esac
+  echo ""
 done
+
+if [ ${canDoAMachine} == true ]; then
+while true; do
+  read -p "Do you want to create a new machine on Heroku? [y/n]" yn
+  case $yn in
+    [Yy]* )
+      herokucreate
+      break;;
+    [Nn]* ) break;;
+    * ) echo "Please answer y or n.";;
+    esac
+  done
+  echo ""
+fi
 
 echo ""
 echo "All done."
