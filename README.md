@@ -53,7 +53,36 @@ Once you have installed these, you can choose to boot up one of the following en
 
 ### Java
 
+In the Java box we have provided the following packages :
+
+* Java 8 - v1.8
+* Maven 3
+* Gradle 2
+* Tomcat 8
+
+Additionally, Postgres database has been setup.
+
+Tomcat server is set to auto-start on port 8080. Now in this box, the port 8080 is mapped with Host, i.e your machine's port 9100. Thus, run anything on the tomcat server and it would be accessible on your machine in the address [http://localhost:9100](http://localhost:9100)
+
 ### Node
+
+In Node box we have provided the following packages :
+
+* [MongoDB](https://www.mongodb.com/) 3.0 server and client
+* [NVM](https://github.com/creationix/nvm) or Node Version Manager
+* [Node](https://nodejs.org) version 4.4.3 (Can be easily updated via `nvm install`)
+* [Bower](http://bower.io/)
+* [Gulp](http://gulpjs.com/)
+* [Yeoman](http://yeoman.io/) CLI
+* [Express](http://expressjs.com/)
+* Essential Nodeschool Workshopper modules
+	* [git-it](https://github.com/jlord/git-it)
+	* [learnyounode](https://github.com/workshopper/learnyounode)
+	* [how-to-npm](https://github.com/npm/how-to-npm)
+	* [learnyoumongo](https://github.com/evanlucas/learnyoumongo)
+	* [expressworks](https://github.com/azat-co/expressworks)
+
+In vagrant configuration, the port 6000 is mapped with guest port 9331. Thus, if you start an express app on port 6000, you can access it via the address [http://localhost:9331](http://localhost:9331)
 
 ### PHP
 
