@@ -1,100 +1,83 @@
-#!/usr/bin/env bash
+#!/bin/bash -
+#title          :zeus_host_script.sh
+#description    :Zeus - Vagrant boxes with Heroku integration
+#author         :mtancoigne
+#date           :20160602
+#version        :0.1
+#usage          :./zeus.sh
+#notes          :
+#bash_version   :4.3.42(1)-release
+#============================================================================
+export Z_VERSION="0.1"
+source ./zeus_host_functions.sh
 
-# Making the arguments of the zeus command available to the whole script
-export zeusargv1=$1
-export zeusargv2=$2
-export zeusargv3=$3
+# Getting the params:
+while getopts ":l:d:o:ghncz" opt; do
+  case $opt in
+    l) export Z_LANGUAGE="$OPTARG"
+    ;;
+    d) export Z_DESTINATION="$OPTARG"
+    ;;
+    o) export Z_OPTION="$OPTARG"
+    ;;
+    \?) z_error "Invalid option -$OPTARG"
+    ;;
+    :) z_error "Option -$OPTARG requires an argument."
+    ;;
+  esac
+done
 
-gitconfig () {
-    # Ask user for input to set up GitHub and git configs.
-    read -p "What is your real name? >>> " username
-    read -p "What is your Github email address? >>> " email
-    read -p "what is your Github username? >>> " githubusername
-    git config --global user.email "$email"
-    git config --global user.name "$username"
-    # Set push to simple
-    git config --global push.default simple
-    # Store the GitHub username inside github_config so that gitcreate
-    # can retrieve the username to perform Github API call
-    echo "githubusername: $githubusername" >> /home/vagrant/.configs/github_config
-}
+# Display the wonderful logo
+echo -e "$(z_logo)"
 
-gitcreate () {
-    # Create a private or public repo on Github
-    read -p "How should the Github remote repo be called? >>> " remoterepo
-    # Get the stored GitHub username inside github_config
-    githubname=$(cat ~/.configs/github_config | egrep "githubusername" | tail -1 | awk '{print $2}')
-    # Loop to create the remote repo
-    case $zeusargv2 in
-        private)
-            curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""',"private":"true"}'
-            ;;
-        public)
-            curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""'}'
-            ;;
-    esac
-}
+# Current directory
+export Z_DIR=$(pwd)
 
-create () {
-    # Create a new project directory named after the third argument.
-    # Options available for -python
-    case $zeusargv2 in
-        -python)
-        # Installs all dependencies needed for the Python stack
-            mkdir $zeusargv3
-            BASEDIR=$(dirname "$0")
-            cp $BASEDIR/python/.gitignore $PWD/$zeusargv3
-            cp $BASEDIR/python/Procfile $PWD/$zeusargv3
-            cp $BASEDIR/python/runtime.txt $PWD/$zeusargv3
-            cp $BASEDIR/python/Vagrantfile $PWD/$zeusargv3
-            cp $BASEDIR/python/provision.sh $PWD/$zeusargv3
-            cp $BASEDIR/python/requirements.txt $PWD/$zeusargv3
-            cp $BASEDIR/python/.bashrc $PWD/$zeusargv3
-            cp $BASEDIR/zeus $PWD/$zeusargv3
-            cd $PWD/$zeusargv3
-            git init
-            vagrant up
-            vagrant ssh
-            ;;
-        -bootstrap)
-        # Install all dependencies needed for Bootstrap stack
-            mkdir $zeusargv3
-            BASEDIR=$(dirname "$0")
-            cp $BASEDIR/bootstrap/.gitignore $PWD/$zeusargv3
-            cp $BASEDIR/bootstrap/composer.json $PWD/$zeusargv3
-            cp $BASEDIR/bootstrap/home.html $PWD/$zeusargv3
-            cp $BASEDIR/bootstrap/index.php $PWD/$zeusargv3
-            cp $BASEDIR/bootstrap/.bashrc $PWD/$zeusargv3
-            cp $BASEDIR/bootstrap/Vagrantfile $PWD/$zeusargv3
-            cp $BASEDIR/bootstrap/provision.sh $PWD/$zeusargv3
-            cp $BASEDIR/zeus $PWD/$zeusargv3
-            cd $PWD/$zeusargv3
-            git init
-            vagrant up
-            vagrant ssh
-            ;;
-    esac
-}
+# No language or destination
+if [ "${Z_LANGUAGE}" == '' ] || [ "${Z_DESTINATION}" == '' ];then
+  z_error "You should at least provide a language and a destination."
+fi
 
-# Choice of which function to use based on user input of zeus' arguments
-case $zeusargv1 in
-    gitconfig)
-        gitconfig
-        ;;
-    gitcreate)
-        gitcreate
-        ;;
-    create)
-        create
-        ;;
-    help)
-        echo "Zeus - the tool to make web development faster"
-        echo "You have the following commands: zeus gitconfig, zeus gitcreate private, zeus gitcreate public."
-        echo "You need to run zeus gitconfig first in order to use the rest"
-        echo "zeus gitconfig creates or overwrites existing git username, email, and push configurations."
-        echo "zeus gitcreate creates a public or private GitHub repo depending on the second argument you give."
-        ;;
-    *)
-        echo "Invalid argument parsed"
-        ;;
-esac
+# Language does not exist
+if [ ! -d "${Z_DIR}/${Z_LANGUAGE}" ] || [ "${Z_LANGUAGE}" == 'common' ]; then
+  z_error "Language '${Z_LANGUAGE}' not found"
+fi
+
+# Destination exists
+if [ -d "${Z_DESTINATION}" ]; then
+  # Destination is not empty
+  if  [ "$(ls -A ${Z_DESTINATION})" ]; then
+    z_error "Directory '${Z_DESTINATION}' is not empty."
+  fi
+else
+  mkdir "${Z_DESTINATION}"
+fi
+
+echo '---------------------------------------------------------------------------'
+echo ''
+echo "Preparing a vagrant box for ${Z_LANGUAGE} language..."
+echo ''
+echo '---------------------------------------------------------------------------'
+echo ' - Copying box files'
+# Copy all the files
+cp -r ./${Z_LANGUAGE}/* ${Z_DESTINATION}/
+
+echo ' - Passing options to provision'
+# Copy the functions
+echo 'export Z_OPTION='${Z_OPTION} >> ${Z_DESTINATION}/vagrant/_provision_vars.sh
+
+# Creating script for GH/Heroku credentials
+credfile=${Z_DESTINATION}/vagrant/zeus_credentials.sh
+cp zeus_guest_scripts.sh ${Z_DESTINATION}/vagrant/zeus_credentials.sh
+
+# Updating rights
+chmod +x ${Z_DESTINATION}/vagrant/*
+cd "${Z_DESTINATION}"
+
+echo ''
+echo '---------------------------------------------------------------------------'
+echo "Launching Vagrant"
+echo '---------------------------------------------------------------------------'
+vagrant up
+
+#vagrant ssh

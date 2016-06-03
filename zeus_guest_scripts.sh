@@ -114,6 +114,9 @@ while true; do
         #         * ) echo "Please answer y or n.";;
         #     esac
         # done
+        # For now, as github integration is not finished.
+        echo "... Initializing a new git repo."
+        cd "${V_WORKING_DIR}"
         break;;
         [Nn]* ) break;;
         * ) echo "Please answer y or n.";;
