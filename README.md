@@ -6,7 +6,7 @@
 - [What is Zeus](#what-is-zeus)
 - [Current Version](#current-version)
 - [How to Use](#how-to-use)
-   - [Basic Requirement](basic-requirement)
+   - [Basic Requirement](#basic-requirement)
    - [Clojure](#clojure)
    - [Java](#java)
    - [Node](#node)
@@ -45,7 +45,7 @@ Present version of this project stands at 1.0.0. We use Semvar based versioning.
 
 You need to install **latest** (version 5.0.20) [Virtualbox](https://www.virtualbox.org/wiki/Downloads), its compatible Virtualbox [Extension pack](https://www.virtualbox.org/wiki/Downloads) for USB 2.0 support; and **latest** (1.8.1) [Vagrant](https://www.vagrantup.com/downloads.html) itself.
 
-If you are on Windows, you need [Git Bash](https://git-scm.com/downloads). ON other platforms, like Linux or MacOSX; you would require having [git](https://git-scm.com/downloads) installed in your machine.
+If you are on Windows, you need [Git Bash](https://git-scm.com/downloads). On other platforms, like Linux or MacOSX; you would require having [git](https://git-scm.com/downloads) installed in your machine. On Windows, you might need to restart your machine after Vagrant installation.
 
 Once you have installed these, you can choose to boot up one of the following environments. In future, we plan on installing the basic requirements as part of `zeus` as well.
 
