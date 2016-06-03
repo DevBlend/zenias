@@ -20,7 +20,6 @@
 # All credit goes to Shinichi Segawa (tektoh) for his implementation, I only
 # updated his work to CakePHP 3.2.
 #-------------------------------------------------------------------------------
-
 # Installation settings for a PHP box with CakePHP installed
 PROJECT="my_project" # we would want a name passed to it via te first argument, $1
 DB="my_app" # the name of postgreSQL DB we need to provision, maybe $2
@@ -115,6 +114,7 @@ usermod -a -G www-data vagrant
 #
 # ZEUS OPTION IS HANDLED HERE
 #
+cd /vagrant/vagrant
 case "${Z_OPTION}" in
   cake3)
   ./provision-cake3.sh
@@ -123,18 +123,14 @@ case "${Z_OPTION}" in
   ;;
 esac
 
-#
-# Git and heroku integration are here.
-# THAT SHOULD BE PRESENT IN ALL THE BOXES PROVISIONNERS
-gitconfig
-gitcreate
-herokuconfig
-herokucreate
-
 # All done
 echo "---------------------------------------------"
 echo "Everything is up. Use 'vagrant ssh' to log on"
 echo "your new box."
+echo ""
+echo "If you wanted to configure Github and Heroku,"
+echo "execute"
+echo "    /vagrant/vagrant/zeus_credentials.sh"
 echo "---------------------------------------------"
 
 exit 0
