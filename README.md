@@ -2,7 +2,57 @@
 
 [![Join the chat at https://gitter.im/FreeCodeCamp/vagrant](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/FreeCodeCamp/vagrant)
 
-Zeus is a tool that creates quickly a platform-independent Vagrant development environment. Currently, Python-Django stack is supported but many more plugins, such as Ruby stack, are under development.
+## Table of Contents
+- [What is Zeus](#what-is-zeus)
+- [Current Version](#current-version)
+- [How to Use](#how-to-use)
+   - [Clojure](#clojure)
+   - [Java](#java)
+   - [Node](#node)
+   - [PHP](#php)
+   - [Python](#python)
+   - [Ruby](#ruby)
+- [Motivation](#motivation)
+- [Features and Packages](#features-and-packages)
+  - [Individual Boxes](#individual-boxes)
+  - [Common Features](#common-features)
+- [Contributing Guidelines](#contributing-guidelines)
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [License](#license)
+
+## What is Zeus
+
+## Current Version
+
+## How to Use
+
+### Clojure
+
+### Java
+
+### Node
+
+### PHP
+
+### Python
+
+### Ruby
+
+## Motivation
+
+## Features and Packages
+
+### Individual Boxes
+
+### Common Features
+
+## Contributing Guidelines
+
+## Frequently Asked Questions
+
+## License
+
+Zeus creates a platform-independent Vagrant development environment. Currently, Python-Django stack is supported but many more plugins, such as Ruby stack, are under development.
 
 Zeus was initially made for students of [FreeCodeCamp](https://freecodecamp.com).
 
