@@ -12,24 +12,12 @@ echo "---------------------------------------------"
 echo "------- Updating package dependencies -------"
 echo "------------ And adding repos ---------------"
 echo "---------------------------------------------"
-#sudo apt-get update -y # no need for sudo, and -y is needed to bypass the yes-no
-#sudo apt-get install python-software-properties software-properties-common -y
-
-#sudo add-apt-repository -y ppa:chris-lea/node.js
 sudo sh -c "echo deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu trusty main  >> /etc/apt/sources.list.d/chris-lea-node_js-trusty.list"
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7917B12
-#sudo add-apt-repository -y 'deb http://toolbelt.heroku.com/ubuntu ./' -k 'https://toolbelt.heroku.com/apt/'
 sudo sh -c "echo deb http://toolbelt.heroku.com/ubuntu ./ >> /etc/apt/sources.list.d/heroku.list"
 wget -q -O- https://toolbelt.heroku.com/apt/release.key | sudo apt-key add -
 
-echo "-------------hmmmmm--------------------------"
 sudo apt-get update -y
-
-#find /etc/apt/sources.list.d -type f -name '*.list' -exec sudo apt-get update -o Dir::Etc::sourcelist="{}" ';'
-# sudo apt-get update -o Dir::Etc::sourcelist="sources.list.d/chris-lea-node_js-trusty.list" \
-#     -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"
-# sudo apt-get update -o Dir::Etc::sourcelist="sources.list.d/heroku.list" \
-#     -o Dir::Etc::sourceparts="-" -o APT::Get::List-Cleanup="0"
 
 echo "---------------------------------------------"
 echo "-------- Installing packages ----------------"
@@ -59,9 +47,6 @@ echo "---------------------------------------------"
 echo "------ Creating Ruby environment --------"
 echo "---------------------------------------------"
 
-# # no rdoc for installed gems
-# sudo -u vagrant echo 'gem: --no-ri --no-rdoc' >> /home/vagrant/.gemrc
-
 # download and extract ruby 2.3.1
 mkdir ~/.rubies
 cd ~/.rubies
@@ -87,61 +72,5 @@ sudo make install
 cd ~
 rm -rf ruby-install-0.6.0 ruby-install-0.6.0.tar.gz
 
-
-
-# install nodejs and heroku
-echo "-------------- Installing heroku toolbelt -------------------------"
-
-# add heroku repository to apt
-#sudo echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
-# install heroku's release key for package verification
-# add up-to-date nodejs ppa
-# echo "---adaptrepo"
-# sudo add-apt-repository ppa:chris-lea/node.js -y
-# sudo add-apt-repository 'deb http://toolbelt.heroku.com/ubuntu ./' -y
-# echo "---wget"
-# curl https://toolbelt.heroku.com/apt/release.key | sudo apt-key add -
-#
-# echo "---update"
-# sudo apt-get update
-# echo "---install"
-# sudo apt-get install heroku-toolbelt nodejs -y
-# echo "--- aptd done"
-#
-
-
-
-
-#back up our .bashrc
-mv ~/.bashrc ~/.bashrc.bak
-#copy in our modified .bashrc
-cp /vagrant/bashfix ~/.bashrc
-dos2unix ~/.bashrc
-
-# # install a couple of common gems
-# gem install bundler -v '~> 1.12'
-# gem install rspec -v '~> 3.4'
-# gem install rails -v '~>4.2'
-# gem install sinatra -v '~> 1.4'
-#
-# # If you are on Windows host, with Git checkout windows line terminator style CRLF
-# # this comes in handy
-# dos2unix  /home/vagrant/.bashrc > /dev/null 2>&1
-#
-# sudo add-apt-repository ppa:chris-lea/node.js -y
-# sudo apt-get install heroku-toolbelt nodejs -y
-#
-# # install heroku toolbelt
-# #echo "-------------- Installing heroku toolbelt -------------------------"
-# # These shell script snippets are directly taken from heroku installation script
-# # We want to avoid the apt-get update
-# # add heroku repository to apt
-# #echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
-# # install heroku's release key for package verification
-# #wget -O- https://toolbelt.heroku.com/apt/release.key 2>&1 | apt-key add -
-# # install the cli
-# #heroku --version > /dev/null 2>&1
-#
-# echo "---------------------------------------------"
-# echo " Done! Run vagrant ssh to start working "
-# echo "---------------------------------------------"
+# backup and mod our .bashrc
+sed -i".bak" '6,11d' .bashrc
