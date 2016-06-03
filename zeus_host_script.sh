@@ -121,9 +121,10 @@ fi
 chmod +x ${Z_DESTINATION}/vagrant/*
 cd "${Z_DESTINATION}"
 
+echo ''
 echo '-----------------------------------------------------------------------'
 echo "Launching Vagrant"
 echo '-----------------------------------------------------------------------'
-#vagrant up
+vagrant up
 
-#agrant ssh
+#vagrant ssh
