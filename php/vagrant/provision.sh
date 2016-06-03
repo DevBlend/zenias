@@ -123,10 +123,12 @@ case "${Z_OPTION}" in
   ;;
 esac
 
-
+#
+# Git and heroku integration are here.
+# THAT SHOULD BE PRESENT IN ALL THE BOXES PROVISIONNERS
 gitconfig
 gitcreate
-herokulog
+herokuconfig
 herokucreate
 
 # All done
