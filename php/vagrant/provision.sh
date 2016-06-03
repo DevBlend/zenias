@@ -26,6 +26,10 @@ PROJECT="my_project" # we would want a name passed to it via te first argument, 
 DB="my_app" # the name of postgreSQL DB we need to provision, maybe $2
 SERVER="fcc-vagrant-php" # Should be the same name as the box, when implementing #29
 
+# WORKING DIR, or "WHERE IS LOCATED THE GIT ROOT ?".
+# MUST BE PRESENT.
+export V_WORKING_DIR='/vagrant/www'
+
 # Git repos
 export GIT_CAKE3="https://github.com/mtancoigne/zeus-php-cakephp3.git"
 
@@ -81,7 +85,7 @@ su - postgres -c "createuser -s vagrant"
 # Creating 2 different dbs:
 # NOTE : for now, all the names are hardcoded in the beginning of this file
 # In the future, the changes should be applied to config/app.php too
-# 
+#
 # The development database
 su - vagrant -c "createdb ${DB}"
 # The testing database, used when phpunit tests are ran.
@@ -109,8 +113,21 @@ service apache2 restart
 usermod -a -G www-data vagrant
 
 #
-# Here the provision-cake3.sh should be launched if choosen by user.
+# ZEUS OPTION IS HANDLED HERE
 #
+case "${Z_OPTION}" in
+  cake3)
+  ./provision-cake3.sh
+  ;;
+  \?) z_error "No options provided... Continuing"
+  ;;
+esac
+
+
+gitconfig
+gitcreate
+herokulog
+herokucreate
 
 # All done
 echo "---------------------------------------------"
