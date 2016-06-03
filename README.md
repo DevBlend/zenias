@@ -31,7 +31,7 @@ Presently, we support creating Ubuntu 14.04 LTS environment with these stacks:
 - Java 1.8-Tomcat-Maven-Gradle
 - PHP-CakePHP
 - Python-Django
-- Ruby-Rails
+- Ruby-Rails-Sinatra
 
 In all of the above, PostgreSQL 9.3 is present and configured for use as Database, except for the Node and Express stack; where MongoDB has been provided.
 
@@ -101,6 +101,20 @@ Now open [http://localhost:9200](http://localhost:9200) in your browser and voil
 ### Python
 
 ### Ruby
+
+In Ruby box we have provided the following packages :
+* [ruby 3.2.1](https://www.ruby-lang.org) precompiled by [Travis CI](http://rubies.travis-ci.org/ubuntu/14.04/x86_64/ruby-2.3.1)
+* [chruby](https://github.com/postmodern/chruby)
+* [ruby-install](https://github.com/postmodern/ruby-install)
+
+It installs the following gems:
+* [rails](http://rubyonrails.org/) 4.2.x
+* [sinatra](http://www.sinatrarb.com/) 1.4.x
+* [bundler](http://bundler.io/) 1.12.x
+* [rspec](http://rspec.info/) 3.4.x
+
+Start rails servers with `rails s -b 0.0.0.0` to make the server available at http://localhost:3000 
+
 
 ## Motivation
 
