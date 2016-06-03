@@ -78,16 +78,14 @@ echo ' - Copying box files'
 # Copy all the files
 cp -r ./${Z_LANGUAGE}/* ${Z_DESTINATION}/
 
-echo ' - Copying Zeus files'
+echo ' - Merging provision.sh with Zeus files'
 # Copy the functions
 cat ./zeus.sh > ${Z_DESTINATION}/vagrant/zeus_guest.sh
-z_export >>${Z_DESTINATION}/vagrant/zeus_guest.sh
-
-echo ' - Preparing provision file'
-# Exporting config in another file
-# If there is an other solution to pass vars from this shell to the provisionning one,
-# let me know
-#z_export > ${Z_DESTINATION}/vagrant/zeus_config.sh
+# Export config
+z_export >> ${Z_DESTINATION}/vagrant/zeus_guest.sh
+# Merge
+cat ${Z_DESTINATION}/vagrant/zeus_guest.sh ${Z_DESTINATION}/vagrant/provision.sh > ${Z_DESTINATION}/vagrant/provision.sh.tmp
+mv ${Z_DESTINATION}/vagrant/provision.sh.tmp ${Z_DESTINATION}/vagrant/zeus_guest.sh
 
 # Creating script for GH/Heroku credentials
 credfile=${Z_DESTINATION}/vagrant/zeus_credentials.sh

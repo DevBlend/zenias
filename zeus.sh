@@ -22,7 +22,6 @@ z_logo() {
   ${Z_STATE} script
 
 
-
 EOF
 }
 
@@ -74,7 +73,7 @@ export -f z_export
 export -f z_error
 
 
-if [ "$@" == '-z' ]; then # We have been called by Vagrantfile
+if [ "$@" == "-z" ]; then # We have been called by Vagrantfile
   export Z_STATE='Guest'
   #/vagrant/vagrant/./zeus_config.sh "$@"
 else # Normal call
