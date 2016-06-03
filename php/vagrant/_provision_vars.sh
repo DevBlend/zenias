@@ -1,3 +1,4 @@
 #
-# This file should stay empty
-#
+# The V_WORKING_DIR MUST BE PRESENT AND POINT THE FOLDER WHERE THE GIT REPO
+# WILL BE CREATED
+export V_WORKING_DIR='/vagrant/www'

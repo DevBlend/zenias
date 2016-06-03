@@ -64,7 +64,7 @@ cp -r ./${Z_LANGUAGE}/* ${Z_DESTINATION}/
 
 echo ' - Passing options to provision'
 # Copy the functions
-echo 'export Z_OPTION='${Z_OPTION} > ${Z_DESTINATION}/vagrant/_provision_vars.sh
+echo 'export Z_OPTION='${Z_OPTION} >> ${Z_DESTINATION}/vagrant/_provision_vars.sh
 
 # Creating script for GH/Heroku credentials
 credfile=${Z_DESTINATION}/vagrant/zeus_credentials.sh
