@@ -15,13 +15,13 @@ echo "---------------------------------------------"
 
 # install heroku toolbelt
 echo "-------------- Installing heroku toolbelt -------------------------"
-wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh > /dev/null
 # These shell script snippets are directly taken from heroku installation script
 # We want to avoid the apt-get update
 # add heroku repository to apt
 echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
 # install heroku's release key for package verification
-wget -O- https://toolbelt.heroku.com/apt/release.key 2>&1 | apt-key add -
+wget -O- https://toolbelt.heroku.com/apt/release.key 2>&1 | apt-key add - > /dev/null
 
 ## Add Keys for MongoDB
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
@@ -52,7 +52,7 @@ su - vagrant <<NVM
 
 source ~/.nvm/nvm.sh
 echo 'sourcing done'
-nvm install 4.4.3
+nvm install 4.4.3 > /dev/null
 
 NVM
 
