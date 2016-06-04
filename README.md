@@ -102,18 +102,18 @@ The PHP box comes with the following packages:
 
   * Apache 2.4 webserver
   * PHP 5.5 with these extensions:
-    * php5-intl 
-	  * php5-pgsql 
-    * php5-mcrypt 
-    * php5-sqlite 
-    * php5-apcu 
+    * php5-intl
+	  * php5-pgsql
+    * php5-mcrypt
+    * php5-sqlite
+    * php5-apcu
     * php5-cli
     * php5-gd
   * PostgreSQL server 9.3 (MySQL or MariaDB support may come later)
   * PostgreSQL client 9.3
   * phpunit 3.7
 
-The typical workflow imagined for this PHP box is the following :
+Typical workflow for using this PHP box:
 
   1. Launch the virtual machine
   2. Work on the _host_ with your favorite tools (Apache documentRoot is `<zeus>/php/www` on the host, `/vagrant/www` on the guest)
@@ -129,7 +129,7 @@ The typical workflow imagined for this PHP box is the following :
   * The default IP adress of the guest is `http://192.168.56.101`.
   * You can access the PostgreSQL server with user `vagrant`, password `vagrant`. An empty database named `my_app` has already been created.
 
-For complete informations, refer to the [PHP readme](php/README.md).  
+For more information. refer to the [PHP readme](php/README.md).  
 
 ### Python
 
