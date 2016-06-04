@@ -194,6 +194,23 @@ There are three levels that zeus will change: your local machine, Vagrant VM, an
 
 > Virtual systems within an already-virtual system is kind of tricky, and in most cases not allowed. We did some research, and we are yet to find a solution. However, if you have a workaround, do get in touch with [us](https://gitter.im/FreeCodeCamp/vagrant)!
 
+### Why build your own vagrant box project, when there are plenty such boxes on GitHub and Atlas?
+
+> In simple words, to have control over what we distribute. One of the focus of our project is to give the bare minimum necessity, because we have planned some tutorials on top of our vagrant boxes in the future. In those, the end user would install and configure some stuff on their own. We want to leave those opportunities - not distribute everything that we can!
+
+> Also, most such projects are built to complement an existing project of the authors who created the project. They most likely won't work on your personal Windows 7 laptop. They are not usually active, and defintely not meant for mass consumption.
+
+> We encountered an interesting bug when we were following a popular repo's vagrant provisioning - it has issues on some Windows machine. Upon further inspection, we found that there was a step to copy `~/.bashrc` from the cloned repo into the vagrant box. Guess what, if the cloning git client is not set up to handle line terminators properly, the vagrant box would only see Windows style line terminators and the whole `~/.bashrc` sourcing would fail with lot of error texts.
+
+> We wanted to get rid of all these, so decided to have our own boxes. But the good practices of all these repositories, still live on. We incorporate them whenever possible, with proper credit to original author.
+
+### Why PostgreSQL, and no MySQL?
+
+> Because our campers prefer heroku for deployment. Heroku is simpler than AWS or gcloud or Google App Engine. And by deafult, PostgreSQL is supported on Heroku.
+
+> Since 2012, when Oracle acquired MySQL, there have been a steady move to PosttgreSQL or MariaDB even within the big companies. PostgreSQL is a great DB with popularity and good community support.
+
+> But if you still wish to use MySQL, you can install it! In fact, please talk to us so that we can let the user choose during provisioning whether to have a box with MySQL or PostgreSQL.
 
 ## License
 
