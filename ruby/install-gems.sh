@@ -19,6 +19,10 @@ gem install sinatra -q -v '~> 1.4'
 # restore our original .bashrc
 mv ~/.bashrc.bak ~/.bashrc
 
+# take the redirect off of chruby
+sed -i '$ d' .bashrc
+echo "chruby 2.3.1" >> ~/.bashrc
+
 echo "---------------------------------------------"
 echo " Done! Run vagrant ssh to start working      "
 echo "---------------------------------------------"

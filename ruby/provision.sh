@@ -12,29 +12,25 @@ echo "---------------------------------------------"
 echo "------- Updating package dependencies -------"
 echo "------------ And adding repos ---------------"
 echo "---------------------------------------------"
+# we don't need a proper node install for rails so we use this repo
 sudo sh -c "echo deb http://ppa.launchpad.net/chris-lea/node.js/ubuntu trusty main  >> /etc/apt/sources.list.d/chris-lea-node_js-trusty.list"
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7917B12
+# add heroku repo
 sudo sh -c "echo deb http://toolbelt.heroku.com/ubuntu ./ >> /etc/apt/sources.list.d/heroku.list"
 wget -q -O- https://toolbelt.heroku.com/apt/release.key | sudo apt-key add -
-
-sudo apt-get update -y
+# update our packages lists
+sudo apt-get -y update
 
 echo "---------------------------------------------"
-echo "-------- Installing packages ----------------"
+echo "-Downloading and Installing packages ~117MiB "
 echo "---------------------------------------------"
-# install gcc and g++ and other build basics to ensure most software works
-# install man
-# dos2unix is needed because we could have CR-LF line terminator on Windows
-# And that would prevent ~/.bashrc to work properly because \r would be unrecognized
-# add PPA for up-to-date Node.js runtime
-# notice that this is not a rigorous node  install, where we typically use npm
-
-sudo apt-get --ignore-missing --no-install-recommends install build-essential \
+# install all of our dependencies and a few conveniences
+sudo apt-get -y --ignore-missing --no-install-recommends install build-essential \
 curl openssl libssl-dev libcurl4-openssl-dev zlib1g zlib1g-dev libreadline-dev \
 libreadline6 libreadline6-dev libyaml-dev libsqlite3-dev libsqlite3-0 sqlite3  \
-libxml2-dev libxslt1-dev  libffi-dev libgdm-dev  \
-libncurses5-dev automake autoconf libtool bison postgresql postgresql-contrib \
-libpq-dev pgadmin3 libc6-dev man dos2unix heroku-toolbelt nodejs -y
+libxml2-dev libxslt1-dev  libffi-dev libgdm-dev libncurses5-dev automake autoconf libtool bison postgresql postgresql-contrib \
+libpq-dev pgadmin3 libc6-dev man dos2unix heroku-toolbelt nodejs libqtwebkit-dev \
+gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
 # install postgresql and setup user
 echo "---------------------------------------------"
@@ -44,26 +40,40 @@ sudo su - postgres -c "createuser -s vagrant"
 createdb ${DB}
 
 echo "---------------------------------------------"
-echo "------ Creating Ruby environment --------"
+echo "------ Creating Ruby environment ------------"
 echo "---------------------------------------------"
 
-# download and extract ruby 2.3.1
+echo "---------------------------------------------"
+echo "-- Downloading Ruby 2.3.1 25.15 MiB ---------"
+echo "---------------------------------------------"
+# download ruby 2.3.1
 mkdir ~/.rubies
 cd ~/.rubies
 wget -q -O ruby-2.3.1.tar.bz2 http://rubies.travis-ci.org/ubuntu/14.04/x86_64/ruby-2.3.1.tar.bz2
+
+echo "---------------------------------------------"
+echo "--------- Extracting Ruby 2.3.1 -------------"
+echo "---------------------------------------------"
+# extract ruby 2.3.1
 tar -xjf ruby-2.3.1.tar.bz2
 rm ruby-2.3.1.tar.bz2
 cd ~
 
+echo "---------------------------------------------"
+echo "------------ Installing chruby --------------"
+echo "---------------------------------------------"
 #install chruby
 wget -q -O chruby-0.3.9.tar.gz https://github.com/postmodern/chruby/archive/v0.3.9.tar.gz
 tar -xzf chruby-0.3.9.tar.gz
 cd chruby-0.3.9
-sudo ./scripts/setup.sh
+sudo ./scripts/setup.sh 2>&1
 cd ~
 rm -rf chruby-0.3.9 chruby-0.3.9.tar.gz
-echo 'chruby 2.3.1' >> ~/.bashrc
+echo "chruby 2.3.1 > /dev/null 2>&1" >> ~/.bashrc
 
+echo "---------------------------------------------"
+echo "--------- Installing ruby-install -----------"
+echo "---------------------------------------------"
 #install ruby-install
 wget -q -O ruby-install-0.6.0.tar.gz https://github.com/postmodern/ruby-install/archive/v0.6.0.tar.gz
 tar -xzf ruby-install-0.6.0.tar.gz
