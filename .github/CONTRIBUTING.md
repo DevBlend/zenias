@@ -52,7 +52,8 @@ You wish to show off your coding skills, now is the time. Please follow this wor
 2. On your forked repository, change to another branch from master so you don't mess up when you make a mistake. Develop on this new branch until maturity of your code. You can of course resort to as many further sub-branches as you wish, but try not to develop on master branch in any case.
 3. Once you are finished on your development branch, merge with your forked repository's master branch.
 4. From the master branch of your fork, submit a Pull Request to the master of Zeus main repository.
-5. Never ever pull in your own Pull Request, assign the Pull Request to one of the existing collaborators. If the majority of the collaborators tested your Pull Request and think it is good to go, then one of them will merge your Pull Request.
+5. Always include an upgrade of all the documentation and readme files that are affected by your change in code. The recommendation is to write your documentation ideally before your code and after you are finished coding, close of a final version of your documentation. You should always include documentation with your code. Don't forget to comment extensively on in your code as well. 
+6. Never ever pull in your own Pull Request, assign the Pull Request to one of the existing collaborators. If the majority of the collaborators tested your Pull Request and think it is good to go, then one of them will merge your Pull Request.
 
 ## Commit Message Style
 
