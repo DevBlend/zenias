@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
 # installation settings
-DB="fcc_provision" # the name of postgreSQL DB we need to provision, maybe $2
-
 export DEBIAN_FRONTEND=noninteractive
+
 echo "---------------------------------------------"
 echo "Running vagrant provisioning"
 echo "---------------------------------------------"
@@ -22,14 +21,15 @@ wget -q -O- https://toolbelt.heroku.com/apt/release.key | sudo apt-key add -
 sudo apt-get -y update
 
 echo "---------------------------------------------"
-echo "-Downloading and Installing packages ~117MiB "
+echo "-Downloading and Installing packages ~137MiB "
 echo "---------------------------------------------"
 # install all of our dependencies and a few conveniences
 sudo apt-get -y --ignore-missing --no-install-recommends install build-essential \
 curl openssl libssl-dev libcurl4-openssl-dev zlib1g zlib1g-dev libreadline-dev \
 libreadline6 libreadline6-dev libyaml-dev libsqlite3-dev libsqlite3-0 sqlite3  \
-libxml2-dev libxslt1-dev  libffi-dev libgdm-dev libncurses5-dev automake autoconf libtool bison postgresql postgresql-contrib \
-libpq-dev pgadmin3 libc6-dev man dos2unix heroku-toolbelt nodejs libqtwebkit-dev \
+libxml2-dev libxslt1-dev  libffi-dev libgdm-dev libncurses5-dev automake \
+autoconf libtool bison postgresql postgresql-contrib libpq-dev pgadmin3 \
+libc6-dev man dos2unix heroku-toolbelt nodejs libqtwebkit-dev xvfb \
 gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
 # install postgresql and setup user
@@ -37,7 +37,6 @@ echo "---------------------------------------------"
 echo "------- Setting up postgresql ---------------"
 echo "---------------------------------------------"
 sudo su - postgres -c "createuser -s vagrant"
-createdb ${DB}
 
 echo "---------------------------------------------"
 echo "------ Creating Ruby environment ------------"
