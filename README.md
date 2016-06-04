@@ -98,6 +98,39 @@ Now open [http://localhost:9200](http://localhost:9200) in your browser and voil
 
 ### PHP
 
+The PHP box comes with the following packages:
+
+  * Apache 2.4 webserver
+  * PHP 5.5 with these extensions:
+    * php5-intl 
+	  * php5-pgsql 
+    * php5-mcrypt 
+    * php5-sqlite 
+    * php5-apcu 
+    * php5-cli
+    * php5-gd
+  * PostgreSQL server 9.3 (MySQL or MariaDB support may come later)
+  * PostgreSQL client 9.3
+  * phpunit 3.7
+
+The typical workflow imagined for this PHP box is the following :
+
+  1. Launch the virtual machine
+  2. Work on the _host_ with your favorite tools (Apache documentRoot is `<zeus>/php/www` on the host, `/vagrant/www` on the guest)
+  3. Test
+  4. Push your commits on github and/or heroku:
+    - From the host, with your usual tools (I use SmartGit to manage my git repos, and the Heroku toolbelt)
+    - From the guest : you will have to configure your git repository, but the Heroku toolbelt is installed.
+  5. Repeat from 2
+  6. Celebrate.
+
+#### Defaults
+
+  * The default IP adress of the guest is `http://192.168.56.101`.
+  * You can access the PostgreSQL server with user `vagrant`, password `vagrant`. An empty database named `my_app` has already been created.
+
+For complete informations, refer to the [PHP readme](php/README.md).  
+
 ### Python
 
 ### Ruby
