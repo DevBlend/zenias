@@ -6,9 +6,9 @@
 
 ```zeus create -python yourprojectdir```
 
-Create a new project in Python with Django stack inside a new directory that is generated during this process called ```yourprojectdir```. You want this because it automates the following steps: 
+Create a new project in Python with Django stack inside a new directory that is generated during this process called ```yourprojectdir```. You want this because it automates the following steps:
 
-1. Create a new directory called yourprojectdir 
+1. Create a new directory called yourprojectdir
 2. Copy files that are necessary for Python-Django stack to work inside this directory and make it self-enclosing and self-sufficient
 3. ```vagrant up```
 4. Vagrant provisioning
@@ -30,7 +30,7 @@ Create a new project in Python with Django stack inside a new directory that is 
 
 ## Features
 
-There are three levels where Zeus does its magic. Various features are installed on different levels. 
+There are three levels where Zeus does its magic. Various features are installed on different levels.
 
 - Your local machine
 - Vagrant VM
@@ -81,7 +81,7 @@ Follow these tutorials to see how you can use Zeus for Python and Django stack:
 
 [asciinema Tutorial by byteknacker](https://asciinema.org/a/1u9zm99yzpz6v1b95wv6mrppn)
 
-or 
+or
 
 [Video Tutorial by byteknacker](https://youtu.be/RbQ1qtOVSJc)
 
@@ -136,7 +136,7 @@ You should see all tests PASSED and no errors printed.
 ## For people who wish to write new code
 
 1. Fork the main GitHub repo of Zeus
-2. Read the the CONTRIBUTING.md and Wiki pages to get yourself up to speed
+2. Read our [Contributing Docs](https://github.com/alayek/zeus/blob/master/.github/CONTRIBUTING.md) and Wiki pages to get yourself up to speed
 3. Join our (Gitter Chat)[https://gitter.im/FreeCodeCamp/vagrant] to ask questions if you are unclear about anything
 4. Submit Pull Request from your fork's master branch
 
@@ -147,7 +147,7 @@ You should see all tests PASSED and no errors printed.
 
 Do not be alarmed by any red-colored text during provisioning. Unless it clearly says _error_ no need to panic!
 
-# Acknowledgement
+# Acknowledgements
 
 Many thanks to all those who have helped to develop this Open Source project. We hope that it is useful for you and welcome your feedback. Please feel free to contact anyone of the contributors.
 

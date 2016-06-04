@@ -66,7 +66,7 @@ Tomcat server is set to auto-start on port 8080. Now in this box, the port 8080 
 
 ### Node
 
-In Node box we have provided the following packages :
+In the Node box we have provided the following packages :
 
 * [MongoDB](https://www.mongodb.com/) 3.0 server and client
 * [NVM](https://github.com/creationix/nvm) or Node Version Manager
@@ -82,7 +82,7 @@ In Node box we have provided the following packages :
 	* [learnyoumongo](https://github.com/evanlucas/learnyoumongo)
 	* [expressworks](https://github.com/azat-co/expressworks)
 
-In vagrant configuration, the port 3000 is mapped with guest port 9200. Thus, if you start an express app on port 3000, you can access it via the address [http://localhost:9200](http://localhost:9200)
+In our vagrant configuration, the port 3000 is mapped with guest port 9200. Thus, if you start an express app on port 3000, you can access it via the address [http://localhost:9200](http://localhost:9200)
 
 We have also included a sample [Todo app](https://github.com/tastejs/todomvc/tree/master/examples/socketstream/) with Socket Stream, built by the awesome guys at [TodoMVC](https://github.com/tastejs/todomvc). To run it, do the following :
 
@@ -102,7 +102,7 @@ Now open [http://localhost:9200](http://localhost:9200) in your browser and voil
 
 ### Ruby
 
-In Ruby box we have provided the following packages :
+In the Ruby box we have provided the following packages :
 * [ruby 3.2.1](https://www.ruby-lang.org) precompiled by [Travis CI](http://rubies.travis-ci.org/ubuntu/14.04/x86_64/ruby-2.3.1)
 * [chruby](https://github.com/postmodern/chruby)
 * [ruby-install](https://github.com/postmodern/ruby-install)
@@ -113,8 +113,7 @@ It installs the following gems:
 * [bundler](http://bundler.io/) 1.12.x
 * [rspec](http://rspec.info/) 3.4.x
 
-Start rails servers with `rails s -b 0.0.0.0` to make the server available at http://localhost:3000 
-
+Start rails servers with `rails s -b 0.0.0.0` to make the server available at http://localhost:3000
 
 ## Motivation
 
@@ -206,9 +205,9 @@ There are three levels that zeus will change: your local machine, Vagrant VM, an
 
 ### Why PostgreSQL, and no MySQL?
 
-> Because our campers prefer heroku for deployment. Heroku is simpler than AWS or gcloud or Google App Engine. And by deafult, PostgreSQL is supported on Heroku.
+> Because our campers prefer Heroku for deployment. Heroku is simpler than AWS or gcloud or Google App Engine. And by default, PostgreSQL is supported on Heroku.
 
-> Since 2012, when Oracle acquired MySQL, there have been a steady move to PosttgreSQL or MariaDB even within the big companies. PostgreSQL is a great DB with popularity and good community support.
+> Since 2012, when Oracle acquired MySQL, there have been a steady move to PostgreSQL or MariaDB even within the big companies. PostgreSQL is a great DB with popularity and good community support.
 
 > But if you still wish to use MySQL, you can install it! In fact, please talk to us so that we can let the user choose during provisioning whether to have a box with MySQL or PostgreSQL.
 
