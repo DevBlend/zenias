@@ -3,7 +3,7 @@
 #-------------------------------------------------------------------------------
 # Vagrant configuration file, highly based on
 #   https://github.com/tektoh/heroku-cakephp3-app
-#   https://github.com/alayek/zeus
+#   https://github.com/DevBlend/DevBlend
 #   and some strings found on puphpet boxes (http://puphpet.com)
 #
 # Author: Manuel Tancoigne

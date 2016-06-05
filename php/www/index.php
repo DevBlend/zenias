@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Zeus PHP</title>
+		<title>DevBlend PHP</title>
 		<meta name="author" content="FreeCodeCamp team">
 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
@@ -87,7 +87,7 @@
 			<nav>
 				<div class="nav-wrapper green">
 					<div class="container">
-						<a href="#!" class="brand-logo">Zeus for PHP</a>
+						<a href="#!" class="brand-logo">DevBlend for PHP</a>
 					</div>
 				</div>
 			</nav>
@@ -97,7 +97,7 @@
 				<div class="col s12">
 					<div class="sectionHeader green lighten-1">
 						<h1>It works !</h1>
-						<p>You are seeing this because the Zeus for PHP box is up and working</p>
+						<p>You are seeing this because the DevBlend for PHP box is up and working</p>
 					</div>
 				</div>
 			</div>
@@ -107,7 +107,7 @@
 				<div class="col s12">
 					<h2>What now ?</h2>
 					<p>This this file is located in the <code>/vagrant/www</code> directory on the <em>guest box</em>, wich is your base of work for your PHP files.</p>
-					<p>The <code>/vagrant/www</code> folder is a shared folder, so you will find its content on the <em>hosting</em> machine in the <code>&lt;path-to-your-zeus-php-project&gt;/www</code> folder.</p>
+					<p>The <code>/vagrant/www</code> folder is a shared folder, so you will find its content on the <em>hosting</em> machine in the <code>&lt;path-to-your-DevBlend-php-project&gt;/www</code> folder.</p>
 					<p>
 						Happy coding !
 						<br/>
