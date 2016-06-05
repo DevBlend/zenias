@@ -76,9 +76,9 @@ If you are on Windows, restart your local machine after the installation of thes
 
 1. `git clone --recursive https://github.com/DevBlend/DevBlend.git`
 2. Navigate to the directory of this cloned repo.
-`cd your/path/to/dblend/ruby`
+`cd your/path/to/DevBlend/ruby`
 3. `vagrant up` in your bash-compliant terminal (Git Bash on Windows, regular terminal on Linux or Mac).
-3. Inside the directory `your/path/to/dblend/ruby` run `vagrant ssh` to start the session inside the development VM.
+3. Inside the directory `your/path/to/DevBlend/ruby` run `vagrant ssh` to start the session inside the development VM.
 4. Complete Github and git config setup. You only need to login to Github once during your first push and never again. You don't need to authenticate yourself when you perform git commit.
 5. Start coding.
 

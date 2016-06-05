@@ -79,11 +79,11 @@ If you are on Windows, restart your local machine after the installation of thes
 ### First Time Usage
 
 1. Run `git clone https://github.com/DevBlend/DevBlend.git`
-2. Inside the directory path/to/dblend/rails/ run `vagrant up` in your bash-compliant terminal (Git Bash on Windows, regular terminal on Linux or Mac).
-3. Inside the directory path/to/dblend/rails/ run `vagrant ssh` to start the session inside the development VM.
+2. Inside the directory path/to/DevBlend/rails/ run `vagrant up` in your bash-compliant terminal (Git Bash on Windows, regular terminal on Linux or Mac).
+3. Inside the directory path/to/DevBlend/rails/ run `vagrant ssh` to start the session inside the development VM.
 4. Start coding and forget about development environment setups.
 
-Note that you end up inside the Vagrant VM after these four steps. The VM is isolated from your local machine. Your current working directory has the absolute path of `/vagrant`, which is termed synced folder. It is in real-time sync with your `path/to/dblend/rails` local git repo. That is how your local machine communicates with the Vagrant VM.
+Note that you end up inside the Vagrant VM after these four steps. The VM is isolated from your local machine. Your current working directory has the absolute path of `/vagrant`, which is termed synced folder. It is in real-time sync with your `path/to/DevBlend/rails` local git repo. That is how your local machine communicates with the Vagrant VM.
 
 
 ### Test Your Setup
