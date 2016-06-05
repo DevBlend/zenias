@@ -20,11 +20,15 @@
 # All credit goes to Shinichi Segawa (tektoh) for his implementation, I only
 # updated his work to CakePHP 3.2.
 #-------------------------------------------------------------------------------
-
+source /vagrant/vagrant/_provision_vars.sh
 # Installation settings for a PHP box with CakePHP installed
 PROJECT="my_project" # we would want a name passed to it via te first argument, $1
 DB="my_app" # the name of postgreSQL DB we need to provision, maybe $2
 SERVER="fcc-vagrant-php" # Should be the same name as the box, when implementing #29
+
+# WORKING DIR, or "WHERE IS LOCATED THE GIT ROOT ?".
+# MUST BE PRESENT.
+export V_WORKING_DIR='/vagrant/www'
 
 # Git repos
 export GIT_CAKE3="https://github.com/mtancoigne/zeus-php-cakephp3.git"
@@ -61,7 +65,7 @@ echo "---------------------------------------------"
 #  - ruby : needed for heroku toolbelt
 #  - curl : needed to download things
 #  - Apache2 is installed here so we can update its config before the modules install.
-apt-get install -y --no-install-recommends heroku-toolbelt ruby dos2unix man curl apache2
+apt-get install -y --no-install-recommends heroku-toolbelt ruby dos2unix man curl apache2 jq
 # Set Apache ServerName.
 echo "ServerName ${SERVER}" >> /etc/apache2/apache2.conf;
 
@@ -81,7 +85,7 @@ su - postgres -c "createuser -s vagrant"
 # Creating 2 different dbs:
 # NOTE : for now, all the names are hardcoded in the beginning of this file
 # In the future, the changes should be applied to config/app.php too
-# 
+
 # The development database
 su - vagrant -c "createdb ${DB}"
 # The testing database, used when phpunit tests are ran.
@@ -109,13 +113,25 @@ service apache2 restart
 usermod -a -G www-data vagrant
 
 #
-# Here the provision-cake3.sh should be launched if choosen by user.
+# ZEUS OPTION IS HANDLED HERE
 #
+cd /vagrant/vagrant
+case "${Z_OPTION}" in
+  cake3)
+  ./provision-cake3.sh
+  ;;
+  \?) z_error "No options provided... Continuing"
+  ;;
+esac
 
 # All done
 echo "---------------------------------------------"
 echo "Everything is up. Use 'vagrant ssh' to log on"
 echo "your new box."
+echo ""
+echo "If you wanted to configure Github and Heroku,"
+echo "execute"
+echo "    /vagrant/vagrant/zeus_credentials.sh"
 echo "---------------------------------------------"
 
 exit 0
