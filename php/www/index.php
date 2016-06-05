@@ -107,7 +107,7 @@
 				<div class="col s12">
 					<h2>What now ?</h2>
 					<p>This this file is located in the <code>/vagrant/www</code> directory on the <em>guest box</em>, wich is your base of work for your PHP files.</p>
-					<p>The <code>/vagrant/www</code> folder is a shared folder, so you will find its content on the <em>hosting</em> machine in the <code>&lt;path-to-your-zeus-php-project&gt;/www</code> folder.</p>
+					<p>The <code>/vagrant/www</code> folder is a shared folder, so you will find its content on the <em>hosting</em> machine in the <code>&lt;path-to-your-dblend-php-project&gt;/www</code> folder.</p>
 					<p>
 						Happy coding !
 						<br/>

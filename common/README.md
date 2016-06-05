@@ -1,4 +1,4 @@
-# Directory for commonly reused files for zeus
+# Directory for commonly reused files for dblend
 
 Sometimes files are reused multiple times.
 

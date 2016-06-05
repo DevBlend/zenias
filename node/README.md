@@ -2,7 +2,7 @@
 
 Vagrant Box to have all [Nodeschool](http://nodeschool.io) workshoppers as a dependency. Primarily made for [Nodeschool IEM-Kolkata International Day Workshop](http://nodeschool.io/iem-kolkata/).
 
-Motivated by [ByteKnacker](https://github.com/byteknacker)'s awesome [fcc-python-vagrant](https://github.com/byteknacker/fcc-python-vagrant) Project and now merged with [Zeus](https://github.com/alayek/zeus) Project.
+Motivated by [ByteKnacker](https://github.com/byteknacker)'s awesome [fcc-python-vagrant](https://github.com/byteknacker/fcc-python-vagrant) Project and now merged with [Zeus](https://github.com/DevBlend/DevBlend) Project.
 
 ## Features
 
@@ -44,7 +44,7 @@ If you are on Windows, restart your local machine after the installation of thes
 
 ### First Time Usage
 
-1. Run `git clone https://github.com/alayek/zeus.git`
+1. Run `git clone https://github.com/DevBlend/DevBlend.git`
 2. Inside the directory path/to/node/ run `vagrant up` in your bash-compliant terminal (Git Bash on Windows, regular terminal on Linux or Mac).
 3. Inside the directory path/to/node/ run `vagrant ssh` to start the session inside the development VM.
 4. Start coding and forget about development environment setups.
