@@ -1,0 +1,21 @@
+{
+  "name": "todomvc-socketstream",
+  "description": "SocketStream TodoMVC app",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "http://sindresorhus.com"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "mongoose": "^4.4.19",
+    "socketstream": "~0.3.10",
+    "ss-hogan": "~0.1.3"
+  }
+}
