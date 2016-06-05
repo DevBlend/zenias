@@ -37,7 +37,7 @@ We prefer if you concentrate on one particular task, ideally where you are extre
 
 Steps to report bugs:
 
-1. Go to the [Issues](https://github.com/alayek/zeus/issues) page and find if the same bug has already been reported.
+1. Go to the [Issues](https://github.com/DevBlend/DevBlend/issues) page and find if the same bug has already been reported.
 2. Submit your bug report with as much information as possible so we can reproduce the bug easily. Refer to [Atom Contributing Guidelines](https://github.com/atom/atom/blob/master/CONTRIBUTING.md) to have a look at a standard way to submit bug reports. Please use their template for submitting your report.
 
 ### Feature Request

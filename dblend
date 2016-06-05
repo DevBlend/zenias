@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-# Making the arguments of the zeus command available to the whole script
-export zeusargv1=$1
-export zeusargv2=$2
-export zeusargv3=$3
+# Making the arguments of the dblend command available to the whole script
+export dblendargv1=$1
+export dblendargv2=$2
+export dblendargv3=$3
 
 gitconfig () {
     # Ask user for input to set up GitHub and git configs.
@@ -25,7 +25,7 @@ gitcreate () {
     # Get the stored GitHub username inside github_config
     githubname=$(cat ~/.configs/github_config | egrep "githubusername" | tail -1 | awk '{print $2}')
     # Loop to create the remote repo
-    case $zeusargv2 in
+    case $dblendargv2 in
         private)
             curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""',"private":"true"}'
             ;;
@@ -38,37 +38,37 @@ gitcreate () {
 create () {
     # Create a new project directory named after the third argument.
     # Options available for -python
-    case $zeusargv2 in
+    case $dblendargv2 in
         -python)
         # Installs all dependencies needed for the Python stack
-            mkdir $zeusargv3
+            mkdir $dblendargv3
             BASEDIR=$(dirname "$0")
-            cp $BASEDIR/python/.gitignore $PWD/$zeusargv3
-            cp $BASEDIR/python/Procfile $PWD/$zeusargv3
-            cp $BASEDIR/python/runtime.txt $PWD/$zeusargv3
-            cp $BASEDIR/python/Vagrantfile $PWD/$zeusargv3
-            cp $BASEDIR/python/provision.sh $PWD/$zeusargv3
-            cp $BASEDIR/python/requirements.txt $PWD/$zeusargv3
-            cp $BASEDIR/python/.bashrc $PWD/$zeusargv3
-            cp $BASEDIR/zeus $PWD/$zeusargv3
-            cd $PWD/$zeusargv3
+            cp $BASEDIR/python/.gitignore $PWD/$dblendargv3
+            cp $BASEDIR/python/Procfile $PWD/$dblendargv3
+            cp $BASEDIR/python/runtime.txt $PWD/$dblendargv3
+            cp $BASEDIR/python/Vagrantfile $PWD/$dblendargv3
+            cp $BASEDIR/python/provision.sh $PWD/$dblendargv3
+            cp $BASEDIR/python/requirements.txt $PWD/$dblendargv3
+            cp $BASEDIR/python/.bashrc $PWD/$dblendargv3
+            cp $BASEDIR/dblend $PWD/$dblendargv3
+            cd $PWD/$dblendargv3
             git init
             vagrant up
             vagrant ssh
             ;;
         -bootstrap)
         # Install all dependencies needed for Bootstrap stack
-            mkdir $zeusargv3
+            mkdir $dblendargv3
             BASEDIR=$(dirname "$0")
-            cp $BASEDIR/bootstrap/.gitignore $PWD/$zeusargv3
-            cp $BASEDIR/bootstrap/composer.json $PWD/$zeusargv3
-            cp $BASEDIR/bootstrap/home.html $PWD/$zeusargv3
-            cp $BASEDIR/bootstrap/index.php $PWD/$zeusargv3
-            cp $BASEDIR/bootstrap/.bashrc $PWD/$zeusargv3
-            cp $BASEDIR/bootstrap/Vagrantfile $PWD/$zeusargv3
-            cp $BASEDIR/bootstrap/provision.sh $PWD/$zeusargv3
-            cp $BASEDIR/zeus $PWD/$zeusargv3
-            cd $PWD/$zeusargv3
+            cp $BASEDIR/bootstrap/.gitignore $PWD/$dblendargv3
+            cp $BASEDIR/bootstrap/composer.json $PWD/$dblendargv3
+            cp $BASEDIR/bootstrap/home.html $PWD/$dblendargv3
+            cp $BASEDIR/bootstrap/index.php $PWD/$dblendargv3
+            cp $BASEDIR/bootstrap/.bashrc $PWD/$dblendargv3
+            cp $BASEDIR/bootstrap/Vagrantfile $PWD/$dblendargv3
+            cp $BASEDIR/bootstrap/provision.sh $PWD/$dblendargv3
+            cp $BASEDIR/dblend $PWD/$dblendargv3
+            cd $PWD/$dblendargv3
             git init
             vagrant up
             vagrant ssh
@@ -76,8 +76,8 @@ create () {
     esac
 }
 
-# Choice of which function to use based on user input of zeus' arguments
-case $zeusargv1 in
+# Choice of which function to use based on user input of dblend' arguments
+case $dblendargv1 in
     gitconfig)
         gitconfig
         ;;
@@ -89,10 +89,10 @@ case $zeusargv1 in
         ;;
     help)
         echo "Zeus - the tool to make web development faster"
-        echo "You have the following commands: zeus gitconfig, zeus gitcreate private, zeus gitcreate public."
-        echo "You need to run zeus gitconfig first in order to use the rest"
-        echo "zeus gitconfig creates or overwrites existing git username, email, and push configurations."
-        echo "zeus gitcreate creates a public or private GitHub repo depending on the second argument you give."
+        echo "You have the following commands: dblend gitconfig, dblend gitcreate private, dblend gitcreate public."
+        echo "You need to run dblend gitconfig first in order to use the rest"
+        echo "dblend gitconfig creates or overwrites existing git username, email, and push configurations."
+        echo "dblend gitcreate creates a public or private GitHub repo depending on the second argument you give."
         ;;
     *)
         echo "Invalid argument parsed"

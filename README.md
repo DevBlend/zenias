@@ -12,7 +12,7 @@ Zeus relies on [Vagrant](https://www.vagrantup.com/). It is a tool that automate
 
 ## Features
 
-There are three levels that zeus will change: your local machine, Vagrant VM, and virtualenv within the Vagrant VM. Various features are installed on different levels.
+There are three levels that DevBlend will change: your local machine, Vagrant VM, and virtualenv within the Vagrant VM. Various features are installed on different levels.
 
 [asciinema Tutorial](https://asciinema.org/a/1u9zm99yzpz6v1b95wv6mrppn)
 
@@ -39,7 +39,7 @@ These are system-wide installations within the Vagrant VM:
 #### Programmes
 
 - python2.7, python3.4, python-dev, python3-dev, libpq-dev, pip, build-essential, dos2unix, python-pip, man, Git, Heroku toolbelt, Heroku CLI, ruby, virtualenvwrapper, postgresql, Postgresql-contrib
-- Custom commands in the command line via zeus. Refer to section "How to Use Zeus" to know what commands are available.
+- Custom commands in the command line via `dblend`. Refer to section "How to Use Zeus" to know what commands are available.
 
 #### Configurations
 
@@ -74,26 +74,26 @@ If you are on Windows, restart your local machine after the installation of thes
 
 ### Standard Usage
 
-1. `git clone --recursive https://github.com/alayek/zeus.git`
+1. `git clone --recursive https://github.com/DevBlend/DevBlend.git`
 2. Navigate to the directory of this cloned repo.
-`cd your/path/to/zeus/ruby`
+`cd your/path/to/DevBlend/ruby`
 3. `vagrant up` in your bash-compliant terminal (Git Bash on Windows, regular terminal on Linux or Mac).
-3. Inside the directory `your/path/to/zeus/ruby` run `vagrant ssh` to start the session inside the development VM.
+3. Inside the directory `your/path/to/DevBlend/ruby` run `vagrant ssh` to start the session inside the development VM.
 4. Complete Github and git config setup. You only need to login to Github once during your first push and never again. You don't need to authenticate yourself when you perform git commit.
 5. Start coding.
 
 Note that you end up inside the Vagrant VM after these four steps. The VM is isolated from your local machine. Your current working directory has the absolute path of `/vagrant`, which is termed the "synced directory". It is in real-time sync with the `your/path/to/fcc-python-vagrant` local git repo. That is how your local machine communicates with the Vagrant VM.
 
-If you run into trouble, hit `zeus help` inside the Vagrant ssh session.
+If you run into trouble, hit `dblend help` inside the Vagrant ssh session.
 
 ### Zeus CLI
 
 Run these commands within your Vagrant ssh session.
 
-- `zeus gitconfig`
+- `dblend gitconfig`
 Create or overwrite existing git configuration for the user in terms of username and email address. Git push is set to simple as this is best practice.
-- `zeus gitcreate private` or `zeus gitcreate public`
-Create a private or public repository on Github via the GitHub API. You need to first have setup your git configurations with `zeus gitconfig` to use this properly. You only need to specify the name you wish to give to the remote repository.
+- `dblend gitcreate private` or `dblend gitcreate public`
+Create a private or public repository on Github via the GitHub API. You need to first have setup your git configurations with `dblend gitconfig` to use this properly. You only need to specify the name you wish to give to the remote repository.
 
 
 Nota Bene:
@@ -155,4 +155,4 @@ A special acknowledgement to FreeCodeCamp for inviting coders to participate in 
 
 # Security
 
-The Vagrant VM initiated by zeus stores your GitHub credentials on file. Please do not package this VM and share it. Attempts are made in the future to use HashiCorp Vault to store safely your credentials while not compromising on convenience.
+The Vagrant VM initiated by `dblend` stores your GitHub credentials on file. Please do not package this VM and share it. Attempts are made in the future to use HashiCorp Vault to store safely your credentials while not compromising on convenience.

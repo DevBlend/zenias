@@ -3,7 +3,7 @@
 #-------------------------------------------------------------------------------
 # Vagrant configuration file, highly based on
 #   https://github.com/tektoh/heroku-cakephp3-app
-#   https://github.com/alayek/zeus
+#   https://github.com/DevBlend/DevBlend
 #   and some strings found on puphpet boxes (http://puphpet.com)
 #
 # Author: Manuel Tancoigne
@@ -27,7 +27,7 @@ DB="my_app" # the name of postgreSQL DB we need to provision, maybe $2
 SERVER="fcc-vagrant-php" # Should be the same name as the box, when implementing #29
 
 # Git repos
-export GIT_CAKE3="https://github.com/mtancoigne/zeus-php-cakephp3.git"
+export GIT_CAKE3="https://github.com/mtancoigne/dblend-php-cakephp3.git"
 
 # This file is executed by root user - sudo not needed
 # But do not create any directory

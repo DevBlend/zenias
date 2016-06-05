@@ -88,7 +88,7 @@ source /usr/local/bin/virtualenvwrapper.sh > /dev/null 2>&1
 cd /vagrant
 
 # Ask for git configuration data from user based on input
-chmod 755 /home/vagrant/.configs/zeus
+chmod 755 /home/vagrant/.configs/dblend
 export PATH=$PATH:/home/vagrant/.configs
 echo 'export PATH=$PATH:/home/vagrant/.configs' >> ~/.profile
 # Makes it easier to use Github, you only have to give once your username
@@ -98,7 +98,7 @@ git config credential.helper store
 
 githubcredentials () {
     # Set up Github and git configurations
-    latercommand='You can setup Github later by running zeus gitconfig'
+    latercommand='You can setup Github later by running "dblend gitconfig"'
     iterator1=0
     iterator2=0
     while [[ $iterator1 = 0 && $iterator2 -lt 5 && ! -f ~/.gitconfig ]]
@@ -107,7 +107,7 @@ githubcredentials () {
 
         case $response in
             [yY][eE][sS]|[yY])
-                /home/vagrant/.configs/zeus gitconfig
+                /home/vagrant/.configs/dblend gitconfig
                 iterator1=1
                 ;;
             [nN][oO]|[nN])

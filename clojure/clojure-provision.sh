@@ -59,7 +59,7 @@ su - vagrant -c "createdb ${DB}"
 echo -------------- Setting Up Bashrc ------------------------------------
 su - vagrant -c "cp /vagrant/.bashrc /home/vagrant/"
 su - vagrant -c "mkdir /home/vagrant/.configs"
-su - vagrant -c "cp /vagrant/zeus.sh /home/vagrant/.configs/zeus"
+su - vagrant -c "cp /vagrant/dblend.sh /home/vagrant/.configs/dblend"
 # If you are on Windows host, with Git checkout windows line terminator style CRLF
 # this comes in handy
 su - vagrant -c "dos2unix  /home/vagrant/.bashrc > /dev/null 2>&1"
