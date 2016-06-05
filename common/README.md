@@ -1,4 +1,4 @@
-# Directory for commonly reused files for dblend
+# Directory for commonly reused files for DevBlend
 
 Sometimes files are reused multiple times.
 

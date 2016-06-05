@@ -12,7 +12,7 @@ Zeus relies on [Vagrant](https://www.vagrantup.com/). It is a tool that automate
 
 ## Features
 
-There are three levels that dblend will change: your local machine, Vagrant VM, and virtualenv within the Vagrant VM. Various features are installed on different levels.
+There are three levels that DevBlend will change: your local machine, Vagrant VM, and virtualenv within the Vagrant VM. Various features are installed on different levels.
 
 [asciinema Tutorial](https://asciinema.org/a/1u9zm99yzpz6v1b95wv6mrppn)
 
@@ -39,7 +39,7 @@ These are system-wide installations within the Vagrant VM:
 #### Programmes
 
 - python2.7, python3.4, python-dev, python3-dev, libpq-dev, pip, build-essential, dos2unix, python-pip, man, Git, Heroku toolbelt, Heroku CLI, ruby, virtualenvwrapper, postgresql, Postgresql-contrib
-- Custom commands in the command line via dblend. Refer to section "How to Use Zeus" to know what commands are available.
+- Custom commands in the command line via `dblend`. Refer to section "How to Use Zeus" to know what commands are available.
 
 #### Configurations
 
@@ -155,4 +155,4 @@ A special acknowledgement to FreeCodeCamp for inviting coders to participate in 
 
 # Security
 
-The Vagrant VM initiated by dblend stores your GitHub credentials on file. Please do not package this VM and share it. Attempts are made in the future to use HashiCorp Vault to store safely your credentials while not compromising on convenience.
+The Vagrant VM initiated by `dblend` stores your GitHub credentials on file. Please do not package this VM and share it. Attempts are made in the future to use HashiCorp Vault to store safely your credentials while not compromising on convenience.

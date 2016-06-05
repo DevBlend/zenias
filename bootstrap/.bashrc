@@ -98,7 +98,7 @@ git config credential.helper store
 
 githubcredentials () {
     # Set up Github and git configurations
-    latercommand='You can setup Github later by running dblend gitconfig'
+    latercommand='You can setup Github later by running "dblend gitconfig"'
     iterator1=0
     iterator2=0
     while [[ $iterator1 = 0 && $iterator2 -lt 5 && ! -f ~/.gitconfig ]]
