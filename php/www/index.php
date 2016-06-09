@@ -124,20 +124,20 @@
 								This virtual machine has been created with the following php extensions:
 							</p>
 							<pre>
-php5 
+php5
 php5-cli
-php5-pgsql 
-php5-sqlite 
-php5-intl 
-php5-mcrypt 
-php5-apcu 
+php5-pgsql
+php5-sqlite
+php5-intl
+php5-mcrypt
+php5-apcu
 php5-gd
-phpunit 
+phpunit
 </pre>
 							<p>PostgreSQL is the database server: </p>
 							<pre>
 postgresql
-postgresql-contrib 
+postgresql-contrib
 </pre>
 							<p>Of course, <code>git</code> and the <code>heroku-toolelt</code> are present too.</p>
 							<a class="btn waves-effect waves-light modal-trigger" href="#phpinfo">Display complete phpinfo</a>
