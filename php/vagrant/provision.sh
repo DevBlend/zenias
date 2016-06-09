@@ -3,7 +3,7 @@
 #-------------------------------------------------------------------------------
 # Vagrant configuration file, highly based on
 #   https://github.com/tektoh/heroku-cakephp3-app
-#   https://github.com/alayek/zeus
+#   https://github.com/DevBlend/DevBlend
 #   and some strings found on puphpet boxes (http://puphpet.com)
 #
 # Author: Manuel Tancoigne
@@ -24,7 +24,10 @@
 # Installation settings for a PHP box with CakePHP installed
 PROJECT="my_project" # we would want a name passed to it via te first argument, $1
 DB="my_app" # the name of postgreSQL DB we need to provision, maybe $2
-SERVER="fcc-vagrant-php"
+SERVER="fcc-vagrant-php" # Should be the same name as the box, when implementing #29
+
+# Git repos
+export GIT_CAKE3="https://github.com/mtancoigne/zeus-php-cakephp3.git"
 
 # This file is executed by root user - sudo not needed
 # But do not create any directory
@@ -63,7 +66,7 @@ apt-get install -y --no-install-recommends heroku-toolbelt ruby dos2unix man cur
 echo "ServerName ${SERVER}" >> /etc/apache2/apache2.conf;
 
 # Installing the PHP dev stack
-apt-get install -y --no-install-recommends git postgresql postgresql-contrib phpunit php5 php5-intl php5-pgsql php5-mcrypt php5-sqlite php5-apcu php5-cli
+apt-get install -y --no-install-recommends postgresql postgresql-contrib phpunit php5 php5-intl php5-pgsql php5-mcrypt php5-sqlite php5-apcu php5-cli php5-gd
 
 # Install Heroku CLI
 su - vagrant -c "heroku --version > /dev/null 2>&1"
@@ -74,9 +77,19 @@ echo "---- Setting up postgresql with ${DB} DB ----"
 echo "---------------------------------------------"
 # Creating superuser (-s) vagrant
 su - postgres -c "createuser -s vagrant"
+
+# Creating 2 different dbs:
+# NOTE : for now, all the names are hardcoded in the beginning of this file
+# In the future, the changes should be applied to config/app.php too
+# 
+# The development database
 su - vagrant -c "createdb ${DB}"
+# The testing database, used when phpunit tests are ran.
+su - vagrant -c "createdb ${DB}_test"
+
 # Setting default password for vagrant so Cake can connect
 su - vagrant -c "psql -U vagrant -d ${DB} -c \"ALTER USER \\\"vagrant\\\" WITH PASSWORD 'vagrant';\""
+su - vagrant -c "psql -U vagrant -d ${DB}_test -c \"ALTER USER \\\"vagrant\\\" WITH PASSWORD 'vagrant';\""
 
 # Copying apache config
 echo "---------------------------------------------"
@@ -88,29 +101,16 @@ cp vagrant/000-default.conf /etc/apache2/sites-available/000-default.conf
 php5enmod mcrypt
 # Enabling mod_rewrite
 a2enmod rewrite
+
 # Restarting apache for changes to take effects
 service apache2 restart
+
 # Adding user vagrant to www-data group for file permissions
 usermod -a -G www-data vagrant
 
-# Downloading composer in site dir.
-echo "---------------------------------------------"
-echo "- Setting up Composer and Cake dependencies -"
-echo "---------------------------------------------"
-# Installing composer
-if [ ! -e composer.phar ]; then
-  curl -sS https://getcomposer.org/installer | sudo php
-  export COMPOSER_PROCESS_TIMEOUT=600
-  yes | sudo -u vagrant php composer.phar install --prefer-dist
-else
-  php composer.phar self-update
-  yes | sudo -u vagrant php composer.phar update
-fi
-echo "---------------------------------------------"
-echo "-------- Migrating Beer Plugin DB -----------"
-echo "---------------------------------------------"
-# Migrating sample DB
-sudo -u vagrant ./bin/cake migrations migrate -p Beers
+#
+# Here the provision-cake3.sh should be launched if choosen by user.
+#
 
 # All done
 echo "---------------------------------------------"
