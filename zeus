@@ -27,10 +27,16 @@ gitcreate () {
     # Loop to create the remote repo
     case $zeusargv2 in
         private)
-            curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""',"private":"true"}'
+            curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""',"private":"true"}' > ~/.configs/.githubremote
+            newgithubremote=$(cat ~/.configs/.githubremote | egrep "html_url" | tail -1 | awk '{print $2}' | sed -r 's/[",]//g')
+            git remote add origin $newgithubremote
+            git push --set-upstream origin master
             ;;
         public)
-            curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""'}'
+            curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""'}' > ~/.configs/.githubremote
+            newgithubremote=$(cat ~/.configs/.githubremote | egrep "html_url" | tail -1 | awk '{print $2}' | sed -r 's/[",]//g')
+            git remote add origin $newgithubremote
+            git push --set-upstream origin master
             ;;
     esac
 }
@@ -56,6 +62,26 @@ create () {
             vagrant up
             vagrant ssh
             ;;
+
+        -pythontest)
+        # Installs all dependencies needed for testing the Python stack
+            mkdir $zeusargv3
+            BASEDIR=$(dirname "$0")
+            cp $BASEDIR/python/.gitignore $PWD/$zeusargv3
+            cp $BASEDIR/python/Procfile $PWD/$zeusargv3
+            cp $BASEDIR/python/runtime.txt $PWD/$zeusargv3
+            cp $BASEDIR/python/Vagrantfile $PWD/$zeusargv3
+            cp $BASEDIR/python/provision.sh $PWD/$zeusargv3
+            cp $BASEDIR/python/requirements.txt $PWD/$zeusargv3
+            cp $BASEDIR/python/.bashrc $PWD/$zeusargv3
+            cp $BASEDIR/zeus $PWD/$zeusargv3
+            cp -r $BASEDIR/python/python_test $PWD/$zeusargv3
+            cd $PWD/$zeusargv3
+            git init
+            vagrant up
+            vagrant ssh
+            ;;
+
         -bootstrap)
         # Install all dependencies needed for Bootstrap stack
             mkdir $zeusargv3
