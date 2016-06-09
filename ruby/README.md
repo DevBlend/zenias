@@ -14,11 +14,8 @@ There are three levels: local machine, Vagrant VM, and virtualenv within the Vag
 
 - .gitignore
 - Vagrantfile
-- Berksfile
-- Berksfile.lock
+- provision.sh
 - README.md
-- LICENSE
-
 
 #### Local Programs installed
 
@@ -34,24 +31,25 @@ Refer to [System Requirements](#system-requirements). The next version's system 
 ### Vagrant VM Level
 
 These are system-wide installations within the Vagrant VM, after running `vagrant ssh`:
-
+bundler -v '~> 1.12'
+sudo -u vagrant -i gem install rspec -v '~> 3.4'
+sudo -u vagrant -i gem install rails -v '~>4.2'
+sudo -u vagrant -i gem install sinatra -v '~> 1.4'
 #### Programmes
 
 - ruby 2.3.1
-- rbenv
-- build-essential
 - rails 4.2.x
-- dos2unix -nope
-- gem
-- bundle
-- rake
-- RSpec
-- man
-- Git
+- bundler 1.12.x
+- rspec 3.4.x
+- sinatra 1.4.x
+- rbenv
+- rubybuild
+- git
 - Heroku toolbelt
 - Heroku CLI
 - PostgreSQL
 - Postgresql-contrib
+- dos2unix
 
 #### Configurations
 
@@ -79,13 +77,30 @@ You need to have the following programmes installed on your local machine before
 If you are on Windows, restart your local machine after the installation of these programmes.
 
 ### First Time Usage
-1. `vagrant plugin install vagrant-berksfile`
-2. `git clone https://github.com/alayek/zeus.git`
-3. Navigate to the directory of this cloned repo. `cd your/path/to/zeus/ruby`
-4. `vagrant up` in your bash-compliant terminal (Git Bash on Windows, regular terminal on Linux or Mac).
-5. Inside the directory `your/path/to/zeus/ruby` run `vagrant ssh` to start the session inside the development VM.
-6. Complete Github and git config setup. You only need to login to Github once during your first push and never again. You don't need to authenticate yourself when you perform git commit.
-7. Start coding.
+
+1. Run `git clone https://github.com/alayek/zeus.git`
+2. Inside the directory path/to/zeus/rails/ run `vagrant up` in your bash-compliant terminal (Git Bash on Windows, regular terminal on Linux or Mac).
+3. Inside the directory path/to/zeus/rails/ run `vagrant ssh` to start the session inside the development VM.
+4. Start coding and forget about development environment setups.
+
+Note that you end up inside the Vagrant VM after these four steps. The VM is isolated from your local machine. Your current working directory has the absolute path of `/vagrant`, which is termed synced folder. It is in real-time sync with your `path/to/zeus/rails` local git repo. That is how your local machine communicates with the Vagrant VM.
+
+
+### Test Your Setup
+
+If you wish you can test the development environment setup by following these steps:
+
+- Test manually by checking whether all the features we promised are installed inside your Vagrant VM.
+- Use `date && vagrant up > logfile.log && date` instead of just `vagrant up` to log all printouts of `vagrant up` into the `logfile.log` with start time and end time of the execution. (The terminal will print nothing during the entire setup, please don't panic, everything is written into the `logfile.log`). Finally, inspect `logfile.log` to ensure no installation error occurred.
+- Run vagrant halt and restart with `vagrant up` and `vagrant ssh`. Ensure the state of the VM is the same as before, run another test if necessary.
+- Automated testing:
+
+It is assumed that these tests would be run inside the standard virtualenv of the `vagrant ssh` session.
+
+
+### TODO : Automated Testing
+
+You should see all tests PASSED and no errors printed.
 
 # Contributing Guidelines
 
