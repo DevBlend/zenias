@@ -1,5 +1,7 @@
 # FreeCodeCamp - Zeus
 
+[![Join the chat at https://gitter.im/DevBlend/DevBlend](https://badges.gitter.im/DevBlend/DevBlend.svg)](https://gitter.im/DevBlend/DevBlend?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Join the chat at https://gitter.im/FreeCodeCamp/vagrant](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/FreeCodeCamp/vagrant)
 
 Zeus is a tool that creates quickly a platform-independent Vagrant development environment. Currently, Python-Django stack is supported but many more plugins, such as Ruby stack, are under development.
