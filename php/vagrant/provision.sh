@@ -3,7 +3,7 @@
 #-------------------------------------------------------------------------------
 # Vagrant configuration file, highly based on
 #   https://github.com/tektoh/heroku-cakephp3-app
-#   https://github.com/alayek/zeus
+#   https://github.com/DevBlend/DevBlend
 #   and some strings found on puphpet boxes (http://puphpet.com)
 #
 # Author: Manuel Tancoigne
@@ -66,6 +66,7 @@ apt-get install -y --no-install-recommends heroku-toolbelt ruby dos2unix man cur
 echo "ServerName ${SERVER}" >> /etc/apache2/apache2.conf;
 
 # Installing the PHP dev stack
+apt-get install -y --no-install-recommends postgresql postgresql-contrib phpunit php5 php5-intl php5-pgsql php5-mcrypt php5-sqlite php5-apcu php5-cli php5-gd
 apt-get install -y --no-install-recommends git postgresql postgresql-contrib phpunit php5 php5-intl php5-pgsql php5-mcrypt php5-sqlite php5-apcu php5-cli php5-gd
 
 # Install Heroku CLI
@@ -81,7 +82,7 @@ su - postgres -c "createuser -s vagrant"
 # Creating 2 different dbs:
 # NOTE : for now, all the names are hardcoded in the beginning of this file
 # In the future, the changes should be applied to config/app.php too
-# 
+#
 # The development database
 su - vagrant -c "createdb ${DB}"
 # The testing database, used when phpunit tests are ran.

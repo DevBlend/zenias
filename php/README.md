@@ -1,27 +1,27 @@
-# Zeus for PHP
+# DevBlend for PHP
 
 ## Filesystem
- The document root of the Apache sercer is located in the `/vagrant/www` directory on the _guest box_, wich is your base of work for your PHP files.
+ The document root of the Apache server is located in the `/vagrant/www` directory on the _guest box_, wich is your base of work for your PHP files.
 
-This `/vagrant/www` folder is a shared folder: so you will find its content on the _hosting_ machine in the `<path-to-your-zeus-php-project>/www` folder.
+This `/vagrant/www` folder is a shared folder: so you will find its content on the _hosting_ machine in the `<path-to-your-DevBlend-php-project>/www` folder.
 
 ## Packages
 This virtual machine has been created with the following php extensions:
 
-  - php5 
+  - php5
   - php5-cli
-  - php5-pgsql 
-  - php5-sqlite 
-  - php5-intl 
-  - php5-mcrypt 
-  - php5-apcu 
+  - php5-pgsql
+  - php5-sqlite
+  - php5-intl
+  - php5-mcrypt
+  - php5-apcu
   - php5-gd
-  - phpunit 
+  - phpunit
 
 PostgreSQL is the database server:
 
   - postgresql
-  - postgresql-contrib 
+  - postgresql-contrib
 
 Of course, `git` and the `heroku-toolelt` are present too.
 
