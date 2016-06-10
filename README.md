@@ -116,17 +116,17 @@ The PHP box comes with the following packages:
 Typical workflow for using this PHP box:
 
   1. Launch the virtual machine
-  2. Work on the _host_ with your favorite tools (Apache documentRoot is `<zenias>/php/www` on the host, `/vagrant/www` on the guest)
+  2. Work on the _host_ with your favourite tools (Apache documentRoot is `<zenias>/php/www` on the host, `/vagrant/www` on the guest)
   3. Test
   4. Push your commits on github and/or heroku:
-    - From the host, with your usual tools (I use SmartGit to manage my git repos, and the Heroku toolbelt)
-    - From the guest : you will have to configure your git repository, but the Heroku toolbelt is installed.
+    - From the host, with your usual tools (I use SmartGit to manage my git repos, and the heroku toolbelt)
+    - From the guest : you will have to configure your git repository, but the heroku toolbelt is installed.
   5. Repeat from 2
   6. Celebrate.
 
 #### Defaults
 
-  * The default IP adress of the guest is `http://192.168.56.101`.
+  * The default IP address of the guest is `http://192.168.56.101`.
   * You can access the PostgreSQL server with user `vagrant`, password `vagrant`. An empty database named `my_app` has already been created.
 
 For more information. refer to the [PHP readme](php/README.md).  
@@ -175,7 +175,7 @@ There are three levels that Zenias will change: your local machine, Vagrant VM, 
 - Do talk to [us](https://gitter.im/FreeCodeCamp/vagrant) before you raise a pull request.
 - If you are looking for something to work on, please check our [issues](https://github.com/DevBlend/zenias/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22).
 - Vagrant testing takes time, and we intend to support major platforms. If you raise a PR, it might take a day or two for us to test on most platforms. So have patience.
-- You can contribute by adding documentation on [FreecodeaCamp Wiki](https://github.com/FreeCodeCamp/FreeCodeCamp/wiki) about this project.
+- You can contribute by adding documentation on [FreecodeCamp Wiki](https://github.com/FreeCodeCamp/FreeCodeCamp/wiki) about this project.
 - You can contribute by testing various boxes on new platforms, or existing PRs on common platforms.
 
 ## Frequently Asked Questions
@@ -196,7 +196,7 @@ There are three levels that Zenias will change: your local machine, Vagrant VM, 
 
 > In a lot of countries, getting good reliable internet is an issue. Power cuts are rampant. If you are from one of those places, you are probably more comfortable working on your local environment offline.
 
-> We acknowledge the benefits of cloud-hosted, browser-interfaced envs like c9 or nitrous. And our tool is complementary to these. In the end, it's the end-user who gets to decide which one they want to use.
+> We acknowledge the benefits of cloud-hosted, browser-interfaced `env`s like c9 or nitrous. And our tool is complementary to these. In the end, it's the end-user who gets to decide which one they want to use.
 
 ### Why shell-script provisioning?
 
@@ -204,7 +204,7 @@ There are three levels that Zenias will change: your local machine, Vagrant VM, 
 
 > But, while they are great for provisioning 16 GB CentOS workstations in a team, part of a large MNC, your local Windows 10 with 4 GB RAM would most likely not be able to handle them. You machine would slow down, or would need to download hundreds of files along with the huge plugins. In some cases, even more things to download.
 
-> We started with shell-script as it is lightweight, and it just works. Our setup is not that complex. In our usecase, where we are provisioning personal machines, we found shell script to provision envs the fastest. We have not yet had a reason to move to any of these provisioners; however, if such a need were to arise, we won't think twice before moving to these!
+> We started with shell-script as it is lightweight, and it just works. Our setup is not that complex. In our usecase, where we are provisioning personal machines, we found shell script to provision `env`s the fastest. We have not yet had a reason to move to any of these provisioners; however, if such a need were to arise, we won't think twice before moving to these!
 
 > Shell script can be odd and esoteric at times, but we have figured out solutions to most of the common problems over the course of this project.
 
@@ -230,7 +230,7 @@ There are three levels that Zenias will change: your local machine, Vagrant VM, 
 
 > In simple words, to have control over what we distribute. One of the focus of our project is to give the bare minimum necessity, because we have planned some tutorials on top of our vagrant boxes in the future. In those, the end user would install and configure some stuff on their own. We want to leave those opportunities - not distribute everything that we can!
 
-> Also, most such projects are built to complement an existing project of the authors who created the project. They most likely won't work on your personal Windows 7 laptop. They are not usually active, and defintely not meant for mass consumption.
+> Also, most such projects are built to complement an existing project of the authors who created the project. They most likely won't work on your personal Windows 7 laptop. They are not usually active, and definitely not meant for mass consumption.
 
 > We encountered an interesting bug when we were following a popular repo's vagrant provisioning - it has issues on some Windows machine. Upon further inspection, we found that there was a step to copy `~/.bashrc` from the cloned repo into the vagrant box. Guess what, if the cloning git client is not set up to handle line terminators properly, the vagrant box would only see Windows style line terminators and the whole `~/.bashrc` sourcing would fail with lot of error texts.
 
@@ -369,9 +369,6 @@ $ py.test -v
 ```
 
 You should see all tests PASSED and no errors printed.
-
-
-
 
 # Security
 
