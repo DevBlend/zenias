@@ -1,0 +1,14 @@
+# Official repos for zenias
+---
+php:
+  main: https://github.com/mtancoigne/zenias-PHP.git
+  modules:
+    cake3:
+      description: A CakePHP3-ready box
+      main: https://github.com/mtancoigne/zeus-php-cakephp3.git
+python:
+  description: Python for Zenias
+  main: http://python-official
+ruby:
+  description: Ruby for Zenias
+  main: http://ruby-official
