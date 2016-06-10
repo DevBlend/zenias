@@ -1,9 +1,9 @@
-# FreeCodeCamp - Zeus
+# Zenias
 
 [![Join the chat at https://gitter.im/FreeCodeCamp/vagrant](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/FreeCodeCamp/vagrant)
 
 ## Table of Contents
-- [What is Zeus](#what-is-zeus)
+- [What is Zenias](#what-is-zenias)
 - [Current Version](#current-version)
 - [How to Use](#how-to-use)
    - [Basic Requirement](#basic-requirement)
@@ -21,9 +21,9 @@
 - [Frequently Asked Questions](#frequently-asked-questions)
 - [License](#license)
 
-## What is Zeus
+## What is Zenias
 
-_Zeus_ is a CLI tool that creates a platform-independent [Vagrant](https://www.vagrantup.com) development environment.
+_Zenias_ is a CLI tool that creates a platform-independent [Vagrant](https://www.vagrantup.com) development environment.
 
 Presently, we support creating Ubuntu 14.04 LTS environment with these stacks:
 - Clojure-Compojure-Leiningan
@@ -47,7 +47,7 @@ You need to install **latest** (version 5.0.20) [Virtualbox](https://www.virtual
 
 If you are on Windows, you need [Git Bash](https://git-scm.com/downloads). On other platforms, like Linux or MacOSX; you would require having [git](https://git-scm.com/downloads) installed in your machine. On Windows, you might need to restart your machine after Vagrant installation.
 
-Once you have installed these, you can choose to boot up one of the following environments. In future, we plan on installing the basic requirements as part of `zeus` as well.
+Once you have installed these, you can choose to boot up one of the following environments. In future, we plan on installing the basic requirements as part of `zenias` as well.
 
 ### Clojure
 
@@ -116,7 +116,7 @@ The PHP box comes with the following packages:
 Typical workflow for using this PHP box:
 
   1. Launch the virtual machine
-  2. Work on the _host_ with your favorite tools (Apache documentRoot is `<zeus>/php/www` on the host, `/vagrant/www` on the guest)
+  2. Work on the _host_ with your favorite tools (Apache documentRoot is `<zenias>/php/www` on the host, `/vagrant/www` on the guest)
   3. Test
   4. Push your commits on github and/or heroku:
     - From the host, with your usual tools (I use SmartGit to manage my git repos, and the Heroku toolbelt)
@@ -150,7 +150,7 @@ Start rails servers with `rails s -b 0.0.0.0` to make the server available at ht
 
 ## Motivation
 
-Zeus is made for students of [FreeCodeCamp](https://freecodecamp.com), who are starting their journey in learning back-end development.
+Zenias is made for students of [FreeCodeCamp](https://freecodecamp.com), who are starting their journey in learning back-end development.
 
 The motivation for this Open Source project is to let users focus more on coding web apps, and less on configuration and set-up.
 
@@ -158,11 +158,11 @@ We expect our vagrant environments running smoothly on most platforms; including
 
 ## Features and Packages
 
-There are three levels that zeus will change: your local machine, Vagrant VM, and virtualenv within the Vagrant VM. Various features are installed on different levels.
+There are three levels that Zenias will change: your local machine, Vagrant VM, and virtualenv within the Vagrant VM. Various features are installed on different levels.
 
 ### Individual Boxes
 
-- Each individual box has its own shell-based provisioner. For instance, `java` provisioner is `zeus/java/provision.sh`.
+- Each individual box has its own shell-based provisioner. For instance, `java` provisioner is `zenias/java/provision.sh`.
 - Each box has a DB, a web framework, a package manager and some nifty tools like `curl`, `git`, `dos2unix` etc.
 
 
@@ -173,7 +173,7 @@ There are three levels that zeus will change: your local machine, Vagrant VM, an
 
 ## Contributing Guidelines
 - Do talk to [us](https://gitter.im/FreeCodeCamp/vagrant) before you raise a pull request.
-- If you are looking for something to work on, please check our [issues](https://github.com/alayek/zeus/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22).
+- If you are looking for something to work on, please check our [issues](https://github.com/DevBlend/zenias/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22).
 - Vagrant testing takes time, and we intend to support major platforms. If you raise a PR, it might take a day or two for us to test on most platforms. So have patience.
 - You can contribute by adding documentation on [FreecodeaCamp Wiki](https://github.com/FreeCodeCamp/FreeCodeCamp/wiki) about this project.
 - You can contribute by testing various boxes on new platforms, or existing PRs on common platforms.
@@ -278,7 +278,7 @@ These are system-wide installations within the Vagrant VM:
 #### Programmes
 
 - python2.7, python3.4, python-dev, python3-dev, libpq-dev, pip, build-essential, dos2unix, python-pip, man, Git, Heroku toolbelt, Heroku CLI, ruby, virtualenvwrapper, postgresql, Postgresql-contrib
-- Custom commands in the command line via zeus. Refer to section "How to Use Zeus" to know what commands are available.
+- Custom commands in the command line via Zenias. Refer to section "How to Use Zenias" to know what commands are available.
 
 #### Configurations
 
@@ -297,7 +297,7 @@ These are system-wide installations within the Vagrant VM:
 
 Ubuntu 14.04 LTS based box minimal/trusty64, hosted at https://atlas.hashicorp.com/minimal/boxes/trusty64
 
-## How to Use Zeus
+## How to Use Zenias
 
 ### System Requirements
 
@@ -313,26 +313,26 @@ If you are on Windows, restart your local machine after the installation of thes
 
 ### Standard Usage
 
-1. `git clone --recursive https://github.com/alayek/zeus.git`
+1. `git clone --recursive https://github.com/DevBlend/zenias.git`
 2. Navigate to the directory of this cloned repo.
-`cd your/path/to/zeus/ruby`
+`cd your/path/to/zenias/ruby`
 3. `vagrant up` in your bash-compliant terminal (Git Bash on Windows, regular terminal on Linux or Mac).
-3. Inside the directory `your/path/to/zeus/ruby` run `vagrant ssh` to start the session inside the development VM.
+3. Inside the directory `your/path/to/zenias/ruby` run `vagrant ssh` to start the session inside the development VM.
 4. Complete Github and git config setup. You only need to login to Github once during your first push and never again. You don't need to authenticate yourself when you perform git commit.
 5. Start coding.
 
-Note that you end up inside the Vagrant VM after these four steps. The VM is isolated from your local machine. Your current working directory has the absolute path of `/vagrant`, which is termed the "synced directory". It is in real-time sync with the `your/path/to/fcc-python-vagrant` local git repo. That is how your local machine communicates with the Vagrant VM.
+Note that you end up inside the Vagrant VM after these four steps. The VM is isolated from your local machine. Your current working directory has the absolute path of `/vagrant`, which is termed the "synced directory". It is in real-time sync with the `your/path/to/zenias` local git repo. That is how your local machine communicates with the Vagrant VM.
 
-If you run into trouble, hit `zeus help` inside the Vagrant ssh session.
+If you run into trouble, hit `zenias help` inside the Vagrant ssh session.
 
-### Zeus CLI
+### Zenias CLI
 
 Run these commands within your Vagrant ssh session.
 
-- `zeus gitconfig`
+- `zenias gitconfig`
 Create or overwrite existing git configuration for the user in terms of username and email address. Git push is set to simple as this is best practice.
-- `zeus gitcreate private` or `zeus gitcreate public`
-Create a private or public repository on Github via the GitHub API. You need to first have setup your git configurations with `zeus gitconfig` to use this properly. You only need to specify the name you wish to give to the remote repository.
+- `zenias gitcreate private` or `zenias gitcreate public`
+Create a private or public repository on Github via the GitHub API. You need to first have setup your git configurations with `zenias gitconfig` to use this properly. You only need to specify the name you wish to give to the remote repository.
 
 
 Nota Bene:
@@ -375,4 +375,4 @@ You should see all tests PASSED and no errors printed.
 
 # Security
 
-The Vagrant VM initiated by zeus stores your GitHub credentials on file. Please do not package this VM and share it. Attempts are made in the future to use HashiCorp Vault to store safely your credentials while not compromising on convenience.
+The Vagrant VM initiated by Zenias stores your GitHub credentials on file. Please do not package this VM and share it. Attempts are made in the future to use HashiCorp Vault to store safely your credentials while not compromising on convenience.
