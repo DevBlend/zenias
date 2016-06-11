@@ -8,7 +8,7 @@ php:
       main: https://github.com/mtancoigne/zeus-php-cakephp3.git
 python:
   description: Python for Zenias
-  main: http://python-official
+  main: 
 ruby:
   description: Ruby for Zenias
-  main: http://ruby-official
+  main: 
