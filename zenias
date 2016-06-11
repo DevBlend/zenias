@@ -1,189 +1,103 @@
 #!/usr/bin/python
 
-import sys
-import os
 import argparse
-import yaml #pyyaml
+import os
 import shutil
-from subprocess import call
-from git import Repo # gitpython
+import sys
+# pyyaml
+import yaml
 
-Z_VERSION='0.1'
+# gitpython
+from git import Repo
+from subprocess import call
+from zenias_functions import (z_logo, 
+                              z_error,
+                              z_warning,
+                              z_info,
+                              z_success,
+                              z_get_parent_lang,
+                              z_available_lang,
+                              z_check_language_config,
+                              z_check_dir,
+                              OutColors)
+from zenias_version import Z_VERSION
+
 global Z_REPOS
 
-# Defining some colors for console output candyness
-class outColors:
-    BLUE   = '\033[34m'
-    LBLUE  = '\033[94m'
-    GREEN  = '\033[32m'
-    LGREEN = '\033[92m'
-    RED    = '\033[31m'
-    LRED   = '\033[91m'
-    YELLOW = '\033[33m'
-    LYELLOW= '\033[93m'
-    BOLD      = '\033[1m'
-    UNDERLINE = '\033[4m'
-    ENDC      = '\033[0m'
-
-# Displays a nice logo
-def z_logo():
-  print outColors.BLUE
-  print ' _______ _ __ (_) __ _ ___  '
-  print '|_  / _ \ `_ \| |/ _` / __| '+outColors.ENDC+'Zenias: Vagrant boxes with Heroku integration'+outColors.BLUE
-  print ' / /  __/ | | | | (_| \__ \ '
-  print '/___\___|_| |_|_|\__,_|___/ '+outColors.ENDC+'V '+Z_VERSION
-  print
-  print outColors.ENDC
-
-# Nice messages
-def z_error(msg):
-  return "\n" + outColors.LRED+'Error: '+ outColors.RED+msg+outColors.ENDC +"\n"
-
-def z_warning(msg):
-  return "\n" + outColors.LYELLOW+'Error: '+ outColors.YELLOW+msg+outColors.ENDC+"\n"
-
-def z_info(msg):
-  return outColors.LBLUE+'Info: '+ outColors.BLUE+msg+outColors.ENDC
-
-def z_success(msg):
-  return outColors.LGREEN+'Error: '+ outColors.GREEN+msg+outColors.ENDC
-
-def z_underline(msg):
-  return outColors.UNDERLINE + msg + outColors.ENDC
-
-def z_header1(msg):
-  lineLenght=80
-  line= '+' + (lineLenght-2)*'-' + '+'
-  blank= '\n|'+(lineLenght-2)*' '+ '|\n'
-  return line + blank + "| " + msg + " " + (lineLenght-4-len(msg))*' ' + "|" + blank + line
-
-def z_header2(msg):
-  lineLenght=80
-  line= '+' + (lineLenght-2)*'-' + '+'
-  return line + "\n| " + msg + " " + (lineLenght-4-len(msg))*' ' + "|\n" + line
-
-# Returns the language for a submodule
-def z_getParentLang(module):
-  for l in Z_REPOS:
-    if ('modules' in Z_REPOS[l]) and (Z_REPOS[l]['modules'] != None):
-        for m in Z_REPOS[l]['modules']:
-          if module==m:
-            return l
-  return None
-
+# Logo
 z_logo()
 
 # Load the official repos
 with open('repos.yml', 'r') as f:
     Z_REPOS = yaml.load(f)
-f.close();
+f.close()
 
+#
 # Parser for arguments
+#
 parser = argparse.ArgumentParser(prog='zenias')
-
 # Main commands
 subparsers = parser.add_subparsers()
+#
 # create the parser for the "create" command
 parser_a = subparsers.add_parser('create', help='Creates a box. Use "zenias create -h" for help.')
-#Language argument
+# Language argument
 parser_a.add_argument('language', type=str,
-                    help='The language/module you want to build the box for. Use \'zenias -ll\' for the complete list.')
+                      help='The language/module you want to build the box for. Use \'zenias -ll\' for the complete list.')
 # Directory argument
 parser_a.add_argument('-d', '--directory',  type=str, default='.',
-                    help='Directory where to create the box. Default is the current dir.')
+                      help='Directory where to create the box. Default is the current dir.')
 # Options argument
 parser_a.add_argument('-o', '--options',
-                    help='List of options. Please refer to the specific options available for each boxes.')
-
-# create the parser for the "b" command
+                      help='List of options. Please refer to the specific options available for each boxes.')
+#
+# create the parser for the "list" command
 parser_b = subparsers.add_parser('list', help='Display the list of all languages/modules. Use "zenias list -h" for help.')
-# Complete list
-# parser_b.add_argument('-l', '--list', action="count",
-                    # help='Display the list of available languages and modules (add whatever argument as language)')
-#Language options
+# Language options
 parser_b.add_argument('-l', type=str,
-                    help='Restrict the list to this language and submodules')
+                      help='Restrict the list to this language and submodules')
 args = parser.parse_args()
 
-# Displays the list of all the available lang/modules 
+# ------------------------
+# List available languages (zenias list -l <lang>)
 if 'l' in args:
-  if(args.l is None):
-    # Generate a langauge/modules list:
-    print z_underline('Available langages:')
-    for l in Z_REPOS:
-      name=outColors.BLUE + ' - ' + l + outColors.ENDC
-      if 'description' in Z_REPOS[l] :
-        name += ' - ' + Z_REPOS[l]['description']
-      print name
-      if ('modules' in Z_REPOS[l]) and (Z_REPOS[l]['modules'] != None):
-        for m in Z_REPOS[l]['modules']:
-          name=outColors.LBLUE + '  - ' + m + outColors.ENDC
-          if 'description' in  Z_REPOS[l]['modules'][m]:
-            name += ' - '+ Z_REPOS[l]['modules'][m]['description']
-          print name
-      print
-  elif args.l in Z_REPOS:
-    l=args.l
-    print z_underline('Language and modules for ' + l + ':')
-    name=outColors.BLUE + ' - ' + l + outColors.ENDC
-    if 'description' in Z_REPOS[l] :
-      name += ' - ' + Z_REPOS[l]['description']
-    print name
-    if ('modules' in Z_REPOS[l]) and (Z_REPOS[l]['modules'] != None):
-      for m in Z_REPOS[l]['modules']:
-        name=outColors.LBLUE + '  - ' + m + outColors.ENDC
-        if 'description' in  Z_REPOS[l]['modules'][m]:
-          name += ' - '+ Z_REPOS[l]['modules'][m]['description']
-        print name
-    print
-  else:
-    z_error('Sorry, we don\'t have this language...')
-    sys.exit(1)
-  sys.exit(0)
+    z_available_lang(args.language, Z_REPOS)
+    sys.exit(0)
 
+# ------------------------
+# Box creation
+
+#
 # Starting checks
-repo=''
-print z_info('Attempting to create a box for '+args.language+' in "'+ args.directory+'"...')
-# Language presence
-if(args.language not in Z_REPOS):
-  # Check in modules
-  l=z_getParentLang(args.language)
-  if(l is None):
-    print z_error('Unable to find '+args.langage+' in languages and modules.')
-    sys.exit(1)
-  else:
-    # Check repo presence
-    if Z_REPOS[l]['modules'][args.language]['main'] is None:
-      print z_error('This module is misconfigured.')
-      sys.exit(1)
-    else:
-      repo=Z_REPOS[l]['modules'][args.language]['main']
+#
+print z_info('Attempting to create a box for ' + args.language + ' in "' + args.directory + '"...')
+# Language presence and repo
+repo = z_check_language_config(args.language, Z_REPOS)
 
-elif Z_REPOS[args.language]['main'] is None:
-  print z_error('This language is misconfigured.')
-  sys.exit(1)
-else:
-  repo=Z_REPOS[args.language]['main']
-
+if repo is None:
+    exit(1)
 
 print z_info('...Language/module available at ' + repo)
-if not os.path.exists(args.directory):
-  print z_info('Creating ' + args.directory)
-  os.makedirs(args.directory)
-elif os.listdir(args.directory) != []:
-  print z_error('The "'+args.directory+'" directory is not empty.')
-  sys.exit(1)
-else:
-  print z_info('...Directory '+args.directory+' exists and is empty')
-  
+
+#
+# Checking directory
+#
+# Inexistant dir
+z_check_dir(args.directory)
+
+# Getting repo
 print z_info('...Cloning...')
 Repo.clone_from(repo, args.directory)
 print z_success('...Done.')
+# Removing the .git folder
 print z_info('...Cleaning downloaded repo...')
+shutil.rmtree(args.directory + os.sep + '.git')
 print z_success('...Done.')
-shutil.rmtree(args.directory+os.sep+'.git')
+# Copy zenias_bin for usage in guest
 print z_info('...Copying some files...')
-shutil.copyfile('./scripts/zenias_guest.sh', args.directory + os.sep + 'zenias_bin'+os.sep+'zenias')
+shutil.copyfile('./scripts/zenias_guest.sh', args.directory + os.sep + 'zenias_bin' + os.sep + 'zenias')
+# Launch vagrant
 print z_info('...Launching vagrant...')
 os.chdir(args.directory)
-call(['vagrant', 'up'])
+#call(['vagrant', 'up'])
+z_success('Done. Enjoy your box !')
