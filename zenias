@@ -99,5 +99,6 @@ shutil.copyfile('./scripts/zenias_guest.sh', args.directory + os.sep + 'zenias_b
 # Launch vagrant
 print z_info('...Launching vagrant...')
 os.chdir(args.directory)
-#call(['vagrant', 'up'])
+call(['vagrant', 'up'])
+
 z_success('Done. Enjoy your box !')
