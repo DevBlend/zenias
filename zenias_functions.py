@@ -191,7 +191,40 @@ def z_make_templates(source, target, replacements):
             targetfile = io.open(newtarget, 'w')
             sourcefile = io.open(newsource, 'r')
             for line in sourcefile:
-                newline = Template(line)
-                targetfile.write(newline.substitute(replacements))
+                template = Template(line)
+                targetfile.write(template.substitute(replacements))
             targetfile.close()
             print z_info('Created file ' + f)
+
+
+# Merge two dicts recursively.
+# Values from y will override the ones from x
+# Returns x or y if the other is empty.
+def z_merge_two_dicts(x, y):
+    if x is None and y is not None:
+        return y
+    elif x is not None and y is None:
+        return x
+    elif x is None and y is None:
+        return dict()
+    else:
+        if type(y) is dict:
+            for i in y:
+                if i not in x:
+                    x[i] = None
+                x[i] = z_merge_two_dicts(x[i], y[i])
+
+        else:
+            x = y
+        return x
+
+
+# Check for a file file and create it with some content if necessary
+def z_check_file(a_file, content):
+    if not os.path.isfile(a_file):
+        print z_info('Creating a file for your unofficial boxes in ' +
+                     a_file)
+        content = str(content)
+        the_file = open(a_file, 'a')
+        the_file.write(str(content))
+        the_file.close()

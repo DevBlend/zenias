@@ -19,20 +19,56 @@ import yaml
 # Zenias function
 from zenias_functions import (z_available_lang,
                               z_check_dir,
+                              z_check_file,
                               z_check_language_config,
                               z_info,
                               z_logo,
+                              z_merge_two_dicts,
                               z_success)
 # Zenias config
 global Z_REPOS
+user_file = os.path.expanduser('~/.zenias_custom.yml')
+user_config_content = ("# In this file you can add your own custom boxes.\n"
+                       "# The values here overrides the official ones.\n"
+                       "#\n"
+                       "# <lang>:\n"
+                       "#   description: <lang description>\n"
+                       "#   main: <main repo>\n"
+                       "#   modules:\n"
+                       "#     <module_name>:\n"
+                       "#       description: <module_description>\n"
+                       "#       main: <module repo>\n"
+                       "#\n"
+                       "# Example: a new PHP module:\n"
+                       "# --------\n"
+                       "# php:\n"
+                       "#   modules:\n"
+                       "#     newmod:\n"
+                       "#       description: Some new PHP module\n"
+                       "#       main: https://some/git/repo\n"
+                       "#\n"
+                       "# Example: override the official PHP box:\n"
+                       "# --------\n"
+                       "# php:\n"
+                       "#   description: My new description if any\n"
+                       "#   main: http://new/git/repo\n"
+                       "#\n")
 
 # Logo
 z_logo()
 
 # Load the official repos
 with open('repos.yml', 'r') as f:
-    Z_REPOS = yaml.load(f)
+    off_config = yaml.load(f)
 f.close()
+
+z_check_file(user_file, user_config_content)
+
+with open(user_file, 'r') as f:
+    user_config = yaml.load(f)
+f.close()
+
+Z_REPOS = z_merge_two_dicts(off_config, user_config)
 
 #
 # Parser for arguments
@@ -124,6 +160,6 @@ shutil.copyfile('./scripts/zenias_guest.sh',
 # Launch vagrant
 print z_info('...Launching vagrant...')
 os.chdir(target)
-#call(['vagrant', 'up'])
+call(['vagrant', 'up'])
 
-z_success('Done. Enjoy your box !')
+z_success("\nDone. Enjoy your box !\n")
