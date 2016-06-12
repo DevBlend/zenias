@@ -62,12 +62,12 @@ with open('repos.yml', 'r') as f:
     off_config = yaml.load(f)
 f.close()
 
+# Load the user repos
 z_check_file(user_file, user_config_content)
-
 with open(user_file, 'r') as f:
     user_config = yaml.load(f)
 f.close()
-
+# Deep merge the two dicts
 Z_REPOS = z_merge_two_dicts(off_config, user_config)
 
 #
@@ -78,40 +78,48 @@ parser = argparse.ArgumentParser(prog='zenias')
 subparsers = parser.add_subparsers()
 #
 # create the parser for the "create" command
-parser_a = subparsers.add_parser('create',
-                                 help='Creates a box. Use '
+parser_create = subparsers.add_parser('create',
+                                      help='Creates a box. Use '
                                       '"zenias create -h" for help.')
 # Language argument
-parser_a.add_argument('language',
-                      type=str,
-                      help='The language/module you want to build the box for. '
-                           'Use \'zenias -ll\' for the complete list.')
+parser_create.add_argument('language',
+                           type=str,
+                           help='The language/module you want to build '
+                                'the box for. Use \'zenias list\' '
+                                'for the complete list.')
 # Directory argument
-parser_a.add_argument('-d', '--directory',
-                      type=str,
-                      default='.',
-                      help='Directory where to create the box. '
-                           'Default is the current dir.')
+parser_create.add_argument('directory',
+                           type=str,
+                           default='.',
+                           help='Directory where to create the box. '
+                                'Default is the current dir.')
 # Options argument
-parser_a.add_argument('-o', '--options',
-                      help='List of options. Please refer to the '
-                           'specific options available for each boxes.')
+# parser_create.add_argument('-o', '--options',
+#                            help='List of options. Please refer to the '
+#                                 'specific options available for each boxes.')
+
 #
 # create the parser for the "list" command
-parser_b = subparsers.add_parser('list',
-                                 help='Display the list of all '
-                                      'languages/modules. Use "zenias list -h" '
-                                      'for help.')
+parser_list = subparsers.add_parser('list',
+                                    help='Display the list of all '
+                                         'languages/modules.'
+                                         'Use "zenias list -h" for help.')
 # Language options
-parser_b.add_argument('-l',
-                      type=str,
-                      help='Restrict the list to this language and submodules')
+parser_list.add_argument('-l',
+                         type=str,
+                         default=None,
+                         help='Restrict the list to this '
+                              'language and submodules')
+
 args = parser.parse_args()
 
 # ------------------------
 # List available languages (zenias list -l <lang>)
+# as -l have a default and is tied to the "list" command,
+# checking it's existence is enough to determine we want
+# to list the boxes.
 if 'l' in args:
-    z_available_lang(args.language, Z_REPOS)
+    z_available_lang(args.l, Z_REPOS)
     exit(0)
 
 # ------------------------
@@ -128,7 +136,7 @@ repo = z_check_language_config(args.language, Z_REPOS)
 if repo is None:
     exit(1)
 
-print z_info('...Language/module available at ' + repo)
+print z_info('...The ' + args.language + ' box is available at ' + repo)
 
 
 # Target dir, full path
@@ -160,6 +168,6 @@ shutil.copyfile('./scripts/zenias_guest.sh',
 # Launch vagrant
 print z_info('...Launching vagrant...')
 os.chdir(target)
-call(['vagrant', 'up'])
+#call(['vagrant', 'up'])
 
 z_success("\nDone. Enjoy your box !\n")
