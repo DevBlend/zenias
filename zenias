@@ -23,36 +23,15 @@ from zenias_functions import (z_available_lang,
                               z_check_language_config,
                               z_info,
                               z_logo,
+                              z_make_templates,
                               z_merge_two_dicts,
                               z_success)
+# Zenias variables
+from zenias_vars import(Z_DEFAULT_YML, Z_VERSION)
+
 # Zenias config
 global Z_REPOS
 user_file = os.path.expanduser('~/.zenias_custom.yml')
-user_config_content = ("# In this file you can add your own custom boxes.\n"
-                       "# The values here overrides the official ones.\n"
-                       "#\n"
-                       "# <lang>:\n"
-                       "#   description: <lang description>\n"
-                       "#   main: <main repo>\n"
-                       "#   modules:\n"
-                       "#     <module_name>:\n"
-                       "#       description: <module_description>\n"
-                       "#       main: <module repo>\n"
-                       "#\n"
-                       "# Example: a new PHP module:\n"
-                       "# --------\n"
-                       "# php:\n"
-                       "#   modules:\n"
-                       "#     newmod:\n"
-                       "#       description: Some new PHP module\n"
-                       "#       main: https://some/git/repo\n"
-                       "#\n"
-                       "# Example: override the official PHP box:\n"
-                       "# --------\n"
-                       "# php:\n"
-                       "#   description: My new description if any\n"
-                       "#   main: http://new/git/repo\n"
-                       "#\n")
 
 # Logo
 z_logo()
@@ -63,7 +42,7 @@ with open('repos.yml', 'r') as f:
 f.close()
 
 # Load the user repos
-z_check_file(user_file, user_config_content)
+z_check_file(user_file, Z_DEFAULT_YML)
 with open(user_file, 'r') as f:
     user_config = yaml.load(f)
 f.close()
@@ -92,7 +71,7 @@ parser_create.add_argument('directory',
                            type=str,
                            default='.',
                            help='Directory where to create the box. '
-                                'Default is the current dir.')
+                                'use "." to use the current directory.')
 # Options argument
 # parser_create.add_argument('-o', '--options',
 #                            help='List of options. Please refer to the '
@@ -110,18 +89,58 @@ parser_list.add_argument('-l',
                          default=None,
                          help='Restrict the list to this '
                               'language and submodules')
+#
+# create the parser for the "template" command
+parser_template = subparsers.add_parser('template',
+                                        help='Create an empty box structure. '
+                                             'Use "zenias template -h"'
+                                             'for help.')
+# Language options
+parser_template.add_argument('name',
+                             type=str,
+                             default=None,
+                             help='Name for the new box')
+# Directory argument
+parser_template.add_argument('directory',
+                             type=str,
+                             default='.',
+                             help='Directory where to create the skeleton. '
+                                  'Use "." to use the current directory.')
 
 args = parser.parse_args()
 
+# List
 # ------------------------
 # List available languages (zenias list -l <lang>)
-# as -l have a default and is tied to the "list" command,
+#
+# as '-l' have a default and is tied to the "list" command,
 # checking it's existence is enough to determine we want
 # to list the boxes.
 if 'l' in args:
     z_available_lang(args.l, Z_REPOS)
     exit(0)
 
+# Template
+# ------------------------
+# Creates an empty box (zenias template <name> <directory>)
+#
+# as 'name' have a default and is tied to the "list" command,
+# checking it's existence is enough to determine we want
+# to list the boxes.
+if('name' in args):
+    target = os.path.abspath(args.directory)
+    script = os.path.dirname(os.path.realpath(__file__))
+    # Create the new dir
+    z_check_dir(target)
+    z_make_templates(os.path.join(script, 'skeleton'),
+                     target,
+                     dict(Z_VERSION=Z_VERSION, Z_LANG=args.name)
+                     )
+    z_success('Your new ' + args.name +
+              'template is ready for customization in ' + target)
+    exit(0)
+
+# Create
 # ------------------------
 # Box creation
 

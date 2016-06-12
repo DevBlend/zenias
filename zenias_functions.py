@@ -8,7 +8,7 @@ import os
 # Mini template engine
 from string import Template
 # Zenias version
-from zenias_version import Z_VERSION
+from zenias_vars import Z_VERSION
 
 
 # Displays a nice logo
