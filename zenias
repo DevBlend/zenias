@@ -1,27 +1,29 @@
 #!/usr/bin/python
 
+# For argument parsing and --help
 import argparse
+# For some os-related path manipulations
 import os
+# For file manipulation (copy/move/...)
 import shutil
-import sys
+#
+# import sys
+# To execute shell commands
+from subprocess import call
+# gitpython to manage Git repos.
+# It's a wrapper for git system calls
+from git import Repo
 # pyyaml
 import yaml
 
-# gitpython
-from git import Repo
-from subprocess import call
-from zenias_functions import (z_logo, 
-                              z_error,
-                              z_warning,
-                              z_info,
-                              z_success,
-                              z_get_parent_lang,
-                              z_available_lang,
-                              z_check_language_config,
+# Zenias function
+from zenias_functions import (z_available_lang,
                               z_check_dir,
-                              OutColors)
-from zenias_version import Z_VERSION
-
+                              z_check_language_config,
+                              z_info,
+                              z_logo,
+                              z_success)
+# Zenias config
 global Z_REPOS
 
 # Logo
@@ -40,21 +42,33 @@ parser = argparse.ArgumentParser(prog='zenias')
 subparsers = parser.add_subparsers()
 #
 # create the parser for the "create" command
-parser_a = subparsers.add_parser('create', help='Creates a box. Use "zenias create -h" for help.')
+parser_a = subparsers.add_parser('create',
+                                 help='Creates a box. Use '
+                                      '"zenias create -h" for help.')
 # Language argument
-parser_a.add_argument('language', type=str,
-                      help='The language/module you want to build the box for. Use \'zenias -ll\' for the complete list.')
+parser_a.add_argument('language',
+                      type=str,
+                      help='The language/module you want to build the box for. '
+                           'Use \'zenias -ll\' for the complete list.')
 # Directory argument
-parser_a.add_argument('-d', '--directory',  type=str, default='.',
-                      help='Directory where to create the box. Default is the current dir.')
+parser_a.add_argument('-d', '--directory',
+                      type=str,
+                      default='.',
+                      help='Directory where to create the box. '
+                           'Default is the current dir.')
 # Options argument
 parser_a.add_argument('-o', '--options',
-                      help='List of options. Please refer to the specific options available for each boxes.')
+                      help='List of options. Please refer to the '
+                           'specific options available for each boxes.')
 #
 # create the parser for the "list" command
-parser_b = subparsers.add_parser('list', help='Display the list of all languages/modules. Use "zenias list -h" for help.')
+parser_b = subparsers.add_parser('list',
+                                 help='Display the list of all '
+                                      'languages/modules. Use "zenias list -h" '
+                                      'for help.')
 # Language options
-parser_b.add_argument('-l', type=str,
+parser_b.add_argument('-l',
+                      type=str,
                       help='Restrict the list to this language and submodules')
 args = parser.parse_args()
 
@@ -62,7 +76,7 @@ args = parser.parse_args()
 # List available languages (zenias list -l <lang>)
 if 'l' in args:
     z_available_lang(args.language, Z_REPOS)
-    sys.exit(0)
+    exit(0)
 
 # ------------------------
 # Box creation
@@ -70,7 +84,8 @@ if 'l' in args:
 #
 # Starting checks
 #
-print z_info('Attempting to create a box for ' + args.language + ' in "' + args.directory + '"...')
+print z_info('Attempting to create a box for ' +
+             args.language + ' in "' + args.directory + '"...')
 # Language presence and repo
 repo = z_check_language_config(args.language, Z_REPOS)
 
@@ -79,26 +94,36 @@ if repo is None:
 
 print z_info('...Language/module available at ' + repo)
 
+
+# Target dir, full path
+target = os.path.abspath(args.directory)
+# Source dir (zenias dir), full path
+script = os.path.dirname(os.path.realpath(__file__))
+
 #
-# Checking directory
+# Checking target
 #
-# Inexistant dir
-z_check_dir(args.directory)
+z_check_dir(target)
 
 # Getting repo
 print z_info('...Cloning...')
-Repo.clone_from(repo, args.directory)
+Repo.clone_from(repo, target)
 print z_success('...Done.')
+
 # Removing the .git folder
 print z_info('...Cleaning downloaded repo...')
-shutil.rmtree(args.directory + os.sep + '.git')
+shutil.rmtree(os.path.join(target, '.git'))
 print z_success('...Done.')
+
 # Copy zenias_bin for usage in guest
 print z_info('...Copying some files...')
-shutil.copyfile('./scripts/zenias_guest.sh', args.directory + os.sep + 'zenias_bin' + os.sep + 'zenias')
+shutil.copyfile('./scripts/zenias_guest.sh',
+                os.path.join(target, 'zenias_bin/', 'zenias')
+                )
+
 # Launch vagrant
 print z_info('...Launching vagrant...')
-os.chdir(args.directory)
-call(['vagrant', 'up'])
+os.chdir(target)
+#call(['vagrant', 'up'])
 
 z_success('Done. Enjoy your box !')
