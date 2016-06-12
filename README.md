@@ -101,5 +101,4 @@ Zenias comes with a list of _official_ repos in `repos.yml` (tested by the zenia
 You can add custom non-official repos in it and then use them as you would have done for the official ones.
 
 ## Security note
-
-The Vagrant VM initiated by zenias stores your GitHub credentials on file. Please do not package this VM and share it. Attempts are made in the future to use HashiCorp Vault to store safely your credentials while not compromising on convenience.
+When you run zenias in the guest it stores Github credentials in `/home/vagrant/config/`, and heroku credentials are saved bu the heroku toolbelt. **IF YOU SHARE THE WHOLE VM, YOU SHARE YOUR ACCESSES TO THESE SERVICES**.
