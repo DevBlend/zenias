@@ -1,5 +1,5 @@
 #!/usr/bin/python
-Z_VERSION = '0.1.1'
+Z_VERSION = '0.1.2'
 
 Z_DEFAULT_YML = ("# In this file you can add your own custom boxes.\n"
                  "# The values here overrides the official ones.\n"
