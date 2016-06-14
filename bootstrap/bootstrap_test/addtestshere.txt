@@ -1,1 +1,0 @@
-Please remove this file after you added Bootstrap tests here.

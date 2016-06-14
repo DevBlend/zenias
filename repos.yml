@@ -1,0 +1,23 @@
+# Official repos for zenias
+---
+php:
+  # Box with PHP/PostgreSQL
+  description: PHP for Zenias
+  main: https://github.com/mtancoigne/zenias-box-php.git
+  modules:
+    # Box with CakePHP3.2
+    cake3:
+      description: A CakePHP3-ready box
+      main: https://github.com/mtancoigne/zenias-box-php-cake3.git
+
+# Node box by @atjonathan
+node:
+  description: Node box for Zenias
+  main: https://github.com/atjonathan/zenias-box-node.git
+#python:
+#  description: Python for Zenias
+#  main: 
+#
+#ruby:
+#  description: Ruby for Zenias
+#  main:

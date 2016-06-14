@@ -1,0 +1,28 @@
+#!/usr/bin/python
+Z_VERSION = '0.1.2'
+
+Z_DEFAULT_YML = ("# In this file you can add your own custom boxes.\n"
+                 "# The values here overrides the official ones.\n"
+                 "#\n"
+                 "# <lang>:\n"
+                 "#   description: <lang description>\n"
+                 "#   main: <main repo>\n"
+                 "#   modules:\n"
+                 "#     <module_name>:\n"
+                 "#       description: <module_description>\n"
+                 "#       main: <module repo>\n"
+                 "#\n"
+                 "# Example: a new PHP module:\n"
+                 "# --------\n"
+                 "# php:\n"
+                 "#   modules:\n"
+                 "#     newmod:\n"
+                 "#       description: Some new PHP module\n"
+                 "#       main: https://some/git/repo\n"
+                 "#\n"
+                 "# Example: override the official PHP box:\n"
+                 "# --------\n"
+                 "# php:\n"
+                 "#   description: My new description if any\n"
+                 "#   main: http://new/git/repo\n"
+                 "#\n")
