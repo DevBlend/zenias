@@ -8,5 +8,10 @@
 #notes          :       
 #bash_version   :4.3.42(1)-release
 #============================================================================
-
+# Activate python env
+# Is there another way of doing that ?
+source .python_env/bin/activate
+# Launch Zenias
 python zenias.py "$@"
+# Deactivate it
+deactivate
