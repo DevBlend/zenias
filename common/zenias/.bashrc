@@ -88,9 +88,10 @@ source /usr/local/bin/virtualenvwrapper.sh > /dev/null 2>&1
 cd /vagrant
 
 # Ask for git configuration data from user based on input
-chmod 755 /home/vagrant/.configs/zeus
-export PATH=$PATH:/home/vagrant/.configs
-echo 'export PATH=$PATH:/home/vagrant/.configs' >> ~/.profile
+chmod 755 ~/.zenias/zenias
+export PATH=$PATH:~/.zenias
+echo 'export PATH=$PATH:~/.zenias' >> ~/.profile
+
 # Makes it easier to use Github, you only have to give once your username
 # and password and it will be stored locally on your vagrant VM.
 # This is not a secure way and please don't package and share your vagrant VM.
@@ -98,16 +99,16 @@ git config credential.helper store
 
 githubcredentials () {
     # Set up Github and git configurations
-    latercommand='You can setup Github later by running zeus gitconfig'
+    latercommand='You can setup Github later by running zenias gitconfig'
     iterator1=0
     iterator2=0
-    while [[ $iterator1 = 0 && $iterator2 -lt 5 && ! -f ~/.gitconfig ]]
+    while [[ $iterator1 = 0 && $iterator2 -lt 5 ]]
     do
         read -p 'Do you want to setup Github? [y/N] >>> ' response
 
         case $response in
             [yY][eE][sS]|[yY])
-                /home/vagrant/.configs/zeus gitconfig
+                ~/.zenias/zenias gitconfig
                 iterator1=1
                 ;;
             [nN][oO]|[nN])
