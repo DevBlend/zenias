@@ -47,6 +47,7 @@ dev () {
         cp -r $BASEDIR/$subcommands/ $PWD/$destination
         cp $BASEDIR/zenias $PWD/$destination
         cp -r $BASEDIR/common $PWD/$destination
+        cp -r $BASEDIR/common/.github $PWD/$destination
         cd $destination
         git init
         vagrant up
