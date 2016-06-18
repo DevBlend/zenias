@@ -40,13 +40,16 @@ su - vagrant -c "heroku --version > /dev/null 2>&1"
 echo "---------------------------------------------"
 echo "------ Preparing .bashrc for first usage ----"
 echo "---------------------------------------------"
+su - vagrant -c "mkdir ~/.zenias"
+su - vagrant -c "mv /vagrant/zenias ~/.zenias/"
+su - vagrant -c "mv /vagrant/common/zenias/.bashrc ~"
+su - vagrant -c "mv /vagrant/common/zenias/.gitconfig ~"
+su - vagrant -c "mv /vagrant/common/zenias/git-commit-template.txt ~/.zenias"
+su - vagrant -c "rm -rf /vagrant/common"
 
-su - vagrant -c "mv /vagrant/.bashrc /home/vagrant/"
-su - vagrant -c "mkdir /home/vagrant/.configs"
-su - vagrant -c "mv /vagrant/zeus /home/vagrant/.configs/zeus"
 # If you are on Windows host, with Git checkout windows line terminator style CRLF
 # this comes in handy
-su - vagrant -c "dos2unix  /home/vagrant/.bashrc > /dev/null 2>&1"
+su - vagrant -c "dos2unix ~/.bashrc > /dev/null 2>&1"
 
 echo "---------------------------------------------"
 echo " Done! Run vagrant ssh to start working "
