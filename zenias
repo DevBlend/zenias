@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+
+# Making the arguments of the zenias command available to the whole script
+export commands=$1
+export subcommands=$2
+export destination=$3
+
+gitconfig () {
+    # Ask user for input to set up GitHub and git configs.
+    read -p "What is your real name? >>> " username
+    read -p "What is your Github email address? >>> " email
+    read -p "what is your Github username? >>> " githubusername
+    git config --global user.email "$email"
+    git config --global user.name "$username"
+    # Store the GitHub username inside github_config so that gitcreate
+    # can retrieve the username to perform Github API call
+    echo "githubusername: $githubusername" > /home/vagrant/.zenias/github_config
+}
+
+gitcreate () {
+    # Create a private or public repo on Github
+    read -p "How should the Github remote repo be called? >>> " remoterepo
+    # Get the stored GitHub username inside github_config
+    githubname=$(cat ~/.zenias/github_config | egrep "githubusername" | tail -1 | awk '{print $2}')
+    # Loop to create the remote repo
+    case $subcommands in
+        private)
+            curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""',"private":"true"}' > ~/.zenias/.githubremote
+            newgithubremote=$(cat ~/.zenias/.githubremote | egrep "html_url" | tail -1 | awk '{print $2}' | sed -r 's/[",]//g')
+            git remote add origin $newgithubremote
+            git push --set-upstream origin master
+            ;;
+        public)
+            curl -u "$githubname" https://api.github.com/user/repos -d '{"name":'"\"$remoterepo\""'}' > ~/.zenias/.githubremote
+            newgithubremote=$(cat ~/.zenias/.githubremote | egrep "html_url" | tail -1 | awk '{print $2}' | sed -r 's/[",]//g')
+            git remote add origin $newgithubremote
+            git push --set-upstream origin master
+            ;;
+    esac
+}
+
+dev () {
+    # Create an opinionated local DevOps environment to start coding
+    # Install all dependencies needed for the language stack specified
+        mkdir $destination
+        BASEDIR=$(dirname "$0")
+        cp -r $BASEDIR/$subcommands/ $PWD/$destination
+        cp $BASEDIR/zenias $PWD/$destination
+        cp -r $BASEDIR/common $PWD/$destination
+        cp -r $BASEDIR/common/.github $PWD/$destination
+        cd $destination
+        git init
+        vagrant up
+        vagrant ssh
+}
+
+# Choice of which function to use based on user input of zenias' arguments
+case $commands in
+    gitconfig)
+        gitconfig
+        ;;
+    gitcreate)
+        gitcreate
+        ;;
+    dev)
+        dev
+        ;;
+    help)
+        echo "zenias - the tool to make web development faster"
+        echo "You have the following commands: zenias gitconfig, zenias gitcreate private, zenias gitcreate public."
+        echo "You need to run zenias gitconfig first in order to use the rest"
+        echo "zenias gitconfig creates or overwrites existing git username, email, and push configurations."
+        echo "zenias gitcreate creates a public or private GitHub repo depending on the second argument you give."
+        ;;
+    *)
+        echo "Invalid argument parsed"
+        echo "General syntax:"
+        echo "zenias <commands> <subcommands> <destination>"
+        echo "Available commands: gitconfig, gitcreate, dev, help"
+        echo "Available subcommands: python, bootstrap"
+        echo "You can freely choose your destination directory, by default it is blank and means cwd where you launch zenias. Files will be directly copied there."
+        ;;
+esac

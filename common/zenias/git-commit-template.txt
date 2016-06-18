@@ -1,0 +1,32 @@
+
+# <type> <subject>
+#
+# <body>
+#
+# <footer>
+#
+# ------- TYPES -------
+# Feat (new feature)
+# Fix (bug fix)
+# Docs (changes to documentation)
+# Style (formatting, missing semi colons, no production code)
+# Refactor (refactoring production code)
+# Test (adding & refactoring tests; no production code)
+# Chore (updating grunt tasks etc; no production code)
+#
+# ------- BODY -------
+# Use Markdown syntax.
+# Remember the seven golden rules for commit messages
+# 1. Separate subject line from body with a blank line
+# 2. Limit the subject line to 50 characters
+# 3. Capitalised the subject line
+# 4. Do not end the subject line with a period
+# 5. Use the imperative mood in the subject line
+# 6. Wrap the body at 72 characters
+# 7. Use the body to explain what and why,
+#    do not show how, the code explains that
+#
+# ------- FOOTERS -------
+# References #1, #4, and #2.
+# Fix #1. note this marks the item as accepted in Github
+# Closes #1 and #2. note this marks the item as accepted in Github
