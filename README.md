@@ -3,7 +3,9 @@
 [![Join the chat at https://gitter.im/FreeCodeCamp/vagrant](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/FreeCodeCamp/vagrant)
 
 ## Table of Contents
+
 - [What is Zenias](#what-is-zenias)
+- [What is zenias](#what-is-zenias)
 - [Current Version](#current-version)
 - [How to Use](#how-to-use)
    - [Basic Requirement](#basic-requirement)
@@ -116,7 +118,7 @@ The PHP box comes with the following packages:
 Typical workflow for using this PHP box:
 
   1. Launch the virtual machine
-  2. Work on the _host_ with your favourite tools (Apache documentRoot is `<zenias>/php/www` on the host, `/vagrant/www` on the guest)
+  2. Work on the _host_ with your favorite tools (Apache documentRoot is `<zenias>/php/www` on the host, `/vagrant/www` on the guest)
   3. Test
   4. Push your commits on github and/or heroku:
     - From the host, with your usual tools (I use SmartGit to manage my git repos, and the heroku toolbelt)

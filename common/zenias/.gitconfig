@@ -1,0 +1,8 @@
+[alias]
+    routine = "!f(){ git add . && git commit; git push; };f"
+[core]
+	editor = vim
+[commit]
+	template = ~/.zenias/git-commit-template.txt
+[push]
+	default = simple
