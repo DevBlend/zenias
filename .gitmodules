@@ -1,0 +1,3 @@
+[submodule "python/todomvc"]
+	path = python/todomvc
+	url = https://github.com/PabloVallejo/todomvc-django.git
